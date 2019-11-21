@@ -1,6 +1,6 @@
 package dataStructures;
 
-import java.util.LinkedList;
+import java.util.HashMap;
 
 /**
  * Created by Xuraj on 11/12/2019.
@@ -13,12 +13,13 @@ import java.util.LinkedList;
  */
 public class MyHashMap {
     private int hashSize;
-    private LinkedList[] buckets;
+    private MyLinkedList[] buckets;
 
     public MyHashMap(int hashSize) {
         this.hashSize = hashSize;
+        buckets = new MyLinkedList[hashSize];
         for (int i = 0; i < hashSize; i++) {
-            buckets[i] = new LinkedList();
+            buckets[i] = new MyLinkedList();
         }
     }
 
@@ -31,8 +32,15 @@ public class MyHashMap {
     }
 
     // this implementation assumes the key is always integer, in real world it can be anything
-    public void put(int key) {
+    public void put(int key, int data) {
         int hash = hashing(key);
-        //buckets[hash].add();
+        buckets[hash].insert(data);
+    }
+
+    // retrieval
+    public int get(int key) {
+        int hash = hashing(key);
+
+
     }
 }

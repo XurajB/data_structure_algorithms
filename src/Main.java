@@ -1,5 +1,6 @@
 import dataStructures.MyArrayList;
 import dataStructures.MyArrays;
+import dataStructures.MyLinkedList;
 
 /**
  * Created by Xuraj on 11/11/2019.
@@ -11,6 +12,8 @@ public class Main {
         main.verifyMyArrays();
         System.out.println("--------------");
         main.verifyMyArrayList();
+        System.out.println("--------------");
+        main.verifyLinkedList();
     }
 
     private void verifyMyArrays() {
@@ -34,5 +37,20 @@ public class Main {
         for (int i = 0; i < myList.size(); i++) {
             System.out.println(myList.get(i));
         }
+    }
+
+    private void verifyLinkedList() {
+        MyLinkedList linkedList = new MyLinkedList();
+        linkedList.insert(1);
+        linkedList.insert(2);
+        linkedList.insert(3);
+        linkedList.insert(4);
+
+        linkedList.printList();
+        linkedList.get(2);
+        linkedList.remove(2);
+        linkedList.printList();
+        linkedList.removeByIndex(0);
+        linkedList.printList();
     }
 }
