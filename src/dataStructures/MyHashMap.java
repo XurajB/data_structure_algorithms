@@ -37,10 +37,4 @@ public class MyHashMap {
         buckets[hash].insert(data);
     }
 
-    // retrieval
-    public int get(int key) {
-        int hash = hashing(key);
-
-
-    }
 }
