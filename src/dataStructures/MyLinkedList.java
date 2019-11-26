@@ -11,7 +11,7 @@ public class MyLinkedList {
 
     // static so main() has access to it
     // we are assuming data type to be integer but it can be anything
-    static class Node {
+    private static class Node {
         int data;
         Node next;
 
