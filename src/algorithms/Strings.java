@@ -7,7 +7,7 @@ import java.util.Arrays;
  *
  * Algorithms - Strings,
  */
-public class Algos1 {
+public class Strings {
     public void reverseString(String value) {
         if (value == null || value.length() <= 1) {
             return;

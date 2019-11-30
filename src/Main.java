@@ -25,6 +25,9 @@ public class Main {
 
         System.out.println("--------------Queue");
         main.verifyMyQueue();
+
+        System.out.println("--------------BST");
+        main.verifyMyBinarySearchTree();
     }
 
     private void verifyMyArrays() {
@@ -120,5 +123,29 @@ public class Main {
         queue.print();
         queue.enqueue("Hi");
         queue.print();
+        System.out.println();
+    }
+
+    private void verifyMyBinarySearchTree() {
+        MyBinarySearchTree<String, Integer> st = new MyBinarySearchTree<>();
+
+        st.put("A", 8);
+        st.put("C", 4);
+        st.put("E", 12);
+        st.put("H", 5);
+        st.put("L", 11);
+        st.put("M", 9);
+        st.put("P", 10);
+        st.put("R", 3);
+        st.put("S", 0);
+        st.put("X", 7);
+
+        for (String s : st.levelOrder())
+            System.out.println(s + " " + st.get(s));
+
+        System.out.println();
+
+        for (String s : st.keys())
+            System.out.println(s + " " + st.get(s));
     }
 }

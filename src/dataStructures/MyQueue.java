@@ -1,11 +1,14 @@
 package dataStructures;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * Created by Xuraj on 11/23/2019.
  *
  * Implementation of Queue using LinkedList. FIFO - first in first out
  */
-public class MyQueue<K> {
+public class MyQueue<K> implements Iterable<K> {
     private Node first;
     private Node last;
     private int size;
@@ -16,7 +19,7 @@ public class MyQueue<K> {
         size = 0;
     }
 
-    private boolean isEmpty() {
+    public boolean isEmpty() {
         return first == null;
     }
 
@@ -63,6 +66,36 @@ public class MyQueue<K> {
                 System.out.print(temp.value + " ");
                 temp = temp.next;
             }
+        }
+    }
+
+    @Override
+    public Iterator<K> iterator() {
+        return new MyQueueIterator();
+    }
+
+    private class MyQueueIterator implements Iterator<K> {
+
+        private Node current = first;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public K next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            K value = current.value;
+            current = current.next;
+            return value;
+        }
+
+        @Override
+        public void remove() {
+            // not implemented
         }
     }
 
