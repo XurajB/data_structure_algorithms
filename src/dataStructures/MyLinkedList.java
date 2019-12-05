@@ -19,6 +19,7 @@ public class MyLinkedList {
             this.data = data;
             next = null;
         }
+        
     }
 
     // insertion - O(n)

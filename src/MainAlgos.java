@@ -20,6 +20,9 @@ public class MainAlgos {
         System.out.println("--- linear search");
         algos.verifyLinearSearch();
 
+        System.out.println("--- binary search");
+        algos.verifyBinarySearch();
+
         System.out.println("--- bubble sort");
         algos.verifyBubbleSort();
 
@@ -45,6 +48,13 @@ public class MainAlgos {
         Search search = new Search();
         System.out.println(search.linearSearch(dataSet, 23));
         System.out.println(search.linearSearch(dataSet, 10));
+    }
+
+    private void verifyBinarySearch() {
+        int[] dataSet = new int[]{4, 5, 23, 98, 3, 92, -5};
+        Search search = new Search();
+        System.out.println(search.binarySearch(dataSet, 23));
+        System.out.println(search.binarySearch(dataSet, 10));
     }
 
     private void verifyBubbleSort() {
