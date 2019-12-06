@@ -1,4 +1,4 @@
-package misc;
+package threading;
 
 /**
  * This class demonstrates basic thread concepts.
