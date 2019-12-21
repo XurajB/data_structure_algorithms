@@ -1,4 +1,6 @@
-package dataStructures;
+package dataStructures.trees;
+
+import dataStructures.MyQueue;
 
 import java.util.NoSuchElementException;
 
@@ -222,6 +224,11 @@ public class MyBinarySearchTree<Key extends Comparable<Key>, Value> {
         assert check();
     }
 
+    // there are three cases when deleting a node
+    // case 1 - no child - just delete the node
+    // case 2 - one child - replace it with the child
+    // case 3 - two children - either replace it with largest element from the left subtree (inorder predecessor)
+    // or smallest element from the right subtree (inorder successor).
     private Node delete(Node x, Key key) {
         if (x == null) return null;
 

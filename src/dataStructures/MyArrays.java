@@ -37,11 +37,14 @@ public class MyArrays {
 
         // multi-dimensional arrays
         // declaration
-        int[][] myNumbers = {{1, 2, 3, 4, 5}, {6, 7, 8, 9}};
+        int[][] myNumbers = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 0}};
 
         // accessing
         System.out.println(myNumbers[1][3]); // 1 -> array, 3 -> element. prints 9
         System.out.println(myNumbers[0][2]); // prints 3
+
+        System.out.println(myNumbers.length); //rows
+        System.out.println(myNumbers[0].length);
 
         // looping
         for (int[] myNumber : myNumbers) {

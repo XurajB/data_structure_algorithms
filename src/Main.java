@@ -1,4 +1,5 @@
 import dataStructures.*;
+import dataStructures.trees.MyBinarySearchTree;
 
 /**
  * Created by Xuraj on 11/11/2019.

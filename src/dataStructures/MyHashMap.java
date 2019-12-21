@@ -34,7 +34,7 @@ public class MyHashMap<K, V> {
 
         if (existing == null) {
             buckets[hash] = entry;
-        } else {
+        } else { // using separating chaining collision resolution. Another way is open addressing, resizing the array to reducing collision.
             while(existing.next != null) {
                 if (existing.key.equals(key)) {
                     existing.value = value;
