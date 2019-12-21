@@ -497,7 +497,7 @@ public class MyBinarySearchTree<Key extends Comparable<Key>, Value> {
     }
 
     // does this binary tree satisfy symmetric order?
-    // Note: this test also ensures that data structure is a binary tree since order is strict
+    // Note: this Test also ensures that data structure is a binary tree since order is strict
     private boolean isBST() {
         return isBST(root, null, null);
     }

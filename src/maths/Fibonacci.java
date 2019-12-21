@@ -42,6 +42,7 @@ public class Fibonacci {
         return answer;
     }
 
+    // memoization
     private static void printFibDynamic(int num) {
         int[] answer = new int[num];
 
