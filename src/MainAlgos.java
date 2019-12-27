@@ -1,5 +1,5 @@
 import algorithms.Search;
-import algorithms.Sort;
+import algorithms.sorts.Sort;
 import algorithms.Strings;
 
 import java.util.Arrays;

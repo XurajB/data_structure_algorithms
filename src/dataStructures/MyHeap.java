@@ -1,70 +1,149 @@
 package dataStructures;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 /**
- * Simple implementation of Heap using arrays
- * Heap is like a binary tree where parent is always bigger than children (in Max Heap)
+ * Simple implementation of Max Heap using arrays
+ * Heap is like a binary tree where parent is always larger or smaller than children (in Max Heap)
+ * First element at index 0, parent: (index-1)/2, left: 2*index+1, right: 2*index+2 or left+1;
  */
 public class MyHeap {
-    private static int[] heap = new int[] {3, 4, 3, 90, 87, 34, 23, 5};
-    private int itemsInArray;
+    private int capacity;
+    private int size = 0;
+    private int[] heap;
 
-    public static void main(String[] args) {
-        MyHeap myHeap = new MyHeap();
-        for (int i = 0; i < heap.length; i++) {
-            myHeap.insert(i, heap[i]);
+    public MyHeap(int capacity) {
+        this.capacity = capacity;
+        this.heap = new int[capacity];
+    }
+
+    private int getLeftChildIndex(int parentIndex) {
+        return 2 * parentIndex + 1;
+    }
+
+    private int getRightChildIndex(int parentIndex) {
+        return 2 * parentIndex + 2;
+    }
+
+    private int getParentIndex(int childIndex) {
+        return (childIndex - 1) / 2;
+    }
+
+    private boolean hasLeftChild(int index) {
+        return getLeftChildIndex(index) < size;
+    }
+
+    private boolean hasRightChild(int index) {
+        return getRightChildIndex(index) < size;
+    }
+
+    private boolean hasParent(int index) {
+        return getParentIndex(index) >= 0;
+    }
+
+    private int leftChild(int parentIndex) {
+        return heap[getLeftChildIndex(parentIndex)];
+    }
+
+    private int rightChild(int parentIndex) {
+        return heap[getRightChildIndex(parentIndex)];
+    }
+
+    private int parent(int childIndex) {
+        return heap[getParentIndex(childIndex)];
+    }
+
+    private void swap(int index1, int index2) {
+        int element = heap[index1];
+        heap[index1] = heap[index2];
+        heap[index2] = element;
+    }
+
+    // Time Complexity : O( Log n)
+    public void add(int item) {
+        ensureCapacity();
+        heap[size] = item;
+        size++;
+        heapifyUp();
+    }
+
+    private void ensureCapacity() {
+        if (size == capacity) {
+            heap = Arrays.copyOf(heap, capacity * 2);
+            capacity = capacity * 2;
         }
-        System.out.println(Arrays.toString(heap));
-        myHeap.heapSort();
-        System.out.println(Arrays.toString(heap));
     }
 
-    private void insert(int index, int data) {
-        heap[index] = data;
-        heapify(index);
-        itemsInArray++;
+    // Time Complexity : O(1)
+    public int peek() {
+        if (size == 0) {
+            throw new NoSuchElementException();
+        }
+        return heap[0];
     }
 
-    private int pop() {
-        if (itemsInArray != 0) {
-            int root = heap[0];
-            // insert last item in the empty spot
-            heap[0] = heap[--itemsInArray];
-            // heapify the array
-            heapify(0);
-            return root;
+    // Time Complexity : O(Log n)
+    public int poll() {
+        if (size == 0) {
+            throw new NoSuchElementException();
         }
 
-        return -1; // not found. should be replaced with an object
+        int element = heap[0];
+
+        heap[0] = heap[size - 1];
+        size--;
+        heapifyDown();
+
+        return element;
     }
 
-    private void heapify(int index) {
-        int largestChild;
-        int root = heap[index];
-        while (index < itemsInArray / 2) {
-            int leftChildIndex = 2 * index + 1;
-            int rightChildIndex = 2 * index + 2;
+    private void heapifyDown() {
+        int index = 0;
 
-            // find largest among two children
-            if (rightChildIndex < itemsInArray
-                    && heap[leftChildIndex] < heap[rightChildIndex]) {
-                largestChild = rightChildIndex;
-            } else {
-                largestChild = leftChildIndex;
+        while (hasLeftChild(index)) {
+            int smallestChildIndex = getLeftChildIndex(index);
+
+            if (hasRightChild(index) && rightChild(index) < leftChild(index)) {
+                smallestChildIndex = getRightChildIndex(index);
             }
 
-            // swap if root is smaller
-            if (root > heap[largestChild]) {
+            if (heap[index] < heap[smallestChildIndex]) {
+                swap(index, smallestChildIndex);
+            } else {
                 break;
             }
-            heap[index] = heap[largestChild];
+            index = smallestChildIndex;
         }
     }
 
-    private void heapSort() {
-        for (int k = heap.length - 1; k >= 0; k --) {
-            insert(k, pop());
+    private void heapifyUp() {
+        int index = size - 1;
+
+        while (hasParent(index) && parent(index) < heap[index]) {
+            swap(getParentIndex(index), index);
+            index = getParentIndex(index);
         }
+    }
+
+    private void printHeap() {
+        for (int i = 0; i < size; i++) {
+            System.out.print(heap[i] + " ");
+        }
+    }
+
+    public static void main(String[] args) {
+        MyHeap maxHeap = new MyHeap(10);
+
+        maxHeap.add(5);
+        maxHeap.add(3);
+        maxHeap.add(17);
+        maxHeap.add(10);
+        maxHeap.add(84);
+        maxHeap.add(19);
+        maxHeap.add(6);
+        maxHeap.add(22);
+        maxHeap.add(9);
+        maxHeap.printHeap();
     }
 }
