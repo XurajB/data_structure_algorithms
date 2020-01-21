@@ -1,7 +1,9 @@
 package dataStructures.trees;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Simple binary search tree
@@ -30,8 +32,12 @@ public class MyBST {
         myBST.find(20);
         myBST.inOrderTraversal();
 
+
         System.out.println();
         myBST.levelOrderTraversal();
+
+        myBST.preOrderTraversal();
+        myBST.preOrderTraversalIterative();
     }
 
     private static class Node {
@@ -82,6 +88,10 @@ public class MyBST {
         }
     }
 
+    private void preOrderTraversal() {
+        preOrderTraversal(root);
+    }
+
     private void inOrderTraversal() {
         inOrderTraversal(root);
     }
@@ -94,20 +104,40 @@ public class MyBST {
         }
     }
 
+    private void preOrderTraversalIterative() {
+        Stack<Node> stack = new Stack<>();
+        if (root != null) {
+            stack.push(root);
+        }
+        Node n;
+        while (!stack.isEmpty()) {
+            n = stack.pop();
+            System.out.print(n.data + " ");
+            if (n.left != null) {
+                stack.push(n.left);
+            }
+            if (n.right != null) {
+                stack.push(n.right);
+            }
+        }
+        System.out.println();
+    }
+
     private void preOrderTraversal(Node node) {
         if (node != null) {
             System.out.println(node.data);
-            inOrderTraversal(node.left);
-            inOrderTraversal(node.right);
+            preOrderTraversal(node.left);
+            preOrderTraversal(node.right);
         }
     }
 
-    private void postOrderTraversal(Node node) {
+    private List<Integer> postOrderTraversal(Node node, List<Integer> result) {
         if (node != null) {
-            inOrderTraversal(node.left);
-            inOrderTraversal(node.right);
+            postOrderTraversal(node.left, result);
+            postOrderTraversal(node.right, result);
             System.out.println(node.data);
         }
+        return result;
     }
 
     private void delete(int data) {
