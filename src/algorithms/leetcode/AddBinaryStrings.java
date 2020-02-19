@@ -6,7 +6,7 @@ package algorithms.leetcode;
  */
 public class AddBinaryStrings {
     public static void main(String[] args) {
-        System.out.println(addBinaryStrings("1010", "1011"));
+        System.out.println(addBinaryStrings("1010110111001101101000", "1000011011000000111100110"));
     }
 
     private static String addBinaryStrings(String a, String b) {

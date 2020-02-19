@@ -1,4 +1,4 @@
-package algorithms.leetcode;
+package algorithms.backtracking;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -6,6 +6,10 @@ package algorithms.leetcode;
  */
 public class MaxArea {
 
+    /**
+     * Max area to hold water
+     */
+
     public static void main(String[] args) {
         int[] height = {1,8,6,2,5,4,8,3,7};
         System.out.println(maxArea(height));
