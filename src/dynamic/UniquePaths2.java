@@ -34,8 +34,8 @@ public class UniquePaths2 {
         }
 
         // fill first column
-        for (int i = 0; i < r; i++) {
-            grid[i][0] = (grid[i][0] == 0 && grid[0][i-1] == 1 ? 1 : 0);
+        for (int i = 1; i < r; i++) {
+            grid[i][0] = (grid[i][0] == 0 && grid[i-1][0] == 1 ? 1 : 0);
         }
 
         // fill the rest
