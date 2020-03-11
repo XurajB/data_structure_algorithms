@@ -1,4 +1,4 @@
-package dynamic;
+package leetcode;
 
 import java.util.ArrayList;
 

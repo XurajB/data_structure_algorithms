@@ -17,7 +17,7 @@ public class BstIterator implements Iterator<Integer> {
         stack = new Stack<>();
         TreeNode current = root;
 
-        while (current != null) {
+        while (current != null) { // or use leftMost(current)
             stack.push(current);
             current = current.left;
         }
@@ -38,11 +38,19 @@ public class BstIterator implements Iterator<Integer> {
         int val = node.val;
 
         node = node.right;
-        while (node != null) {
+        while (node != null) { // or use leftMost(node.right)
             stack.push(node);
             node = node.left;
         }
 
         return val;
+    }
+
+    // this method can be shared
+    private static void leftMost(TreeNode node) {
+        while (node != null) {
+            stack.push(node);
+            node = node.left;
+        }
     }
 }
