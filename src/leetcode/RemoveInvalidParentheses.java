@@ -12,7 +12,7 @@ import java.util.Stack;
  */
 public class RemoveInvalidParentheses {
     public static void main(String[] args) {
-        System.out.println(removeInvalidParentheses("ab((c)"));
+        System.out.println(removeInvalidParentheses("(a)())()"));
     }
 
     private static List<String> removeInvalidParentheses(String s) {

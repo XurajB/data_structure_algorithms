@@ -90,7 +90,7 @@ public class TrieAutoComplete {
         return current.isEnd;
     }
 
-    private List autocomplete(String prefix) {
+    private List<String> autocomplete(String prefix) {
         TrieNode lastNode = root;
         for (int i = 0; i< prefix.length(); i++) {
             lastNode = lastNode.getChild(prefix.charAt(i));
@@ -112,7 +112,7 @@ public class TrieAutoComplete {
         t.insert("ali express");
         t.insert("ebay");
         t.insert("walmart");
-        List a = t.autocomplete("amaz");
+        List<String> a = t.autocomplete("amaz");
         for (Object o : a) {
             System.out.println(o);
         }

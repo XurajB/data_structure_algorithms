@@ -4,7 +4,7 @@ import java.util.*;
 
 public class AlienDictionary {
     public static void main(String[] args) {
-        String[] words = {"za","zb","ca","cb"};
+        String[] words = {"wrt", "wrf", "er", "ett", "rfttt"};
         System.out.println(alienOrder(words));
     }
 
