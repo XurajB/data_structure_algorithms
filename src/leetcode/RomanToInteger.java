@@ -13,11 +13,10 @@ public class RomanToInteger {
         int result = 0;
         int current = 0;
 
-        String cur = s;
-        while (current < nums.length && cur.length() > 0) {
-            if (cur.startsWith(romans[current])) {
+        while (current < nums.length) {
+            if (s.startsWith(romans[current])) {
                 result += nums[current];
-                cur = cur.substring(romans[current].length());
+                s = s.substring(romans[current].length());
             } else {
                 current++;
             }

@@ -1,0 +1,56 @@
+package leetcode;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * There are n servers numbered from 0 to n-1 connected by undirected server-to-server connections forming a network where connections[i] = [a, b] represents a connection between servers a and b.
+ * Any server can reach any other server directly or indirectly through the network.
+ * A critical connection is a connection that, if removed, will make some server unable to reach some other server.
+ * Return all critical connections in the network in any order.
+ * https://leetcode.com/problems/critical-connections-in-a-network/
+ * https://www.youtube.com/watch?v=aZXi1unBdJA
+ *
+ * Bridges and articulation points in a graph
+ */
+public class CriticalConnectionsInANetwork {
+    int T = 1;
+    public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
+        // use a timestamp, for each node, check the smallest timestamp that can reach from the node
+        // construct the graph first
+        List<Integer>[] graph = new ArrayList[n];
+        for (int i = 0; i < n; i++) {
+            graph[i] = new ArrayList<>();
+        }
+        for (List<Integer> conn : connections) {
+            graph[conn.get(0)].add(conn.get(1));
+            graph[conn.get(1)].add(conn.get(0));
+        }
+
+        int[] timestamp = new int[n]; // an array to save the timestamp that we meet a certain node
+
+        // for each node, we need to run dfs for it, and return the smallest timestamp in all its children except its parent
+        List<List<Integer>> criticalConns = new ArrayList<>();
+        dfs(graph, timestamp, criticalConns, 0, -1);
+        return criticalConns;
+    }
+
+    // return the minimum timestamp it ever visited in all the neighbors
+    private int dfs(List<Integer>[] graph, int[] timestamp, List<List<Integer>> criticalConns, int current, int parent) {
+        if (timestamp[current] != 0) return timestamp[current];
+        timestamp[current] = T++;
+
+        int minTimestamp = Integer.MAX_VALUE;
+        for (int neighbor : (List<Integer>) graph[current]) {
+            if (neighbor == parent) continue; // no need to check the parent
+            int neighborTimestamp = dfs(graph, timestamp, criticalConns, neighbor, current);
+            minTimestamp = Math.min(minTimestamp, neighborTimestamp);
+        }
+
+        if (minTimestamp >= timestamp[current]) {
+            if (parent >= 0) criticalConns.add(Arrays.asList(parent, current));
+        }
+        return Math.min(timestamp[current], minTimestamp);
+    }
+}

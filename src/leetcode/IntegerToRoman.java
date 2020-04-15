@@ -57,7 +57,7 @@ public class IntegerToRoman {
         int curNum = num;
         int current = 0;
 
-        while (current < nums.length && curNum >= 0) {
+        while (current < nums.length) {
             int divider = nums[current];
             int times = curNum / divider;
             curNum = curNum % divider;

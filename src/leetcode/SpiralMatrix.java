@@ -20,50 +20,44 @@ public class SpiralMatrix {
     }
 
     private static List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> ans = new ArrayList<>();
 
-        int row = matrix.length;
-        int col = matrix[0].length;
+        int rowStart = 0;
+        int columnStart = 0;
+        int rowEnd = matrix.length - 1;
+        int columnEnd = matrix[0].length - 1;
 
-        int r = 0;
-        int c = 0;
+        while (rowStart <= rowEnd && columnStart <= columnEnd) {
+            // travel left to right
+            for (int i = columnStart; i <= columnEnd; i++) {
+                ans.add(matrix[rowStart][i]);
+            }
+            rowStart++;
 
-        int total = row * col;
+            // travel from top to bottom
+            for (int i = rowStart; i <= rowEnd; i++) {
+                ans.add(matrix[i][columnEnd]);
+            }
+            columnEnd--;
 
-        List<Integer> result = new ArrayList<>();
-
-        boolean upDownDirection = false;
-
-        for (int current = 0; current < total; current++) {
-
-            System.out.println("[" + r + ", " + c + "]");
-            result.add(matrix[r][c]);
-
-
-            if (!upDownDirection) {
-
-                if (c == col - 1) {
-                    r--;
-                    row--;
-                    upDownDirection = true;
-                } else if (!upDownDirection) {
-                    c++;
+            // travel from right to left
+            // to prevent dupes (so we don't traverse back to visited row item)
+            if (rowStart <= rowEnd) {
+                for (int i = columnEnd; i >= columnStart; i--) {
+                    ans.add(matrix[rowEnd][i]);
                 }
             }
+            rowEnd--;
 
-            if (r < row) {
-
-                if (r == row - 1) {
-                    c--;
-                    col--;
-                    upDownDirection = false;
-                } else if (upDownDirection) {
-                    r++;
+            // travel from bottom to top
+            if (columnStart <= columnEnd) {
+                for (int i = rowEnd; i >= rowStart; i--) {
+                    ans.add(matrix[i][columnStart]);
                 }
             }
-
+            columnStart++;
         }
 
-        return result;
-
+        return ans;
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * Given a set of candidate numbers (C) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.
  * https://www.interviewbit.com/problems/combination-sum/
+ * https://leetcode.com/problems/combination-sum/
  */
 public class CombinationSum {
     public static void main(String[] args) {
@@ -15,7 +16,7 @@ public class CombinationSum {
     }
 
     private static List<List<Integer>> subsets(int[] nums, int target) {
-        Arrays.sort(nums);
+        Arrays.sort(nums); // not really needed, to make sure results are ordered
         List<List<Integer>> answer = new ArrayList<>();
         List<Integer> current = new ArrayList<>();
         generateSets(nums, answer, current, 0, target, 0);

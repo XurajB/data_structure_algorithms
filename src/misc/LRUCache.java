@@ -98,6 +98,7 @@ public class LRUCache<K, V> {
         }
     }
 
+    // we are using doubly linked list so delete is O(1)
     private void deleteNode(Node node) {
         if (node.previous != null) {
             node.previous.next = node.next;
