@@ -39,6 +39,7 @@ public class NumberOfDistinctIsland {
                 if (grid[i][j] == 1) {
                     StringBuilder sb = new StringBuilder();
                     dfs(grid, i, j, sb, "o"); // origin
+                    System.out.println(sb.toString());
                     ans.add(sb.toString());
                 }
             }

@@ -36,10 +36,10 @@ public class TicTacToe {
         rows[row] += toAdd;
         cols[col] += toAdd;
 
-        if (row == col) {
+        if (row == col) { // pr (row - col == 0)
             diagonal += toAdd;
         }
-        if (row == size - col - 1) {
+        if (row == size - col - 1) { // or (row + col == n - 1)
             antiDiagonal += toAdd;
         }
 

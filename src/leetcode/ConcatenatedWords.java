@@ -13,7 +13,7 @@ public class ConcatenatedWords {
     private static TrieNode root = new TrieNode();
 
     public static void main(String[] args) {
-        String[] words = new String[] {"cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"};
+        String[] words = new String[] {"cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat", "hippo", "pot"};
         System.out.println(findAllConcatenatedWordsInADict(words));
     }
 

@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Given an array A of integers and integer K, return the maximum S such that there A[i] + A[j] = S and S < K. If no i, j exist satisfying this equation, return -1.
  * https://leetcode.com/problems/two-sum-less-than-k/
  */
-public class TowSumLessThanK {
+public class TwoSumLessThanK {
     public static void main(String[] args) {
         int[] a = new int[] {34,23,1,24,75,33,54,8};
         System.out.println(towSumLessThanK(a, 60));

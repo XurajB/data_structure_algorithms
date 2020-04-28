@@ -20,7 +20,7 @@ public class WordBreak {
         boolean[] wordMark = new boolean[s.length()+1];
 
         wordMark[0] = true;
-        for (int i = 1; i <= s.length(); i++) {
+        for (int i = 1; i <= s.length(); i++) { // i<= because substring
             for (int j = 0; j < i; j++) {
                 if (wordMark[j] && set.contains(s.substring(j, i))) {
                     wordMark[i] = true;

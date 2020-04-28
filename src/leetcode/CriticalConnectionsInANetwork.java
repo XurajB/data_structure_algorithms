@@ -15,42 +15,70 @@ import java.util.List;
  * Bridges and articulation points in a graph
  */
 public class CriticalConnectionsInANetwork {
-    int T = 1;
+
+    public static void main(String[] args) {
+        List<List<Integer>> connections = new ArrayList<>();
+        connections.add(Arrays.asList(0, 1));
+        connections.add(Arrays.asList(1, 2));
+        connections.add(Arrays.asList(2, 0));
+        connections.add(Arrays.asList(1, 3));
+
+        CriticalConnectionsInANetwork criticalConn = new CriticalConnectionsInANetwork();
+        System.out.println(criticalConn.criticalConnections(4, connections));
+    }
+
+    int T = 1; // to keep track of the discovery time or order of the node
+    int[] visitedTimes;
+    int[] lowTimes;
+    List<List<Integer>> criticalConns;
+    List<Integer>[] graph;
     public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
-        // use a timestamp, for each node, check the smallest timestamp that can reach from the node
-        // construct the graph first
-        List<Integer>[] graph = new ArrayList[n];
-        for (int i = 0; i < n; i++) {
-            graph[i] = new ArrayList<>();
-        }
-        for (List<Integer> conn : connections) {
-            graph[conn.get(0)].add(conn.get(1));
-            graph[conn.get(1)].add(conn.get(0));
-        }
+        graph = new ArrayList[n];
+        criticalConns = new ArrayList<>();
+        visitedTimes = new int[n];
+        lowTimes = new int[n];
 
-        int[] timestamp = new int[n]; // an array to save the timestamp that we meet a certain node
+        // build graph
+        buildGraph(n, connections);
 
-        // for each node, we need to run dfs for it, and return the smallest timestamp in all its children except its parent
-        List<List<Integer>> criticalConns = new ArrayList<>();
-        dfs(graph, timestamp, criticalConns, 0, -1);
+        // dfs
+        boolean[] visited = new boolean[n];
+        dfs(visited, 0, -1);
+
         return criticalConns;
     }
 
-    // return the minimum timestamp it ever visited in all the neighbors
-    private int dfs(List<Integer>[] graph, int[] timestamp, List<List<Integer>> criticalConns, int current, int parent) {
-        if (timestamp[current] != 0) return timestamp[current];
-        timestamp[current] = T++;
+    // O(E + V)
+    private void dfs(boolean[] visited, int current, int parent) {
+        visited[current] = true;
+        visitedTimes[current] = lowTimes[current] = T++;
 
-        int minTimestamp = Integer.MAX_VALUE;
-        for (int neighbor : (List<Integer>) graph[current]) {
-            if (neighbor == parent) continue; // no need to check the parent
-            int neighborTimestamp = dfs(graph, timestamp, criticalConns, neighbor, current);
-            minTimestamp = Math.min(minTimestamp, neighborTimestamp);
+        for (int neighbour: graph[current]) {
+            // we don't want to revisit parent because we want to find another way to get to current node
+            if (neighbour == parent) continue;
+            if (!visited[neighbour]) {
+                dfs(visited, neighbour, current);
+                lowTimes[current] = Math.min(lowTimes[current], lowTimes[neighbour]);
+                if (lowTimes[neighbour] > visitedTimes[current]) {
+                    criticalConns.add(Arrays.asList(current, neighbour));
+                }
+            } else {
+                // we found a back edge
+                // if this is not our parent and it has already been visited, means there is an another way to visit this
+                lowTimes[current] = Math.min(lowTimes[current], visitedTimes[neighbour]);
+            }
         }
+    }
 
-        if (minTimestamp >= timestamp[current]) {
-            if (parent >= 0) criticalConns.add(Arrays.asList(parent, current));
+    private void buildGraph(int n, List<List<Integer>> connections) {
+        for (int i = 0; i < n; i++) {
+            graph[i] = new ArrayList<>();
         }
-        return Math.min(timestamp[current], minTimestamp);
+        for (List<Integer> connection: connections) {
+            int a = connection.get(0);
+            int b = connection.get(1);
+            graph[a].add(b);
+            graph[b].add(a);
+        }
     }
 }

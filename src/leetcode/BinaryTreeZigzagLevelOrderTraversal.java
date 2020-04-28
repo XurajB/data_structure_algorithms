@@ -3,14 +3,13 @@ package leetcode;
 import java.util.*;
 
 public class BinaryTreeZigzagLevelOrderTraversal {
-
     public class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
         TreeNode(int x) { val = x; }
     }
-
+    // O(N)
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<>();
         if (root == null) {
@@ -18,14 +17,18 @@ public class BinaryTreeZigzagLevelOrderTraversal {
         }
         Queue<TreeNode> q = new LinkedList<>();
         q.offer(root);
-        boolean isOdd = true;
+        boolean ltr = false;
         // bfs
         while (!q.isEmpty()) {
             int level = q.size();
-            List<Integer> values = new ArrayList<>();
+            LinkedList<Integer> values = new LinkedList<>();
             for (int i = 0; i < level; i++) {
                 TreeNode node = q.poll();
-                values.add(node.val);
+                if (ltr) {
+                    values.addFirst(node.val);
+                } else {
+                    values.add(node.val);
+                }
                 if (node.left != null) {
                     q.offer(node.left);
                 }
@@ -33,10 +36,7 @@ public class BinaryTreeZigzagLevelOrderTraversal {
                     q.offer(node.right);
                 }
             }
-            isOdd = !isOdd;
-            if (isOdd) {
-                Collections.reverse(values);
-            }
+            ltr = !ltr;
             ans.add(values);
         }
         return ans;

@@ -33,6 +33,7 @@ public class AlienDictionary {
 
             for (int j = 0; j < length; j++) {
                 char out = first.charAt(j);
+
                 char in = second.charAt(j);
                 if (out != in) {
                     // build edge A -> B

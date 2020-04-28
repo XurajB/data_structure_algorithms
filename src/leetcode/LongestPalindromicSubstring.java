@@ -6,7 +6,7 @@ package leetcode;
  */
 public class LongestPalindromicSubstring {
     public static void main(String[] args) {
-        System.out.println(longestPalindrome("aracecarr"));
+        //System.out.println(longestPalindrome("aracecarr"));
         System.out.println(longestPalindrome2("aracecarr"));
     }
 

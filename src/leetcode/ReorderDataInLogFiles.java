@@ -13,12 +13,41 @@ import java.util.Comparator;
 public class ReorderDataInLogFiles {
     public static void main(String[] args) {
         String[] logs = {"dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"};
-        System.out.println(Arrays.toString(reorderLogFiles(logs)));
+        System.out.println(Arrays.toString(reorderLogFiles2(logs)));
     }
 
-    // Time: NLogN, Space: N
+    // O(nLogn)
+    private static String[] reorderLogFiles2(String[] logs) {
+        Comparator<String> myComp = (s1, s2) -> {
+            String[] split1 = s1.split(" ", 2);
+            String[] split2 = s2.split(" ", 2);
+
+            boolean isDigit1 = Character.isDigit(split1[1].charAt(0));
+            boolean isDigit2 = Character.isDigit(split2[1].charAt(0));
+
+            if (!isDigit1 && !isDigit2) {
+                int cmp = split1[1].compareTo(split2[1]);
+                if (cmp == 0) {
+                    return split1[0].compareTo(split2[0]);
+                }
+                return cmp;
+            } else if (isDigit1 && isDigit2) {
+                return 0;
+            } else if (!isDigit1) {
+                return -1;
+            } else {
+                return 1;
+            }
+
+        };
+
+        Arrays.sort(logs, myComp);
+        return logs;
+    }
+
+    // Time: NLogN, Space: N (substring makes it N^2)
     private static String[] reorderLogFiles(String[] logs) {
-        Comparator<String> comp = (Comparator<String>) (s1, s2) -> {
+        Comparator<String> comp = (s1, s2) -> {
             int firstSpace = s1.indexOf(" ");
             int secondSpace = s2.indexOf(" ");
 

@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * Find the contiguous subarray within an array, A of length N which has the largest sum.
  * https://www.interviewbit.com/problems/max-sum-contiguous-subarray/
+ * https://leetcode.com/problems/maximum-subarray/
  */
 public class MaxSubArray {
     public static void main(String[] args) {

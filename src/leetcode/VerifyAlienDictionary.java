@@ -38,14 +38,14 @@ public class VerifyAlienDictionary {
         int l1 = 0, l2 = 0;
 
         int diff = 0;
-        while (l1 <= word1.length() - 1 && l2 <= word2.length() - 1 && diff == 0) {
+        while (l1 < word1.length() && l2 < word2.length() && diff == 0) {
             diff = seq[word1.charAt(l1) - 'a'] - seq[word2.charAt(l2) - 'a'];
 
             l1++;
             l2++;
         }
 
-        // hello, hell
+        // hell, hello
         if (diff == 0) {
             return word1.length() - word2.length();
         } else {

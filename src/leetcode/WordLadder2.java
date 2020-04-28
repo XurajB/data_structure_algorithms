@@ -27,7 +27,7 @@ public class WordLadder2 {
     Map<String, Integer> distance;
     List<List<String>> answer;
 
-    // O(
+    // O(V * E), O(V), V = size of dict, E = avg length of word
     // use bfs to find shortest distance from start to end (build graph)
     // use dfs to find every path with the same distance
     private List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
