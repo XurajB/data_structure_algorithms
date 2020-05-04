@@ -46,27 +46,15 @@ public class MergeIntervals {
         ArrayList<int[]> answer = new ArrayList<>();
         int[] prev = intervals[0];
         answer.add(prev);
-        for (int i = 1; i < intervals.length; i++) {
-            if (prev[1] >= intervals[i][0]) {
-                prev = new int[] {prev[0], Math.max(intervals[i][1], prev[1])};
-                if (answer.size() > 0) {
-                    answer.set(answer.size() - 1,prev);
-                } else {
-                    answer.add(prev);
-                }
+        for (int[] interval: intervals) {
+            if (interval[0] <= prev[1]) {
+                prev[1] = Math.max(interval[1], prev[1]);
             } else {
-                answer.add(intervals[i]);
-                prev = intervals[i];
+                prev = interval;
+                answer.add(prev);
             }
         }
 
-        int[][] ans = new int[answer.size()][2];
-        int i = 0;
-        for (int[] interval: answer) {
-            ans[i] = interval;
-            i++;
-        }
-
-        return ans;
+        return answer.toArray(new int[answer.size()][]);
     }
 }

@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class LongestSubstringWithAtMostK {
     public static void main(String[] args) {
-        System.out.println(lengthOfLongestSubstring("eceba", 2));
+        System.out.println(lengthOfLongestSubstring("pqpqs", 2));
     }
 
     private static int lengthOfLongestSubstring(String s, int k) {
@@ -19,9 +19,8 @@ public class LongestSubstringWithAtMostK {
         }
 
         int max = 1;
-
         int left = 0, right = 0;
-        Map<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map = new HashMap<>(); // char, index
 
         while (right < s.length()) {
             map.put(s.charAt(right), right++);
