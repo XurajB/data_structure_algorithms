@@ -30,8 +30,14 @@ public class OptimalUtilization {
         for (int[] pair: ans) {
             System.out.println(Arrays.toString(pair));
         }
+
+        List<int[]> ans2 = getPairs2(a2, b2, target2);
+        for (int[] pair: ans2) {
+            System.out.println(Arrays.toString(pair));
+        }
     }
 
+    // O(m*n)
     private static List<int[]> getPairs(int[][] a, int[][] b, int target) {
         Map<Integer, List<int[]>> sumMap = new HashMap<>();
         int max = Integer.MIN_VALUE;
@@ -52,5 +58,34 @@ public class OptimalUtilization {
             return sumMap.get(max);
         }
         return new ArrayList<>();
+    }
+
+    // O(nLogn + mLogm)
+    private static List<int[]> getPairs2(int[][] a, int[][] b, int target) {
+        Map<Integer, List<int[]>> map = new HashMap<>();
+        Arrays.sort(a, (x, y) -> x[1] - y[1]);
+        Arrays.sort(b, (x, y) -> x[1] - y[1]);
+        int len = Math.min(a.length, b.length);
+
+        int i = 0, j = len - 1;
+        while (i < len && j >= 0) {
+            int diff = target - (a[i][1] + b[j][1]);
+            if (diff >= 0) {
+                if (!map.containsKey(diff)) {
+                    map.put(diff, new ArrayList<>());
+                }
+                map.get(diff).add(new int[] {a[i][0], b[j][0]});
+                i++;
+            } else {
+                j--;
+            }
+        }
+
+        int min = Integer.MAX_VALUE;
+        for (int key: map.keySet()) {
+            min = Math.min(min, key);
+        }
+
+        return map.get(min);
     }
 }

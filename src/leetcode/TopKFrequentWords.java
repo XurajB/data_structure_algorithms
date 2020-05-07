@@ -24,14 +24,11 @@ public class TopKFrequentWords {
             count.put(word, count.getOrDefault(word, 0) + 1);
         }
         // min heap to keep max elements so we can poll when the size is over k
-        PriorityQueue<String> heap = new PriorityQueue<>(k, new Comparator<String>(){
-            @Override
-            public int compare(String s1, String s2) {
-                if (count.get(s1).equals(count.get(s2))) {
-                    return s2.compareTo(s1);
-                } else {
-                    return count.get(s1) - count.get(s2);
-                }
+        PriorityQueue<String> heap = new PriorityQueue<>(k, (s1, s2) -> {
+            if (count.get(s1).equals(count.get(s2))) {
+                return s2.compareTo(s1);
+            } else {
+                return count.get(s1) - count.get(s2);
             }
         });
 

@@ -1,7 +1,6 @@
 package leetcode;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 /**
  * Reorder the logs so that all of the letter-logs come before any digit-log.

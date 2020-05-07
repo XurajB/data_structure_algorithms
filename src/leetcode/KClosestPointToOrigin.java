@@ -17,35 +17,35 @@ public class KClosestPointToOrigin {
         }
     }
 
+    // nLogK, n
     private static int[][] kClosest(int[][] points, int K) {
-        PriorityQueue<int[]> pq = new PriorityQueue<>(points.length, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] a, int[] b) {
-                double dist1 = distance(a);
-                double dist2 = distance(b);
-
-                if (dist1 > dist2) {
-                    return 1;
-                } else {
-                    return -1;
-                }
+        // max heap
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> {
+            if (getDistance(b) > getDistance(a)) {
+                return 1;
+            } else {
+                return -1;
             }
         });
 
-        for (int i = 0; i < points.length; i++) {
-            pq.offer(points[i]);
+        for (int[] point: points) {
+            pq.offer(point);
+            if (pq.size() > K) {
+                pq.poll();
+            }
         }
 
         int[][] answer = new int[K][2];
-
-        for (int i = 0; i < K; i++) {
-            answer[i] = pq.poll();
+        int n = K-1;
+        while (!pq.isEmpty()) {
+            answer[n] = pq.poll();
+            n--;
         }
 
         return answer;
     }
 
-    private static double distance(int[] a) {
-        return Math.sqrt(a[0]*a[0] + a[1]*a[1]); // distance formula
+    private static double getDistance(int[] point) {
+        return Math.sqrt(point[0] * point[0] + point[1] * point[1]);
     }
 }
