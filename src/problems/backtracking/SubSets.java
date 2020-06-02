@@ -22,7 +22,7 @@ import java.util.List;
  *
  * https://leetcode.com/problems/subsets/
  */
-public class PowerSet {
+public class SubSets {
     public static void main(String[] args) {
         int[] nums = {1,2,3};
         System.out.println(subsets(nums));

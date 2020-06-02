@@ -32,7 +32,6 @@ public class LRUCache<K, V> {
         System.out.println(myCache.get(2));
         myCache.put(2, 9);
         System.out.println(myCache.get(2));
-        myCache.delete(2);
         System.out.println(myCache.get(2));
         myCache.put(4, 0);
         myCache.put(7, 9);
@@ -64,14 +63,6 @@ public class LRUCache<K, V> {
             // add to front
             addToFront(node);
             map.put(key, node);
-        }
-    }
-
-    private void delete(K key) {
-        Node node = map.get(key);
-        if (node != null) {
-            deleteNode(node);
-            map.remove(key);
         }
     }
 

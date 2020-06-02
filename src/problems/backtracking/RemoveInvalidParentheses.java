@@ -13,7 +13,7 @@ import java.util.Stack;
  */
 public class RemoveInvalidParentheses {
     public static void main(String[] args) {
-        System.out.println(removeInvalidParentheses("(a)())()"));
+        System.out.println(removeInvalidParentheses("((a)())())"));
     }
 
     private static List<String> removeInvalidParentheses(String s) {
@@ -30,7 +30,7 @@ public class RemoveInvalidParentheses {
                     removed = s.substring(0, i) + s.substring(i + 1);
                 }
             }
-            if (isValid(removed) && !answer.contains(removed)) {
+            if (isValid(removed) && !answer.contains(removed) && removed.length() > 0) {
                 answer.add(removed);
             }
         }

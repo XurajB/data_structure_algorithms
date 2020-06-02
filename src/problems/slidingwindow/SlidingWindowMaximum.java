@@ -22,15 +22,18 @@ public class SlidingWindowMaximum {
             return nums;
         }
 
+        // insert from one side. and take out from the same side if that element is less than current
+        // if size is equals to k, take out answer from other side
+        // if size is > k. remove out of range number from other side
         LinkedList<Integer> dq = new LinkedList<>();
         int[] answer = new int[n-k+1];
 
         for (int i = 0; i < n; i++) {
             if (!dq.isEmpty() && dq.peek() < i-k+1) {
-                dq.poll();
+                dq.poll(); // take out the first element inserted
             }
             while (!dq.isEmpty() && nums[dq.peekLast()] <= nums[i]) {
-                dq.pollLast();
+                dq.pollLast(); // take out the last element inserted
             }
             dq.offer(i);
             if (i-k+1 >= 0) {

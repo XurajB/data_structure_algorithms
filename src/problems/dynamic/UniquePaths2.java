@@ -26,10 +26,11 @@ public class UniquePaths2 {
         if (grid[0][0] == 1) {
             return 0;
         }
-        grid[0][0] = 1;
+        grid[0][0] = 1; // 1 means number of path - entry point
 
         // fill first row
         for (int i = 1; i < c; i++) {
+            // check if current has not obstacle and left has a path
             grid[0][i] = (grid[0][i] == 0 && grid[0][i-1] == 1 ? 1 : 0);
         }
 

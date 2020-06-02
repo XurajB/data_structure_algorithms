@@ -6,8 +6,11 @@ import java.util.List;
 public class StringPermutation2 {
     public static void main(String[] args) {
         List<String> answer = permutation("hello");
-
         System.out.println(answer);
+
+        List<String> a2 = new ArrayList<>();
+        dfs(a2, "hello", "");
+        System.out.println(a2);
     }
 
     public static ArrayList<String> permutation(String s) {
@@ -46,5 +49,17 @@ public class StringPermutation2 {
             }
         }
         return res;
+    }
+
+    private static void dfs(List<String> res, String str, String ans) {
+        if (str.length() == 0) {
+            res.add(ans);
+            return;
+        }
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            String rest = str.substring(0, i) + str.substring(i + 1);
+            dfs(res, rest, ans + ch);
+        }
     }
 }

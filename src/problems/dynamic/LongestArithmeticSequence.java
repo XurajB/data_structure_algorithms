@@ -14,10 +14,12 @@ public class LongestArithmeticSequence {
         System.out.println(longestArithSeqLength(a));
     }
 
+    // run two loops, put the difference with count in hashmap
+    // O(N^2), O(N)
     public static int longestArithSeqLength(int[] A) {
         int res = 2, n = A.length;
-        HashMap<Integer, Integer>[] dp = new HashMap[n];
-        for (int j = 0; j < A.length; j++) {
+        HashMap<Integer, Integer>[] dp = new HashMap[n]; // (difference, frequencies)
+        for (int j = 0; j < n; j++) {
             dp[j] = new HashMap<>();
             for (int i = 0; i < j; i++) {
                 int d = A[j] - A[i];

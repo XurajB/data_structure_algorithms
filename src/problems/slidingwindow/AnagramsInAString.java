@@ -1,4 +1,4 @@
-package problems.string;
+package problems.slidingwindow;
 
 import java.util.ArrayList;
 import java.util.Arrays;

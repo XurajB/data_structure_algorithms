@@ -33,6 +33,7 @@ public class SplitArrayLargestSum {
      *
      * - Repeat the process until there is nothing else to search. Then use the minimum value we found during the above process.
      */
+    // n log n
     private static int splitArray(int[] nums, int m) {
         int left = 0; // max of nums
         int right = 0; // sum of nums

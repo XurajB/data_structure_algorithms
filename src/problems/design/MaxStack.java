@@ -34,6 +34,7 @@ public class MaxStack {
         return stack.peek()[1];
     }
 
+    // O(n) may not be possible otherwise we could use this to sort in O(n) times
     public int popMax() {
         int max = peekMax();
         Stack<int[]> buffer = new Stack<>();
@@ -41,7 +42,7 @@ public class MaxStack {
         while (top() != max) {
             buffer.push(stack.pop());
         }
-        pop();
+        pop(); // delete the max
         while (!buffer.isEmpty()) {
             push(buffer.pop()[0]);
         }

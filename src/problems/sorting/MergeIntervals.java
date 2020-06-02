@@ -48,7 +48,7 @@ public class MergeIntervals {
         answer.add(prev);
         for (int[] interval: intervals) {
             if (interval[0] <= prev[1]) {
-                prev[1] = Math.max(interval[1], prev[1]);
+                prev[1] = Math.max(interval[1], prev[1]); // this will update prev inside the list
             } else {
                 prev = interval;
                 answer.add(prev);

@@ -10,7 +10,7 @@ import java.util.List;
  * A critical connection is a connection that, if removed, will make some server unable to reach some other server.
  * Return all critical connections in the network in any order.
  * https://leetcode.com/problems/critical-connections-in-a-network/
- * https://www.youtube.com/watch?v=aZXi1unBdJA
+ * https://www.youtube.com/watch?v=erlX-1MJlv8
  *
  * Bridges and articulation points in a graph
  */
@@ -27,6 +27,7 @@ public class CriticalConnectionsInANetwork {
         System.out.println(criticalConn.criticalConnections(4, connections));
     }
 
+    // Tarzen's algorithm, it is a modified version of DFS where but we keep track of two attributes of the node - visitedTime and lowTime
     int T = 1; // to keep track of the discovery time or order of the node
     int[] visitedTimes;
     int[] lowTimes;
@@ -38,7 +39,7 @@ public class CriticalConnectionsInANetwork {
         visitedTimes = new int[n];
         lowTimes = new int[n];
 
-        // build graph
+        // build an adjacency list for our graph
         buildGraph(n, connections);
 
         // dfs
@@ -51,7 +52,7 @@ public class CriticalConnectionsInANetwork {
     // O(E + V)
     private void dfs(boolean[] visited, int current, int parent) {
         visited[current] = true;
-        visitedTimes[current] = lowTimes[current] = T++;
+        visitedTimes[current] = lowTimes[current] = T++; // update our two attributes
 
         for (int neighbour: graph[current]) {
             // we don't want to revisit parent because we want to find another way to get to current node
@@ -69,6 +70,15 @@ public class CriticalConnectionsInANetwork {
             }
         }
     }
+
+    // start with Node 0 - update attributes (0,0)
+    // visit its neighbour - 2 - update attributes (1,1)
+    //   visit its neighbour - 0 - parent skip
+    //   visit its neighbour - 1 - update (2,2)
+    //     visit its neighbour - 2 - parent skip
+    //     visit its neighbour - 0 - has been visited so update lowtime - this means we found a node already visited that is not our parent,
+    //                               so we found an alternative way to get to (1) via 0. So parent cannot be an articulation point. Update lowTimes of current to be min of current or visited time of neighbour (2 to 0)
+    // if 3 had backedge and connected to 2 then when we visit its neighbour 2 - then we know we already visited and we would have updated its (3) lowtimes.
 
     private void buildGraph(int n, List<List<Integer>> connections) {
         for (int i = 0; i < n; i++) {

@@ -65,6 +65,7 @@ public class MinimumCostToRepairEdges {
         }
 
         // edges are already connected so do union
+        // only do unions on non broken edges this time
         for (int[] edge: edges) {
             String path = edge[0] + "#" + edge[1];
             if (!set.contains(path)) {

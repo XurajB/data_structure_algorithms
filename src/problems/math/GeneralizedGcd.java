@@ -6,8 +6,8 @@ package problems.math;
  */
 public class GeneralizedGcd {
     public static void main(String[] args) {
-        int[] arr = {2,4,6,8,10};
-        System.out.println(generalizedGcd(5,arr));
+        int[] arr = {4,2,4,3,8,10};
+        System.out.println(generalizedGcd(6,arr));
     }
 
     private static int generalizedGcd(int n, int[] arr) {

@@ -12,7 +12,25 @@ public class MoveZeros {
         System.out.println(Arrays.toString(elements));
     }
 
+
+    // keeps relative order
+    private static void moveElements2(int[] elements) {
+        int index = 0;
+        // keep non zeros to far left
+        for (int i = 0; i < elements.length; i++) {
+            if (elements[i] != 0) {
+                elements[index++] = elements[i];
+            }
+        }
+
+        // assign rest to 0
+        for (int i = index; i < elements.length; i++) {
+            elements[i] = 0;
+        }
+    }
+
     // Time: O(N), space: O(1)
+    // this does not maintain relative order
     private static void moveElements(int[] elements) {
         int temp;
 

@@ -22,15 +22,10 @@ public class ExclusiveTimeOfFunctions {
 
     private static int[] exclusiveTime(int n, List<String> logs) {
         int[] ans = new int[n];
-        Stack<Integer> jobs = new Stack<>();
-
-        String[] log1 = logs.get(0).split(":");
-        jobs.push(Integer.parseInt(log1[0]));
-
-        int prev = Integer.parseInt(log1[2]);
-
-        for (int i = 1; i < logs.size(); i++) {
-            log1 = logs.get(i).split(":");
+        Stack<Integer> jobs = new Stack<>(); // id
+        int prev = 0;
+        for (String log : logs) {
+            String[] log1 = log.split(":");
             if (log1[1].equals("start")) {
                 if (!jobs.isEmpty()) {
                     ans[jobs.peek()] += Integer.parseInt(log1[2]) - prev;

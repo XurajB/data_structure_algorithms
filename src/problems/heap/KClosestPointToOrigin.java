@@ -1,4 +1,4 @@
-package problems.math;
+package problems.heap;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;

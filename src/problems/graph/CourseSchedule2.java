@@ -16,7 +16,7 @@ public class CourseSchedule2 {
             return new int[0];
         }
 
-        int[] order = new int[numCourses];
+        int[] order = new int[numCourses]; //answer
         int[] indegree = new int[numCourses];
 
         Map<Integer, List<Integer>> graph = new HashMap<>();

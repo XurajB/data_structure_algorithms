@@ -50,7 +50,7 @@ public class MinimumPathSum {
         int c = grid[0].length;
 
         // fill first row
-        for (int i = 1; i < c; i++){
+        for (int i = 1; i < c; i++){ // note: iterate column
             grid[0][i] += grid[0][i-1];
         }
 

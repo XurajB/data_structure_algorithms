@@ -1,4 +1,4 @@
-package problems.string;
+package problems.slidingwindow;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +11,36 @@ public class LongestSubstringWithoutRepeatingCharacter {
     public static void main(String[] args) {
         String s = "abcabcbb";
         System.out.println(lengthOfLongestSubstring(s));
+    }
+
+    // O(N), O(1)
+    public static int lengthOfLongestSubstring2(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        int start = 0;
+        int end = 0;
+        int max = Integer.MIN_VALUE;
+        int[] map = new int[128];
+        int count = 0;
+        while (end < s.length()) {
+            char c = s.charAt(end);
+            map[c]++;
+            if (map[c] > 1) {
+                count++;
+            }
+            if (count > 0) {
+                char c2 = s.charAt(start);
+                map[c2]--;
+                if (map[c2] > 0) {
+                    count--;
+                }
+                start++;
+            }
+            max = Math.max(max, end - start + 1);
+            end++;
+        }
+        return max;
     }
 
     // O(n), space: O(n)

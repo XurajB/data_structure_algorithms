@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class IntersectionOfTwoArrays2 {
 
+    // use hash map solution for O(n + m)
     // O(nLogn + mLogm), O(1)
     public int[] intersect(int[] nums1, int[] nums2) {
 

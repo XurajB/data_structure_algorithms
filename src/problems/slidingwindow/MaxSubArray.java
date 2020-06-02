@@ -11,26 +11,8 @@ import java.util.List;
  */
 public class MaxSubArray {
     public static void main(String[] args) {
-        List<Integer> A = new ArrayList<>(Arrays.asList(-2, 1, -3, 4, -1, 2, 1, -5, 4));
-        System.out.println(maxSubArray(A));
+        List<Integer> A = new ArrayList<>(Arrays.asList(5,-3,-5));
         System.out.println(maxSubArray2(A));
-    }
-
-    // time: O(n^2)
-    public static int maxSubArray(final List<Integer> A) {
-        int max = Integer.MIN_VALUE;
-        int localSum;
-
-        for (int i = 0; i < A.size(); i++) {
-            localSum = 0;
-            for (int j = i; j < A.size(); j++) {
-                localSum += A.get(j);
-                max = Math.max(max, localSum);
-
-            }
-        }
-
-        return max;
     }
 
     // time: O(n)

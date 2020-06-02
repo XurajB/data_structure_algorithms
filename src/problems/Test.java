@@ -1,29 +1,33 @@
 package problems;
 
-import java.util.Comparator;
-import java.util.PriorityQueue;
-
 public class Test {
     public static void main(String[] args) {
 
-        PriorityQueue<Integer> pq = new PriorityQueue<>(5, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2 - o1;
-            }
-        });
 
-        pq.add(0);
-        pq.add(5);
-        pq.add(15);
-        pq.add(7);
-        pq.add(3);
-
-        for (int i = 0; i < 5; i++) {
-            System.out.println(pq.poll());
-        }
+        int[] nums = {4,7,9,10};
+        System.out.println(missingElement(nums, 3));
 
     }
 
+    public static int missingElement(int[] nums, int k) {
 
+        int r = 0;
+        int l = 0;
+
+
+        while (r < nums.length - 1 && k > 0) {
+            if (nums[r+1] != nums[r] + 1) {
+                int diff = nums[r+1] - nums[r] - 1;
+                k = k - diff;
+
+                if (k <= 0) {
+                    return nums[r] + 1;
+                }
+            }
+            r++;
+        }
+
+        return nums[nums.length - 1] + k;
+
+    }
 }

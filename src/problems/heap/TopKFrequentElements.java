@@ -63,6 +63,7 @@ public class TopKFrequentElements {
             ans.add(pq.poll().value);
         }
 
+        Collections.reverse(ans);
         return ans;
     }
 

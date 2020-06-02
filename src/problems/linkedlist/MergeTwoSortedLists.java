@@ -6,6 +6,7 @@ package problems.linkedlist;
  * https://leetcode.com/problems/merge-two-sorted-lists/
  */
 public class MergeTwoSortedLists {
+    //O(m+n)
     public ListNode mergeTwoSortedLists(ListNode l1, ListNode l2) {
         ListNode first = l1;
         ListNode second = l2;

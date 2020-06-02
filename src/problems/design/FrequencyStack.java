@@ -13,11 +13,12 @@ import java.util.PriorityQueue;
  * push(int x), which pushes an integer x onto the stack.
  * pop(), which removes and returns the most frequent element in the stack.
  * If there is a tie for most frequent element, the element closest to the top of the stack is removed and returned.
+ * https://leetcode.com/problems/maximum-frequency-stack/
  */
 public class FrequencyStack {
     int pushCount;
     PriorityQueue<Node> pq;
-    Map<Integer, Integer> map;
+    Map<Integer, Integer> map; // value, freq
     public FrequencyStack() {
         pushCount = 0;
         pq = new PriorityQueue<>(new NodeComparator());

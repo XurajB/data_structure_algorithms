@@ -18,54 +18,43 @@ public class PathWithMaximumMinimumValue {
     // O(nLogn), n = number of elements
     // space: n
     private static int maximumMinimumPath(int[][] A) {
-        if (A == null) {
-            return 0;
-        }
-        int r = A.length;
-        int c = A[0].length;
-
-        int[][] visited = new int[r][c];
-        int[][] dirs = new int[][] {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-
-        //bfs
-        //using max instead of regular queue so that we get next max path node
-        //node[0] = x, node[0] = y, node[2] = value
-        PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]>() {
+        int[][] dirs = new int[][] {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+        int n = A.length;
+        int m = A[0].length;
+        int[][] visited = new int[n][m];
+        // pq to maintain next max node for max path
+        // node[0] = x, node[1] = y, node[2] = value
+        PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]> (){
             @Override
-            public int compare(int[] o1, int[] o2) {
-                return o2[2] - o1[2];
+            public int compare(int[] a, int[] b) {
+                return b[2] - a[2];
             }
         });
 
         pq.offer(new int[] {0, 0, A[0][0]});
-        visited[0][0] = -1; // mark as visited
-        int min = A[0][0];
+        visited[0][0] = -1;
 
+        int min = A[0][0];
         while (!pq.isEmpty()) {
             int[] node = pq.poll();
-
             if (node[2] < min) {
                 min = node[2];
             }
-
-            // check if we have reached the end
-            if (node[0] == r-1 && node[1] == c-1) {
+            // check if we reached end
+            if (node[0] == n-1 && node[1] == m-1) {
                 return min;
             }
-
-            // go through its neighbours
             for (int[] dir: dirs) {
-                int nextR = dir[0] + node[0];
-                int nextC = dir[1] + node[1];
-                if (nextR < 0 || nextC < 0 || nextR >= r || nextC >= c || visited[nextC][nextR] == -1) {
+                int nextX = node[0] + dir[0];
+                int nextY = node[1] + dir[1];
+
+                if (nextX < 0 || nextY < 0 || nextX >= n || nextY >= m || visited[nextX][nextY] == -1) {
                     continue;
                 }
-
-                pq.offer(new int[] {nextR, nextC, A[nextR][nextC]});
-                visited[nextR][nextC] = -1;
+                pq.offer(new int[] {nextX, nextY, A[nextX][nextY]});
+                visited[node[0]][node[1]] = -1;
             }
         }
-
         return -1;
     }
 }

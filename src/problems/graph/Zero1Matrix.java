@@ -1,5 +1,6 @@
 package problems.graph;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -9,7 +10,22 @@ import java.util.Queue;
  * https://leetcode.com/problems/01-matrix/
  */
 public class Zero1Matrix {
-    public int[][] updateMatrix(int[][] matrix) {
+    public static void main(String[] args) {
+        int[][] matrix = {
+                {0,0,0},
+                {0,1,0},
+                {1,1,1}
+        };
+        int[][] ans = updateMatrix(matrix);
+        for (int[] a: ans) {
+            System.out.println(Arrays.toString(a));
+        }
+    }
+    // O(r*c)
+
+    // mark 1 as integer max;
+    // when doing dfs - if neighbour (prev 1) is higher than current - update neighbour to curr + 1;
+    private static int[][] updateMatrix(int[][] matrix) {
         int m = matrix.length;
         int n = matrix[0].length;
 
@@ -28,14 +44,19 @@ public class Zero1Matrix {
         int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
         while (!queue.isEmpty()) {
-            int[] cell = queue.poll();
+            int[] current = queue.poll();
             for (int[] d : dirs) {
-                int r = cell[0] + d[0];
-                int c = cell[1] + d[1];
-                if (r < 0 || r >= m || c < 0 || c >= n ||
-                        matrix[r][c] <= matrix[cell[0]][cell[1]] + 1) continue;
-                queue.add(new int[] {r, c});
-                matrix[r][c] = matrix[cell[0]][cell[1]] + 1;
+                int r = current[0] + d[0];
+                int c = current[1] + d[1];
+                if (r >= 0 && c >= 0 && r < m && c < n) {
+                    int neighbour = matrix[r][c];
+                    int curr = matrix[current[0]][current[1]];
+                    if (neighbour <= curr) {
+                        continue;
+                    }
+                    queue.add(new int[] {r, c});
+                    matrix[r][c] = curr + 1;
+                }
             }
         }
 

@@ -59,7 +59,7 @@ public class InMemoryFileSystem {
     }
 
     // O(m+n)
-    public String readContentFromFile(String filePath, String content) {
+    public String readContentFromFile(String filePath) {
         File file = navigateTo(filePath);
         return file.content.toString();
     }

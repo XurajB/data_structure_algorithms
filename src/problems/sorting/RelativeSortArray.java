@@ -18,7 +18,7 @@ public class RelativeSortArray {
 
     // O(NLogN), O(N)
     private static int[] relativeSortArray(int[] arr1, int[] arr2) {
-        TreeMap<Integer, Integer> map = new TreeMap<>();
+        TreeMap<Integer, Integer> map = new TreeMap<>(); // remaining should be in ascending order
         for (int n: arr1) {
             map.put(n, map.getOrDefault(n, 0) + 1);
         }

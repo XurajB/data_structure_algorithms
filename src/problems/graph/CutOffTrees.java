@@ -29,7 +29,7 @@ public class CutOffTrees {
         int n = forest.get(0).size();
 
         // order by height
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> a[2] - b[2]);
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> a[2] - b[2]); // i, j, height
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {

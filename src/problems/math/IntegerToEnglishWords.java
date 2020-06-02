@@ -19,7 +19,7 @@ public class IntegerToEnglishWords {
 
     public static void main(String[] args) {
         IntegerToEnglishWords words = new IntegerToEnglishWords();
-        System.out.println(words.numberToWords(12344));
+        System.out.println(words.numberToWords(Integer.MAX_VALUE - 1));
     }
 
     private String numberToWords(int num) {
@@ -32,6 +32,7 @@ public class IntegerToEnglishWords {
         one.put(3, "Three");
         one.put(2, "Two");
         one.put(1, "One");
+        one.put(0, "");
 
         teen.put(19, "Nineteen");
         teen.put(18, "Eighteen");

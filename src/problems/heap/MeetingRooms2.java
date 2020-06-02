@@ -43,6 +43,7 @@ public class MeetingRooms2 {
         allocator.add(intervals[0][1]);
         for (int i = 1; i < intervals.length; i++) {
 
+            // previous meeting has ended (current start is higher than last meeting end time). so we don't need a room
             if (intervals[i][0] >= allocator.peek()) {
                 allocator.poll();
             }

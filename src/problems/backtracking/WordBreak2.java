@@ -15,7 +15,6 @@ public class WordBreak2 {
 
     // O(n ^ 2), space:
     private static List<String> dfs(String s, List<String> wordDict, Map<String, LinkedList<String>> cache) {
-
         // cache for memoization purpose (not to prevent dupes)
         if (cache.containsKey(s)) {
             // fore cases like: apple, penapple
@@ -39,7 +38,6 @@ public class WordBreak2 {
 
             }
         }
-
         cache.put(s, res);
         return res;
     }

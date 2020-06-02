@@ -26,7 +26,7 @@ public class MaximalSquare {
         for (int i = 1; i <= r; i++) {
             for (int j = 1; j <= c; j++) {
                 if (matrix[i-1][j-1] == '1') {
-                    // dp[i][j] is the lower left corner of the square
+                    // dp[i][j] is the lower left corner of the square. Look at three remaining sides for a 1
                     dp[i][j] = Math.min(Math.min(dp[i][j-1], dp[i-1][j]), dp[i-1][j-1]) + 1;
                     max = Math.max(dp[i][j], max);
                 }

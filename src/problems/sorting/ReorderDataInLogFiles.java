@@ -43,34 +43,4 @@ public class ReorderDataInLogFiles {
         Arrays.sort(logs, myComp);
         return logs;
     }
-
-    // Time: NLogN, Space: N (substring makes it N^2)
-    private static String[] reorderLogFiles(String[] logs) {
-        Comparator<String> comp = (s1, s2) -> {
-            int firstSpace = s1.indexOf(" ");
-            int secondSpace = s2.indexOf(" ");
-
-            boolean isFirstDigit = Character.isDigit(s1.charAt(firstSpace+1));
-            boolean isSecondDigit = Character.isDigit(s2.charAt(secondSpace+1));
-
-            if (!isFirstDigit && !isSecondDigit) {
-
-                int cmp = s1.substring(firstSpace+1).compareTo(s2.substring(secondSpace+1));
-                if (cmp != 0) {
-                    return cmp;
-                }
-                return s1.compareTo(s2);
-            }
-            if (isFirstDigit && isSecondDigit) {
-                return 0;
-            }
-            else if (isFirstDigit) {
-                return 1; // 1 means they are higher, we want numbers print after letters
-            }
-            return -1;
-        };
-
-        Arrays.sort(logs, comp);
-        return logs;
-    }
 }

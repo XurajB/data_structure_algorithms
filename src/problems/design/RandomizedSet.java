@@ -18,7 +18,7 @@ public class RandomizedSet {
     //space: O(N)
 
     Random rand = new Random();
-    Map<Integer, Integer> dict;
+    Map<Integer, Integer> dict; // val, index
     List<Integer> list;
     public RandomizedSet() {
         dict = new HashMap<>();

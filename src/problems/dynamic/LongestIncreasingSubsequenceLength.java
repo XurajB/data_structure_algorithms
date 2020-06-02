@@ -4,6 +4,7 @@ package problems.dynamic;
  * Given an unsorted array of integers, find the length of longest increasing subsequence.
  * Input: [10,9,2,5,3,7,101,18]
  * Output: 4
+ * https://leetcode.com/problems/longest-increasing-subsequence/
  */
 public class LongestIncreasingSubsequenceLength {
     public static void main(String[] args) {
@@ -23,7 +24,7 @@ public class LongestIncreasingSubsequenceLength {
         int length = 0;
         int[] dp = new int[nums.length];
         dp[0] = 1;
-        for (int i = 1; i < nums.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
             dp[i] = 1;
             for (int j = 0; j < i; j++) {
                 if (nums[i] > nums[j]) {

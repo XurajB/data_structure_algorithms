@@ -15,7 +15,7 @@ public class ReorganizeString {
         System.out.println(reorganizeString("aaab"));
     }
 
-    // O(N), O(N)
+    // O(NLogK), O(N) (k = size of alphabet - 26) so O(N)
     private static String reorganizeString(String S) {
         Map<Character, Integer> map = new HashMap<>();
 
@@ -55,18 +55,13 @@ public class ReorganizeString {
 
         if (q.size() > 0) {
             CharacterCount characterCount = q.poll();
-            for (int i = 0; i < characterCount.count; i++) {
-                sb.append(characterCount.c);
-            }
+            sb.append(characterCount.c);
         }
 
-        for (int i = 1; i < sb.length(); i++) {
-            if (sb.charAt(i-1) == sb.charAt(i)) {
-                return "";
-            }
+        if (sb.length() == S.length()) {
+            return sb.toString();
         }
-
-        return sb.toString();
+        return "";
     }
 
     static class CharacterCount {

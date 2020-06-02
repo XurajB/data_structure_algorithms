@@ -35,7 +35,7 @@ public class AircraftRouteOptimization {
     }
 
     private static List<int[]> getOptimizedRoute(int maxDistance, int[][] forwardRouteList, int[][] returnRouteList) {
-        Map<Integer, List<int[]>> map = new HashMap<>();
+        Map<Integer, List<int[]>> map = new HashMap<>(); // diff, [forward, return]
 
         // sort by min distance
         Arrays.sort(forwardRouteList, (a, b) -> a[1] - b[1]);

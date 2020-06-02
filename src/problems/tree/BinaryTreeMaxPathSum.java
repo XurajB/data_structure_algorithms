@@ -19,8 +19,8 @@ public class BinaryTreeMaxPathSum {
         if (treeNode == null) {
             return 0;
         }
-        int left = helper(treeNode.left);
-        int right = helper(treeNode.right);
+        int left = Math.max(helper(treeNode.left), 0);
+        int right = Math.max(helper(treeNode.right), 0);
         int total = left + right + treeNode.val;
 
         max = Math.max(max, total);

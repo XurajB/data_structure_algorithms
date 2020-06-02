@@ -25,15 +25,12 @@ public class WordLadder {
         Queue<String> queue = new LinkedList<>();
         queue.offer(beginWord);
 
-        List<String> list = new ArrayList<>();
-
         // bfs
         while (!queue.isEmpty()) {
             int size = queue.size();
             level++;
             // go through this level (bfs)
             for (int i = 0; i < size; i++) {
-                list.add(queue.peek()); // not needed for solution, just for study
                 char[] chars = queue.poll().toCharArray();
                 // go through each character in the word
                 for (int j = 0; j < chars.length; j++) {

@@ -1,7 +1,6 @@
 package problems.graph;
 
 import java.util.*;
-
 /**
  * Given two words (beginWord and endWord), and a dictionary's word list, find all shortest transformation sequence(s) from beginWord to endWord, such that:
  *
@@ -24,7 +23,7 @@ public class WordLadder2 {
     // for readability
     Map<String, List<String>> graph;
     Set<String> dict;
-    Map<String, Integer> distance;
+    Map<String, Integer> distance; // distance from begin word to this word
     List<List<String>> answer;
 
     // O(V * E), O(V), V = size of dict, E = avg length of word
@@ -56,36 +55,53 @@ public class WordLadder2 {
         Queue<String> queue = new LinkedList<>(); // for bfs
         queue.offer(beginWord);
 
-        while (!queue.isEmpty()) {
-            String curr = queue.poll();
-            char[] chars = curr.toCharArray();
-            // try all possible substitutions in every position of current word
-            for (int i = 0; i < chars.length; i++) {
-                for (char c = 'a'; c <= 'z'; c++) {
-                    if (chars[i] == c) continue;
-                    char temp = chars[i];
-                    chars[i] = c;
-                    String newWord = new String(chars);
-                    if (dict.contains(newWord)) {
-                        graph.putIfAbsent(curr, new ArrayList<>());
-                        graph.get(curr).add(newWord);
-                    }
-                    chars[i] = temp; // change back to original so we can proceed with other combinations
-                }
-            }
+        dict.add(beginWord);
+        for (String word: dict) {
+            graph.put(word, new ArrayList<>());
+        }
 
-            // traverse through all neighbour of current node and update distance and queue for next level
-            if (graph.containsKey(curr)) {
-                for (String neighbor: graph.get(curr)) {
-                    if (!distance.containsKey(neighbor)) {
-                        distance.put(neighbor, distance.get(curr) + 1);
-                        if (!neighbor.equals(endWord)) {
-                            queue.offer(neighbor);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            boolean found = false;
+            for (int i = 0; i < size; i++) {
+                String current = queue.poll();
+                int curDistance = distance.get(current);
+                List<String> neighbours = getNeighbours(current);
+
+                for (String neighbour: neighbours) {
+                    graph.get(current).add(neighbour);
+                    if (!distance.containsKey(neighbour)) {
+                        distance.put(neighbour, curDistance + 1);
+                        if (neighbour.equals(endWord)) {
+                            found = true;
+                        } else {
+                            queue.offer(neighbour);
                         }
                     }
                 }
+                if (found) {
+                    break;
+                }
             }
         }
+    }
+
+    // try all possible substitutions in every position of current word
+    private List<String> getNeighbours(String curr) {
+        List<String> neighbours = new ArrayList<>();
+        char[] chars = curr.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            for (char c = 'a'; c <= 'z'; c++) {
+                char temp = chars[i];
+                chars[i] = c;
+                String newWord = new String(chars);
+                if (dict.contains(newWord)) {
+                    neighbours.add(newWord);
+                }
+                chars[i] = temp; // change back to original so we can proceed with other combinations
+            }
+        }
+        return neighbours;
     }
 
     // step 2 - dfs

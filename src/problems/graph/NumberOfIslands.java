@@ -12,7 +12,7 @@ import java.util.Queue;
 public class NumberOfIslands {
     public static void main(String[] args) {
         char[][] grid = new char[][] {
-                {'1','1','1','1','0'},
+                {'1','1','0','1','0'},
                 {'1','1','0','1','0'},
                 {'1','1','0','0','0'},
                 {'0','0','0','0','0'}
@@ -24,7 +24,6 @@ public class NumberOfIslands {
         if (grid == null || grid.length == 0) {
             return 0;
         }
-
         int count = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
@@ -34,43 +33,32 @@ public class NumberOfIslands {
                 }
             }
         }
-
         return count;
     }
 
     // O(N * M), row, column, space: min(M,N) - because in bfs; stack size will never be 5 in case of 5X5 grid
-    private static void bfs(char[][] grid, int i, int j) {
-        Queue<int[]> queue = new LinkedList<>();
-        queue.offer(new int[] {i, j});
-        while (!queue.isEmpty()) {
+    private static void bfs(char[][] grid, int x, int y) {
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[] {x, y});
 
-            int[] cell = queue.poll();
-            int x = cell[0];
-            int y = cell[1];
-
-            if (isValid(x + 1, y, grid)) {
-                queue.offer(new int[] {x+1, y});
-                grid[x+1][y] = '0';
-            }
-            if (isValid(x, y + 1, grid)) {
-                queue.offer(new int[] {x, y+1});
-                grid[x][y+1] = '0';
-            }
-            if (isValid(x - 1, y, grid)) {
-                queue.offer(new int[] {x-1, y});
-                grid[x-1][y] = '0';
-            }
-            if (isValid(x, y- 1, grid)) {
-                queue.offer(new int[] {x, y-1});
-                grid[x][y-1] = '0';
+        int[][] dirs = new int[][] {
+                {1, 0}, {0, 1}, {-1, 0}, {0, -1}
+        };
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int k = 0; k < size; k++) {
+                int[] point = q.poll();
+                int i = point[0];
+                int j = point[1];
+                for (int[] dir: dirs) {
+                    int new_x = i + dir[0];
+                    int new_y = j + dir[1];
+                    if (new_x >= 0 && new_y >= 0 && new_x < grid.length && new_y < grid[0].length && grid[new_x][new_y] == '1') {
+                        grid[new_x][new_y] = '0';
+                        q.offer(new int[] {new_x, new_y});
+                    }
+                }
             }
         }
-    }
-
-    private static boolean isValid(int x, int y, char[][] grid) {
-        if (x < 0 || y < 0 || x >= grid.length || y >= grid[0].length || grid[x][y] == '0') {
-            return false;
-        }
-        return true;
     }
 }

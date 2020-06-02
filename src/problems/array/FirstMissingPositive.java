@@ -7,7 +7,8 @@ package problems.array;
  */
 public class FirstMissingPositive {
     public static void main(String[] args) {
-
+        int[] nums = {3,4,-1,1};
+        System.out.println(firstMissingPositive(nums));
     }
 
     private static int firstMissingPositive(int[] nums) {
@@ -18,7 +19,7 @@ public class FirstMissingPositive {
 
         boolean hasOne = false;
 
-        // if the array does not have a 1, return 1
+        // if the array do not have a 1, return 1
         for (int num : nums) {
             if (num == 1) {
                 hasOne = true;

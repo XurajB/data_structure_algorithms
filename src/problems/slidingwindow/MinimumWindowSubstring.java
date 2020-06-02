@@ -13,6 +13,37 @@ public class MinimumWindowSubstring {
         System.out.println(minWindow("ADOBECODEBANC", "ABC"));
     }
 
+    // O(N), O(1)
+    private static String minWindow2(String s, String t) {
+        int [] map = new int[128];
+        for (char c : t.toCharArray()) {
+            map[c]++;
+        }
+        int start = 0, end = 0, minStart = 0, minLen = Integer.MAX_VALUE, counter = t.length();
+        while (end < s.length()) {
+            final char c1 = s.charAt(end);
+            if (map[c1] > 0) {
+                counter--;
+            }
+            map[c1]--;
+            while (counter == 0) {
+                if (minLen > end - start + 1) {
+                    minLen = end - start + 1;
+                    minStart = start;
+                }
+                char c2 = s.charAt(start);
+                map[c2]++;
+                if (map[c2] > 0) {
+                    counter++;
+                }
+                start++;
+            }
+            end++;
+        }
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(minStart, minStart + minLen);
+    }
+
+
     private static String minWindow(String s, String t) {
 
         if (s.length() == 0 || t.length() == 0) {
