@@ -8,6 +8,14 @@ import java.util.Map;
 
 /**
  * Return the root node of a binary search tree that matches the given preorder traversal.
+ *
+ * Note:
+ * You cannot construct tree only from inorder because we won't know root,
+ * We need either reorder (first root) and postorder (last) so we can identify root
+ * Now we can use inorder to find out left and right subtrees (left and right side of root)
+ *
+ * You cannot construct tree if you have preorder and postorder. You need inorder + pre/post
+ * Only works when we have non-duplicate nodes
  */
 public class ConstructBstFromPreorder {
     int[] inorder;
@@ -23,7 +31,9 @@ public class ConstructBstFromPreorder {
             inorder[i] = preorder[i];
         }
         Arrays.sort(inorder);
+
         int i = 0;
+        // in order map
         for (int val: inorder) {
             map.put(val, i++);
         }

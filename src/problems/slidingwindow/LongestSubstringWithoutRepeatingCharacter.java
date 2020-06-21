@@ -9,14 +9,14 @@ import java.util.Set;
  */
 public class LongestSubstringWithoutRepeatingCharacter {
     public static void main(String[] args) {
-        String s = "abcabcbb";
-        System.out.println(lengthOfLongestSubstring(s));
+        String s = "whatwhywhere";
+        System.out.println(lengthOfLongestSubstring2(s));
     }
 
     // O(N), O(1)
-    public static int lengthOfLongestSubstring2(String s) {
+    public static String lengthOfLongestSubstring2(String s) {
         if (s == null || s.length() == 0) {
-            return 0;
+            return "";
         }
         int start = 0;
         int end = 0;
@@ -40,7 +40,8 @@ public class LongestSubstringWithoutRepeatingCharacter {
             max = Math.max(max, end - start + 1);
             end++;
         }
-        return max;
+        // if returning int, return max;
+        return s.substring(start - 1, start + max - 1);
     }
 
     // O(n), space: O(n)

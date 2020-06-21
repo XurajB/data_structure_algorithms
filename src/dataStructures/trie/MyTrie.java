@@ -134,8 +134,6 @@ public class MyTrie {
         Map<Character, TrieNode> children;
         // is this the end of word
         boolean isEnd;
-        // parent node
-        TrieNode parent;
 
         TrieNode() {
             children = new HashMap<>();

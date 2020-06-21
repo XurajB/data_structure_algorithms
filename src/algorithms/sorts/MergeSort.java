@@ -5,12 +5,16 @@ package algorithms.sorts;
  * Merge Sort - Efficient, general purpose comparison based sorting algorithm.
  * It is a divide and conquer algorithm.
  * Complexity: O(nLog n) time, space: O(n)
+ *
+ * Merge sort is an stable sorting algorithm
+ * If we have duplicates - it will sort them in their original order - for something like an object with val and index
  */
 public class MergeSort {
 
     private int[] dataSet;
     private int[] helper;
 
+    // O(nlogn) - logn for recursive calls (dividing the problems into half) * n (merging)
     public void sort(int[] dataSet) {
         this.dataSet = dataSet;
         this.helper = new int[dataSet.length];
@@ -39,6 +43,8 @@ public class MergeSort {
         for (int i = low; i <= high; i++) {
             helper[i] = dataSet[i];
         }
+        // we can also initialize new array here of size[end-start+1] and copy items in there
+        // instead of keeping global helper
 
         // pointers
         int i = low; // for left array

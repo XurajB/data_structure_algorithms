@@ -32,13 +32,18 @@ public class Permutations {
         return output;
     }
 
+    static int k = 3;
     private static void backtrack(int n,
                           ArrayList<Integer> nums,
                           List<List<Integer>> output,
                           int index) {
         // if all integers are used up
-        if (index == n)
+        if (index == n) {
             output.add(new ArrayList<>(nums));
+            if (k-- == 1) {
+                System.out.println(nums);
+            }
+        }
         for (int i = index; i < n; i++) {
             // place i-th integer first
             // in the current permutation

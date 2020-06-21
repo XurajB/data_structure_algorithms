@@ -16,6 +16,7 @@ public class MaxSubArray {
     }
 
     // time: O(n)
+    // Kadane's algorithm
     public static int maxSubArray2(final List<Integer> A) {
         int max = A.get(0);
         int localSum = A.get(0);

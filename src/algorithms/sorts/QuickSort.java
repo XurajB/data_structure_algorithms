@@ -6,7 +6,7 @@ package algorithms.sorts;
  * Divide and conquer. Most practical choice and quick sorting algorithm
  * O(nLogn) - average case - time
  * O(n^2) - worst case (most of the time this is avoided by randomization of the pivot)
- * O(1) - space
+ * O(logn) - space (recursion)
  */
 public class QuickSort {
     private int[] dataSet;

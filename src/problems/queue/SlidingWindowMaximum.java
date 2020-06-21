@@ -1,4 +1,4 @@
-package problems.slidingwindow;
+package problems.queue;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -15,6 +15,7 @@ public class SlidingWindowMaximum {
     }
 
     private static int[] maxSlidingWindow(int[] nums, int k) {
+        // We are using deque for sliding window
         // use deque so we can store indexes max element of that window in the front
         // and use the back to store elements less than that number
         int n = nums.length;

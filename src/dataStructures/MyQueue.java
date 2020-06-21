@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
  *
  * Implementation of Queue using LinkedList. FIFO - first in first out
  */
-public class MyQueue<K> implements Iterable<K> {
+public class MyQueue<T> implements Iterable<T> {
     private Node first;
     private Node last;
     private int size;
@@ -23,7 +23,7 @@ public class MyQueue<K> implements Iterable<K> {
         return first == null;
     }
 
-    public K peek() {
+    public T peek() {
         if (isEmpty()) {
             System.out.println("Empty queue");
             return null;
@@ -31,7 +31,7 @@ public class MyQueue<K> implements Iterable<K> {
         return first.value;
     }
 
-    public void enqueue(K value) {
+    public void enqueue(T value) {
         Node oldLast = last;
         last = new Node(value);
         last.next = null;
@@ -43,12 +43,12 @@ public class MyQueue<K> implements Iterable<K> {
         size++;
     }
 
-    public K dequeue() {
+    public T dequeue() {
         if (isEmpty()) {
             System.out.println("Empty queue");
             return null;
         }
-        K value = first.value;
+        T value = first.value;
         first = first.next;
         size--;
         if (isEmpty()) {
@@ -70,11 +70,11 @@ public class MyQueue<K> implements Iterable<K> {
     }
 
     @Override
-    public Iterator<K> iterator() {
+    public Iterator<T> iterator() {
         return new MyQueueIterator();
     }
 
-    private class MyQueueIterator implements Iterator<K> {
+    private class MyQueueIterator implements Iterator<T> {
 
         private Node current = first;
 
@@ -84,11 +84,11 @@ public class MyQueue<K> implements Iterable<K> {
         }
 
         @Override
-        public K next() {
+        public T next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            K value = current.value;
+            T value = current.value;
             current = current.next;
             return value;
         }
@@ -100,9 +100,9 @@ public class MyQueue<K> implements Iterable<K> {
     }
 
     private class Node {
-        private K value;
+        private T value;
         private Node next;
-        Node(K value) {
+        Node(T value) {
             this.value = value;
         }
     }

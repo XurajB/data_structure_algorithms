@@ -22,9 +22,11 @@ public class Permutations2 {
         }
         for (int i = 0; i < nums.length; i++) {
             if(used[i] || i > 0 && nums[i] == nums[i-1] && !used[i - 1]) continue;
+
             used[i] = true;
             current.add(nums[i]);
             backtrack(ans, current, nums, used);
+
             used[i] = false;
             current.remove(current.size() - 1);
         }
