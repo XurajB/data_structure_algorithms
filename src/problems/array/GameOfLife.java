@@ -28,7 +28,7 @@ public class GameOfLife {
                     // live is -1 or 1 because we are solving this in place
                     // we are using dummy cell value to signify previous state
                     // if we are allowed to use extra space, we can copy board to another 2d array and use that to compare
-                    if (board[newi][newj] == Math.abs(1)) {
+                    if (Math.abs(board[newi][newj]) == 1) {
                         livecount++;
                     }
                 }

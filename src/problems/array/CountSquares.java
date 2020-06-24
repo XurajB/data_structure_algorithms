@@ -1,7 +1,7 @@
 package problems.array;
 
 /**
- *
+ * Given a m * n matrix of ones and zeros, return how many square submatrices have all ones.
  */
 public class CountSquares {
     public static void main(String[] args) {
@@ -14,7 +14,7 @@ public class CountSquares {
     }
 
     // O(m*n)
-    // keep 1s on first row and column
+    // keep 1s on first row and column (but count on res)
     // get min from left, top, left top + 1
     // sum it
     private static int countSquares(int[][] A) {

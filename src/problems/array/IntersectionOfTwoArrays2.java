@@ -36,7 +36,6 @@ public class IntersectionOfTwoArrays2 {
             }
         }
 
-
         int[] answer = new int[ans.size()];
         int p = 0;
         for (int a: ans) {

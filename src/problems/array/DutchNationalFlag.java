@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Given an array of integers A and a pivot, rearrange A in the following order:
  * [Elements less than pivot, elements equal to pivot, elements greater than pivot]
  *
- * Same problem: given marbles with Red, White or Blue (0, 1, 2). sort them by Red, white, blue. Pivot = 1
+ * Same problem: Sort Colors - given marbles with Red, White or Blue (0, 1, 2). sort them by Red, white, blue. Pivot = 1
  */
 public class DutchNationalFlag {
 
