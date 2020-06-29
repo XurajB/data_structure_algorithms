@@ -30,9 +30,11 @@ public class RegularExpressionMatching {
         // thus for odd length, dp[0][j] = false which is default. So we can just skip the odd position, i.e. j starts from 2, the interval of j is also 2.
         // and notice that the length of repeat sub-pattern #* is only 2, we can just make use of dp[0][j - 2] rather than scanning j length each time
         // for checking if it matches #*#*#*#*.
+
+        // empty s, non empty p
         for (int i = 2; i < n + 1; i += 2) {
-            if (p.charAt(i - 1) == '*' && dp[0][i-2]) {
-                dp[0][i] = true;
+            if (p.charAt(i - 1) == '*') {
+                dp[0][i] = dp[0][i-2];
             }
         }
         // Induction rule is very similar to edit distance, where we also consider from the end. And it is based on what character in the pattern we meet.
@@ -55,9 +57,9 @@ public class RegularExpressionMatching {
         //      2.1 if p.charAt(j - 1) is counted as empty, then dp[i][j] = dp[i][j - 2]
         //      2.2 if counted as one, then dp[i][j] = dp[i - 1][j - 2]
         //      2.3 if counted as multiple, then dp[i][j] = dp[i - 1][j]
-        for (int i = 1; i < m + 1; i++) {
-            for (int j = 1; j < n + 1; j++) {
-                char curS = s.charAt(i - 1);
+        for (int i = 1; i <= m; i++) {
+            char curS = s.charAt(i - 1);
+            for (int j = 1; j <= n; j++) {
                 char curP = p.charAt(j - 1);
                 // case 1
                 if (curS == curP || curP == '.') {
@@ -67,9 +69,10 @@ public class RegularExpressionMatching {
                     char preCurP = p.charAt(j-2);
                     if (preCurP != '.' && preCurP != curS) {
                         // check if we can assume 0 number of preceding element
+                        // imagine #* is not there
                         dp[i][j] = dp[i][j-2];
                     } else {
-                        dp[i][j] = (dp[i][j-2] || dp[i-1][j-2] || dp[i-1][j]);
+                        dp[i][j] = (dp[i][j-2] || dp[i-1][j-2] || dp[i-1][j]); // empty case, one, multiple
                     }
                 }
             }

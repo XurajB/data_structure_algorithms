@@ -23,7 +23,6 @@ public class LongestIncreasingSubsequenceLength {
 
         int length = 0;
         int[] dp = new int[nums.length];
-        dp[0] = 1;
         for (int i = 0; i < nums.length; i++) {
             dp[i] = 1;
             for (int j = 0; j < i; j++) {

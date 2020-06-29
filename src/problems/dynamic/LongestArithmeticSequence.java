@@ -17,11 +17,12 @@ public class LongestArithmeticSequence {
     // run two loops, put the difference with count in hashmap
     // O(N^2), O(N)
     public static int longestArithSeqLength(int[] A) {
-        int res = 2, n = A.length;
+        int res = 2; // min ans
+        int n = A.length;
         HashMap<Integer, Integer>[] dp = new HashMap[n]; // (difference, frequencies)
         for (int j = 0; j < n; j++) {
             dp[j] = new HashMap<>();
-            for (int i = 0; i < j; i++) {
+            for (int i = 0; i < j; i++) { // i < j because dp[j] has not been initialized after i
                 int d = A[j] - A[i];
                 dp[j].put(d, dp[i].getOrDefault(d, 1) + 1);
                 res = Math.max(res, dp[j].get(d));

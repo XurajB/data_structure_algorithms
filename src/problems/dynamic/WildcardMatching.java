@@ -27,9 +27,9 @@ public class WildcardMatching {
             dp[0][i] = dp[0][i-1] && p.charAt(i-1) == '*';
         }
 
-        for (int i = 1; i < m+1; i++) {
-            for (int j = 1; j < n+1; j++) {
-                char curS = s.charAt(i - 1);
+        for (int i = 1; i <= m; i++) {
+            char curS = s.charAt(i - 1);
+            for (int j = 1; j <= n; j++) {
                 char curP = p.charAt(j - 1);
                 // case 1
                 if (curS == curP || curP == '?') {
