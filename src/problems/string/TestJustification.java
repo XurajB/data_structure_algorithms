@@ -16,71 +16,76 @@ public class TestJustification {
     }
 
     public List<String> fullJustify(String[] words, int maxWidth) {
+        // start with left being first word
+        // findRight - greedily try to go as far as possible until we fill our line
+        // justify one line at a time
+        //   - If it is one word, just return that word
+        //   - If it is the last line, then just seperate each word with one space (left justified)
+        //   - Else - calculate the size of each space evenly and if there is a reminder, distribute until it is gone
+        int left = 0; // index
         List<String> lines = new ArrayList<>();
 
-        if (words == null || words.length == 0) {
-            return lines;
-        }
-
-        int startIndex = 0;
-        int spaceCount = 0;
-        int currentCount = 0;
-
-        int i = 0;
-        for (i = 0; i < words.length - 1; i++) {
-            int size = currentCount + words[i].length() + spaceCount;
-            if (size < maxWidth) {
-                currentCount = currentCount + words[i].length();
-                spaceCount++;
-            } else {
-                lines.add(getSentence(words, startIndex, i-1, maxWidth, currentCount));
-                startIndex = i;
-                currentCount = 0;
-                spaceCount = 0;
-            }
-        }
-
-
-        if (i < words.length) {
-            StringBuilder sb = new StringBuilder();
-            for (int j = i; j < words.length - 1; j++) {
-                sb.append(words[j]);
-                sb.append(" ");
-            }
-            sb.append(words[words.length - 1]);
-
-            int lastCount = sb.length();
-            if (lastCount < maxWidth) {
-                addSpace(sb, maxWidth - lastCount);
-            }
-
-            lines.add(sb.toString());
+        while (left < words.length) {
+            int right = findRight(left, words, maxWidth);
+            lines.add(justify(left, right, words, maxWidth));
+            left = right + 1;
         }
 
         return lines;
     }
 
-    private String getSentence(String[] words, int start, int end, int maxWidth, int count) {
-        int totalSpaceCount = maxWidth - count;
-        int perWordSpace = totalSpaceCount / (end - start);
+    private int findRight(int left, String[] words, int maxWidth) {
+        int right = left; // start with left
+        int sum = words[right++].length();
 
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = start; i < end; i++) {
-            String s = words[i];
-            sb.append(s);
-            addSpace(sb, perWordSpace);
-            //totalSpaceCount = totalSpaceCount - perWordSpace;
-
+        while (right < words.length && (sum + 1 + words[right].length()) <= maxWidth) {
+            sum += 1 + words[right++].length(); // 1 for space
         }
-        sb.append(words[end]);
 
-        return sb.toString();
+        return right - 1;
     }
 
-    private void addSpace(StringBuilder sb, int count) {
-        for (int j = 0; j < count; j++) {
-            sb.append(" ");
+    private String justify(int left, int right, String[] words, int maxWidth) {
+        if (right - left == 0) {
+            // one word only
+            return padResult(words[left], maxWidth);
         }
+
+        boolean isLastLine = right == words.length - 1;
+        int totalSpaces = maxWidth - wordsLength(left, right, words);
+        int numOfSpaces = right - left;
+
+        String space = isLastLine ? " " : blank(totalSpaces / numOfSpaces);
+        int reminder = isLastLine ? 0 : totalSpaces % numOfSpaces;
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = left; i <= right; i++) {
+            sb.append(words[i])
+                    .append(space)
+                    .append(reminder-- > 0 ? " " : "");
+        }
+
+        if (isLastLine) {
+            return padResult(sb.toString().trim(), maxWidth);
+        }
+        return sb.toString().trim();
+    }
+
+    private int wordsLength(int left, int right, String[] words) {
+        int length = 0;
+        for (int i = left; i <= right; i++) {
+            length += words[i].length();
+        }
+        return length;
+    }
+
+    // pad result with spaces
+    private String padResult(String result, int maxWidth) {
+        return result + blank(maxWidth - result.length());
+    }
+
+    private String blank(int length) {
+        String blank = new String(new char[length]);
+        return blank.replace('\0', ' ');
     }
 }

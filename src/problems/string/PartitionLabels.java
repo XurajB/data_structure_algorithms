@@ -15,7 +15,7 @@ public class PartitionLabels {
         System.out.println(partitionLabels(s));
     }
 
-    // O(N)
+    // O(N), O(1) - since 26
     private static List<Integer> partitionLabels(String s) {
         List<Integer> ans = new ArrayList<>();
         if (s == null || s.length() == 0) {

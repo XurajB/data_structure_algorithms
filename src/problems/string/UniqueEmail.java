@@ -14,11 +14,8 @@ public class UniqueEmail {
     }
 
     private static int numUniqueEmails(String[] emails) {
-
         Set<String> set = new HashSet<>();
-
         for (String s: emails) {
-
             StringBuilder sb = new StringBuilder();
             int a = s.indexOf('@');
             for (int i = 0; i < s.length(); i++) {
@@ -26,16 +23,12 @@ public class UniqueEmail {
                 if (c == '+') {
                     sb.append(s.substring(a));
                     break;
-                } else if (c != '.') {
-                    sb.append(c);
-                } else if (i > a) {
+                } else if (c != '.' || i > a) {
                     sb.append(c);
                 }
             }
-
             set.add(sb.toString());
         }
-
         return set.size();
     }
 }

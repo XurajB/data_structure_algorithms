@@ -25,6 +25,7 @@ public class WordSearch2 {
         System.out.println(findWords(board, words));
     }
 
+    // O(M(4 * 3^L-1)), M = board, L = max length of words
     public static List<String> findWords(char[][] board, String[] words) {
         List<String> ans = new ArrayList<>();
         if (board == null && board.length == 0) {

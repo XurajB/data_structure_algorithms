@@ -9,6 +9,7 @@ public class RotatedArray {
     public static void main(String[] args) {
         int[] a = {4, 5, 6, 7, 1, 2, 3};
         System.out.println(findPivot(a));
+        System.out.println(findPivot2(a));
     }
 
     // there are many properties of the pivot, it is the smallest number. or number that is smaller than both left or right elements
@@ -20,7 +21,7 @@ public class RotatedArray {
         int n = nums.length;
         while (low <= high) {
             int mid = low + (high - low) / 2;
-            int left = (mid - 1 + n) % n, right = (mid + 1) % n; // if they overflow we want to start from the beginning
+            int left = (mid - 1 + n) % n; // one element left to mid. if they overflow we want to start from the beginning
             if (nums[low] <= nums[high]) { //case 1
                 return low;
             } else if (nums[mid] < nums[left]) {
@@ -33,5 +34,43 @@ public class RotatedArray {
         }
 
         return -1; //this means the array
+    }
+
+    private static int findPivot2(int[] nums) {
+        if (nums.length == 1) {
+            return 0;
+        }
+        int low = 0;
+        int high = nums.length - 1;
+
+        // no rotation
+        // 1 2 3 4 5
+        // vs
+        // 4 5 1 2 3
+        if (nums[low] < nums[high]) {
+            return low;
+        }
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            // 5 in above case
+            if (nums[mid] > nums[mid + 1]) {
+                return mid + 1;
+            }
+
+            if (nums[mid] < nums[mid - 1]) {
+                return mid;
+            }
+
+            // mid is larger than num[0] which
+            // means same sorted part 1 2 3 4 5
+            if (nums[mid] > nums[0]) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        return -1;
     }
 }
