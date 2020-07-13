@@ -29,9 +29,9 @@ public class SearchInRotatedSortedArray {
         }
         // then do binary search on one of the side
         if (nums[0] < target) {
-            return search(nums, 0, index - 1, target);
+            return search(nums, 0, index - 1, target); // search in left side
         } else {
-            return search(nums, index, nums.length - 1, target);
+            return search(nums, index, nums.length - 1, target); // search in right side
         }
     }
 
@@ -60,7 +60,7 @@ public class SearchInRotatedSortedArray {
             int mid = low + (high - low) / 2;
             if (nums[mid] == target) {
                 return mid;
-            } else if (nums[mid] >= target) {
+            } else if (nums[mid] > target) {
                 low = mid + 1;
             } else {
                 high = mid - 1;

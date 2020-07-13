@@ -10,8 +10,8 @@ package problems.string;
  */
 public class EditDistance {
     public static void main(String[] args) {
-        String word1 = "hello";
-        String word2 = "world";
+        String word1 = "a";
+        String word2 = "ba";
         System.out.println(minDistance(word1, word2));
     }
 

@@ -31,11 +31,13 @@ public class SlidingWindowMaximum {
 
         for (int i = 0; i < n; i++) {
             if (!dq.isEmpty() && dq.peek() < i-k+1) {
-                dq.poll(); // take out the first element inserted
+                dq.poll(); // take out the first element inserted, which was the max for last window
             }
-            while (!dq.isEmpty() && nums[dq.peekLast()] <= nums[i]) {
-                dq.pollLast(); // take out the last element inserted
+            // if current element is more than the one we inserted before, then throw the last one. until we find something smaller
+            while (!dq.isEmpty() && nums[i] >= nums[dq.peekLast()]) {
+                dq.pollLast();
             }
+            // we insert index so we know the window size
             dq.offer(i);
             if (i-k+1 >= 0) {
                 answer[i-k+1] = nums[dq.peek()];

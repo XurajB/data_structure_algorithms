@@ -31,7 +31,7 @@ public class CombinationSum2 {
         }
 
         for (int i = index; i < nums.length; i++) {
-            if (i  > index && nums[i] == nums[i-1]) { // skip duplicates, only works on sorted array
+            if (i  > index && nums[i] == nums[i-1]) { // skip duplicates, only works on sorted array. i > index means this number has been added before, so now I avoid this
                 continue;
             }
             current.add(nums[i]);

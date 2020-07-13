@@ -17,7 +17,7 @@ public class SingleElementInASortedArray {
         // so at a given index, we can determine of the single element is on the right or left
         int low = 0;
         int high = nums.length - 1;
-        while (low < high) {
+        while (low < high) { // notice no equals
             int mid = low + (high - low) / 2;
             if (mid % 2 == 1) {
                 mid--;

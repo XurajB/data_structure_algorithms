@@ -13,7 +13,8 @@ public class PalindromePartitioning {
         System.out.println(partition("aab"));
     }
 
-    // O(n!), O(n)
+    // O(n * 2 ^ n), O(n)
+    // we are repeating n times and every single decomposition of n that is a palindrome
     private static List<List<String>> partition(String s) {
         List<List<String>> ans = new ArrayList<>();
         if (s == null || s.length() == 0) {
@@ -29,9 +30,12 @@ public class PalindromePartitioning {
             ans.add(new ArrayList<>(current));
             return;
         }
-        for (int i = index; i < s.length(); i++) {
+        // first choice is: a, then every decomposition of remaining ab
+        // then aa..
+        // then aab
+        for (int i = index; i < s.length(); i++) { // we dont start from 0, because the parts are continuous
             if (isPalindrome(s, index, i)) {
-                current.add(s.substring(index, i + 1));
+                current.add(s.substring(index, i + 1)); // i + 1, because substring
                 backtrack(ans, current, s, i + 1);
                 current.remove(current.size() - 1);
             }

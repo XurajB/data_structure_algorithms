@@ -19,7 +19,6 @@ public class SearchRange {
         if (targetPos == -1) {
             return new int[] {-1, -1};
         }
-
         int leftPos = findLeftTargetPos(nums, target, targetPos);
         int rightPos = findRightTargetPos(nums, target, targetPos);
 
