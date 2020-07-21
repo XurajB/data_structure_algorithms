@@ -10,7 +10,7 @@ public class ListNode {
     ListNode() {
     }
 
-    ListNode(int val) {
+    public ListNode(int val) {
         this.val = val;
     }
 

@@ -10,7 +10,7 @@ import java.util.*;
  */
 // topological sort
 public class CourseSchedule2 {
-    // O(N), O(N)
+    // O(V+E), O(N)
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         if (numCourses == 0) {
             return new int[0];

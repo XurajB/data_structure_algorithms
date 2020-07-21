@@ -67,22 +67,24 @@ public class SudokuSolver {
     private static boolean isValid(char[][] board, int row, int col, char c) {
         for (int i = 0; i < 9; i++) {
             // check row
-            if (board[row][i] != '.' && board[row][i] == c) {
+            if (board[row][i] == c) {
                 return false;
             }
             // check col
-            if (board[i][col] != '.' && board[i][col] == c) {
+            if (board[i][col] == c) {
                 return false;
             }
 
             // check 3x3 block
+            // this will give us start position of that block
+            // 3,3 means row 3 and col 3 (start of 4th block)
             int blockRow = 3 * (row / 3);
             int blockCol = 3 * (col / 3);
 
             int indexR = blockRow + i / 3;
             int indexC = blockCol + i % 3;
 
-            if (board[indexR][indexC] != '.' && board[indexR][indexC] == c) {
+            if (board[indexR][indexC] == c) {
                 return false;
             }
         }

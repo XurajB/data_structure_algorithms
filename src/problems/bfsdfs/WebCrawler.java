@@ -1,4 +1,4 @@
-package problems.tree;
+package problems.bfsdfs;
 
 import java.util.*;
 

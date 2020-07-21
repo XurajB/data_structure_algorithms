@@ -14,8 +14,7 @@ import java.util.Map;
  * We need either reorder (first root) and postorder (last) so we can identify root
  * Now we can use inorder to find out left and right subtrees (left and right side of root)
  *
- * You cannot construct tree if you have preorder and postorder. You need inorder + pre/post
- * Only works when we have non-duplicate nodes
+ * However- for BST - we can create a tree using only preorder, since BSt has lower and upper limit properties
  */
 public class ConstructBstFromPreorder {
     int[] inorder;
@@ -40,20 +39,46 @@ public class ConstructBstFromPreorder {
         return helper(0, inorder.length);
     }
 
-    private TreeNode helper(int l, int r) {
-        if (l == r) {
+    private TreeNode helper(int left, int right) {
+        if (left > right) {
             return null;
         }
-        int rootVal = preorder[preIndex];
-        TreeNode root = new TreeNode(rootVal);
-        // root splits inorder list into left and right subtrees
-        int index = map.get(rootVal);
-        // for recursion
-        preIndex++;
-        // build left
-        root.left = helper(l, index);
+
+        TreeNode node = new TreeNode(preorder[index]);
+        // split into two halfs
+        int inIndex = map.get(preorder[index++]);
+        // build left first (For: inorder + postorder: build right tree first if constructing from postorder, start index from length-1)
+        node.left = helper(left, inIndex-1);
         // build right
-        root.right = helper(index+1, r);
-        return root;
+        node.right = helper(inIndex+1, right);
+
+        return node;
     }
-}
+
+    // ----------- using only preorder
+    int[] preorder1;
+    int n;
+    int index;
+    private TreeNode bstFromPreorder2(int[] preorder) {
+        this.preorder1 = preorder;
+        n = preorder.length;
+        index = 0;
+        return helper2(Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+    private TreeNode helper2(int lower, int upper) {
+        if (index == n) {
+            // we used all elements
+            return null;
+        }
+        int val = preorder1[index++];
+        // if it is not within limit then return null
+        if (val > upper || val < lower) {
+            return null;
+        }
+        TreeNode node = new TreeNode(val);
+        node.left = helper2(lower, val);
+        node.right = helper2(val, upper);
+
+        return node;
+    }
+ }

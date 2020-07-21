@@ -15,7 +15,7 @@ public class BestTimeToSellStock3 {
     I.e, with the subarray ​prices[i..prices.length-1]
     Now, to find the maximum of 2 trades over the entire price array:
     for i -> 0 to prices.length
-             max_2_trades = Max(max_2_trades, best_till_i[i] + best_from_i[i+1])
+             max_2_trades = Max(max_2_trades, best_till_i[i] + best_from_i[i])
      */
     public static Integer twoTrades(Integer[] prices) {
         if (prices == null || prices.length < 2) return 0;

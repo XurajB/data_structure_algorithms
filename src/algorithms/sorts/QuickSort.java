@@ -27,6 +27,9 @@ public class QuickSort {
         int pivot = dataSet[low + (high - low)/2];
 
         // divide into two lists
+        // the idea is if we sort all left elements of the pivot is smaller than pivot and all elements on right are higher than pivot element,
+        // we can say pivot is in the sorted position, rest of the elements may or may not be sorted. we recursively perform quick sort on either sides
+
         while (i <= j) {
             // if current value from the left is smaller than pivot, goto next element
             while (dataSet[i] < pivot) {

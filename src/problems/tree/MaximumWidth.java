@@ -17,8 +17,9 @@ public class MaximumWidth {
     }
 
     // O(N)
-    // we need to index each node so we can calculate width
+    // we need to index each node (not level) so we can calculate width
     // we can use the formula: left node: index * 2, right node: index * 2 + 1
+    // we start all level with 0 and upto the max, current index is calculated using parent's index
     // left most node will always be 0, rightmost will be max for that level
     private static int widthOfBinaryTree(TreeNode root) {
         int width = 0;

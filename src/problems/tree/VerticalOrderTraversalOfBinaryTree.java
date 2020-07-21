@@ -61,6 +61,7 @@ public class VerticalOrderTraversalOfBinaryTree {
         return answer;
     }
 
+    // it does not matter what traversal method
     private void dfs(TreeNode root, int row, int col) {
         if (root == null) {
             return;

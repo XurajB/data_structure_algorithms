@@ -1,6 +1,10 @@
 package problems.tree;
 
 import dataStructures.trees.TreeNode;
+import javafx.util.Pair;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.
@@ -38,5 +42,27 @@ public class SumRootToLeaf {
             traverse(root.left, current);
             traverse(root.right, current);
         }
+    }
+
+    // -----------
+    // iterative
+    public int sumNumbers2(TreeNode root) {
+        int ret = 0;
+        Queue<Pair<TreeNode, Integer>> queue = new LinkedList<>();
+        queue.add(new Pair(root, 0));
+        while (!queue.isEmpty()) {
+            Pair<TreeNode, Integer> p = queue.poll();
+            TreeNode node = p.getKey();
+            int value = p.getValue();
+            if (node != null) {
+                value = value * 10 + node.val;
+                if (node.left == null && node.right == null) {
+                    ret += value;
+                }
+                queue.add(new Pair(node.left, value));
+                queue.add(new Pair(node.right, value));
+            }
+        }
+        return ret;
     }
 }

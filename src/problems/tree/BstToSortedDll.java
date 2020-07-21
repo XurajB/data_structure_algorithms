@@ -45,9 +45,9 @@ public class BstToSortedDll {
                 node.left = last;
                 last.right = node;
             } else {
-                first = node;
+                first = node; // this will be the smallest element, and not change because last will not be null
             }
-            last = node;
+            last = node; // smallest node will be first and last since 1 element, but that will change as we navigate
             helper(node.right);
         }
     }

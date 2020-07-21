@@ -1,4 +1,6 @@
-package dataStructures.trees;
+package problems.tree;
+
+import dataStructures.trees.TreeNode;
 
 import java.util.Iterator;
 import java.util.Stack;

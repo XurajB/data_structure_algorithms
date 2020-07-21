@@ -1,9 +1,9 @@
 package problems.tree;
 
 import dataStructures.trees.TreeNode;
+import sun.reflect.generics.tree.Tree;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Serialization is the process of converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer,
@@ -14,6 +14,7 @@ public class SerializeAndDeserializeBst {
 
     public String serialize(TreeNode root) {
         StringBuilder sb = new StringBuilder();
+
         Queue<TreeNode> q = new LinkedList<>();
         q.offer(root);
 
@@ -22,9 +23,9 @@ public class SerializeAndDeserializeBst {
             if (node == null) {
                 sb.append("x,");
             } else {
-                sb.append(root.val).append(",");
-                q.offer(root.left);
-                q.offer(root.right);
+                sb.append(node.val).append(",");
+                q.offer(node.left);
+                q.offer(node.right);
             }
         }
 
@@ -37,30 +38,64 @@ public class SerializeAndDeserializeBst {
             return null;
         }
         TreeNode root = new TreeNode(Integer.parseInt(splits[0]));
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
+        int i = 1;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
 
-        int i = 0;
-        while (!queue.isEmpty()) {
-            TreeNode node = queue.poll();
+        while (!q.isEmpty()) {
+            TreeNode node = q.poll();
             TreeNode left = null;
             TreeNode right = null;
 
             if (!splits[i].equals("x")) {
                 left = new TreeNode(Integer.parseInt(splits[i]));
-                queue.offer(left);
+                q.offer(left);
             }
             i++;
-            if (!splits[i].equals(Integer.parseInt(splits[i]))) {
+            if (!splits[i].equals("x")) {
                 right = new TreeNode(Integer.parseInt(splits[i]));
-                queue.offer(right);
+                q.offer(right);
             }
             i++;
 
             node.left = left;
             node.right = right;
         }
-
         return root;
+    }
+
+    /////////////////////
+    /// recursive
+    private String serialize2(TreeNode root) {
+        return rSerialize(root, "");
+    }
+
+    private String rSerialize(TreeNode root, String str) {
+        if (root == null) {
+            str += "x,";
+        } else {
+            str += root.val + ",";
+            str += rSerialize(root.left, str);
+            str += rSerialize(root.right, str);
+        }
+        return str;
+    }
+
+    private TreeNode deserialize2(String data) {
+        String[] splits = data.split(",");
+        List<String> dataSplits = new ArrayList<>(Arrays.asList(splits));
+        return rDeserialize(dataSplits);
+    }
+
+    private TreeNode rDeserialize(List<String> dataSplits) {
+        if (dataSplits.get(0).equals("x")) {
+            dataSplits.remove(0);
+            return null;
+        }
+        TreeNode node = new TreeNode(Integer.parseInt(dataSplits.get(0)));
+        dataSplits.remove(0);
+        node.left = rDeserialize(dataSplits);
+        node.right = rDeserialize(dataSplits);
+        return node;
     }
 }

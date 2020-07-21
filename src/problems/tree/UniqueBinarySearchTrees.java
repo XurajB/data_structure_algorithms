@@ -13,11 +13,14 @@ public class UniqueBinarySearchTrees {
     public int numTrees(int n) {
         // if we pick a root, then the total trees we can calculate
         // will be product of num of trees by left side and right side
+        // 1 2 3 4 .. i-1 i i+1 .. n
+        // total number trees at F(i) = F(i-1) * F(n-i); - which is product of total trees on left subtree and right subtree
         // we can formulate: F(n) = F(i-1) * F(n-i)
         int[] dp = new int[n+1];
-        // there is only one unique BST out of a sequence of lenfth 1 (only a root) or nothing (empty tree)
+        // there is only one unique BST out of a sequence of length 1 (only a root) or nothing (empty tree)
         dp[0] = 1;
         dp[1] = 1;
+        // we can use dp: how many trees can be constructed from {2,3,4,5} - it is the same number as {1,2,3,4}
         for (int i = 2; i <= n; i++) {
             for (int j = 1; j <= i; j++) {
                 dp[i] += dp[j-1] * dp[i-j];
@@ -37,6 +40,7 @@ public class UniqueBinarySearchTrees {
         return generate(1, n);
     }
 
+    // 1.. n is the in order traversal in BST. so if I pick i as root, left will be 1 to  i-1 and right will be i+1 to n
     private LinkedList<TreeNode> generate(int start, int end) {
         LinkedList<TreeNode> allTrees = new LinkedList<>();
         // base case
