@@ -11,8 +11,6 @@ public class MoveZeros {
         moveElements(elements);
         System.out.println(Arrays.toString(elements));
     }
-
-
     // keeps relative order
     private static void moveElements2(int[] elements) {
         int index = 0;

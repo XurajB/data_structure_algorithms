@@ -59,6 +59,7 @@ public class CriticalConnectionsInANetwork {
             if (neighbour == parent) continue;
             if (!visited[neighbour]) {
                 dfs(visited, neighbour, current);
+                // we visited all neighbours, now update low times
                 lowTimes[current] = Math.min(lowTimes[current], lowTimes[neighbour]);
                 if (lowTimes[neighbour] > visitedTimes[current]) {
                     criticalConns.add(Arrays.asList(current, neighbour));

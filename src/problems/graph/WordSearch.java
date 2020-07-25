@@ -38,12 +38,13 @@ public class WordSearch {
         if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || word.charAt(index) != board[i][j]) {
             return false;
         }
+        char temp = board[i][j];
         board[i][j] = '*';
         boolean result = dfs(board, i+1, j, word, index+1) ||
                 dfs(board, i, j+1, word, index+1) ||
                 dfs(board, i-1, j, word, index+1) ||
                 dfs(board, i, j-1, word, index+1);
-        board[i][j] = word.charAt(index);
+        board[i][j] = temp;
 
         return result;
     }

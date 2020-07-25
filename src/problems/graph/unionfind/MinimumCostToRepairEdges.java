@@ -49,7 +49,7 @@ public class MinimumCostToRepairEdges {
     private int n;
     private int[] parent;
 
-    // ELogV
+    // ELogE
     private int minimumCostToRepair(int N, int[][] edges, int[][] edgesToRepair) {
         this.n = N;
         this.parent = new int[n + 1];
@@ -98,7 +98,6 @@ public class MinimumCostToRepairEdges {
     }
 
     private void union(int v1, int v2) {
-        if (find(v1) == find(v2)) return;
         int pv1 = find(v1);
         int pv2 = find(v2);
         if (pv1 != pv2) {

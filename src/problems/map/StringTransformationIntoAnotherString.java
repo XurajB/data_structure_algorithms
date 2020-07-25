@@ -1,4 +1,4 @@
-package problems.graph;
+package problems.map;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -30,16 +30,20 @@ public class StringTransformationIntoAnotherString {
         Set<Character> set = new HashSet<>();
 
         for (int i = 0; i < str1.length(); i++) {
-            set.add(str2.charAt(i));
-            if (map.containsKey(str1.charAt(i))) {
-                if (map.get(str1.charAt(i)) != str2.charAt(i)) {
-                    return false;
-                }
+            char c1 = str1.charAt(i);
+            char c2 = str2.charAt(i);
+
+            set.add(c2);
+
+            if (map.containsKey(c1) && map.get(c1) != c2) {
+                return false;
             }
-            map.put(str1.charAt(i), str2.charAt(i));
+            map.put(c1,c2);
         }
 
         // if all chars are used from a-z, remaining chars cannot be mapped because a-z are already mapped and remaining will have to be mapped with something else
+        // there won't be any temp character to map, all 26 chars are used
+        // "abcdefghijklmnopqrstuvwxyz" -> "bcdefghijklmnopqrstuvwxyza" is false
         return set.size() != 26;
     }
 }

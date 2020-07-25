@@ -56,7 +56,7 @@ public class TreeDiameter {
 
             for (int neighbour: graph.get(current)) {
                 if (distance[neighbour] == -1) {
-                    distance[neighbour] = distance[start] + 1;
+                    distance[neighbour] = distance[current] + 1;
                     queue.offer(neighbour);
                 }
             }

@@ -60,6 +60,6 @@ public class NumberOfDistinctIsland {
         dfs(grid, i - 1, j, sb, "u");
         dfs(grid, i, j - 1, sb, "l");
 
-        sb.append("b"); // back
+        sb.append("b"); // back tracking, other wise won't work in this case [[1,1,0],[0,1,1],[0,0,0],[1,1,1],[0,1,0]]
     }
 }

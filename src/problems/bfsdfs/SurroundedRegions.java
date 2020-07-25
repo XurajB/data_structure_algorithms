@@ -1,4 +1,4 @@
-package problems.graph;
+package problems.bfsdfs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,14 +25,18 @@ public class SurroundedRegions {
         int r = board.length;
         int c = board[0].length;
 
+        // idea is mark everything connected from boarders as can't capture
+        // and mark everything else as captured. We only need to do dfs from boarder region so we can mark can't capture
+        // everything else can be marked as X
+
         // first get a list of edges
         List<Pair> edges = new ArrayList<>(); // or List<int[]>
-        // rows
+        // rows (left and right edges)
         for (int i = 0; i < r; i++) {
             edges.add(new Pair(i, 0));
             edges.add(new Pair(i, c-1));
         }
-        // cols
+        // cols (top and bottom edges)
         for (int i = 0; i < c; i++) {
             edges.add(new Pair(0, i));
             edges.add(new Pair(r-1, i));

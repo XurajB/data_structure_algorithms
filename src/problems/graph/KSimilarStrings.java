@@ -37,6 +37,8 @@ public class KSimilarStrings {
                 }
                 for (int k = j + 1; k < current.length(); k++) {
                     // check if next swap is target value for shortest path
+                    // don't swap equal characters
+                    //if (current.charAt(k) == B.charAt(j)) { // will also work, but less optimal
                     if (current.charAt(k) == B.charAt(j) && current.charAt(k) != B.charAt(k)) {
                         String next = swap(current, j, k);
                         if (!visited.contains(next)) {

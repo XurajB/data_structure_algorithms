@@ -28,7 +28,7 @@ public class CheapestFlightWithinKStops {
             graph.get(flight[0]).add(new int[] {flight[1], flight[2]});
         }
         PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[2]));
-        pq.offer(new int[] {src, K+1, 0}); // src, stops, cost
+        pq.offer(new int[] {src, K+1, 0}); // node, remaining stops, cost
         while (!pq.isEmpty()) {
             int[] point = pq.poll();
             int cur = point[0];
@@ -42,7 +42,7 @@ public class CheapestFlightWithinKStops {
                     continue;
                 }
                 for (int[] next: graph.get(cur)) {
-                    pq.offer(new int[] {next[0], stop-1, cost+next[1]});
+                    pq.offer(new int[] {next[0], stop-1, cost+next[1]}); // next is from graph, next[1] cost
                 }
             }
         }

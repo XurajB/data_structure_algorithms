@@ -17,7 +17,7 @@ public class BinaryTreeZigzagLevelOrderTraversal {
         }
         Queue<TreeNode> q = new LinkedList<>();
         q.offer(root);
-        boolean ltr = false;
+        boolean ltr = true; // start with ltr
         // bfs
         while (!q.isEmpty()) {
             int level = q.size();
@@ -25,9 +25,9 @@ public class BinaryTreeZigzagLevelOrderTraversal {
             for (int i = 0; i < level; i++) {
                 TreeNode node = q.poll();
                 if (ltr) {
-                    values.addFirst(node.val);
-                } else {
                     values.add(node.val);
+                } else {
+                    values.addFirst(node.val);
                 }
                 if (node.left != null) {
                     q.offer(node.left);

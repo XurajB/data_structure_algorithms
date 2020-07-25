@@ -92,6 +92,9 @@ public class AccountsMerge {
         if (parents.get(email).equals(email)) {
             return email;
         }
-        return find(parents.get(email), parents);
+        // path compression
+        String parent = find(parents.get(email), parents);
+        parents.put(email, parent);
+        return parent;
     }
 }

@@ -23,7 +23,7 @@ public class MinimumKnightMove {
     }
 
     Queue<Node> q = new LinkedList<>();
-    Set<Integer> visited = new HashSet<>();
+    Set<Integer> visited = new HashSet<>(); // adding int[] into visited set won't work
 
     // Time: O(n), n = max no of moves, Space: O(n)
     public int minKnightMoves(int x, int y) {

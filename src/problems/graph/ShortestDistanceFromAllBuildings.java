@@ -29,6 +29,9 @@ public class ShortestDistanceFromAllBuildings {
         int r = grid.length;
         int c = grid[0].length;
 
+        // from each building, use bfs to compute shortest distance from each '0' to this building
+        // when we do this for all buildings - we get the sum of shortest distance from every '0' to all reachable buildings
+
         // total count if this i,j is reachable from all buildings
         int[][] reach = new int[r][c];
         // total distance to reach at i,j from all buildings

@@ -1,6 +1,7 @@
 package problems.graph.unionfind;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * There are N cities numbered from 1 to N.
@@ -14,10 +15,7 @@ import java.util.Arrays;
 
 // Kruskal's MST
 public class ConnectingCitiesWithMinimumCost {
-
     int[] parent;
-    int n;
-
     public static void main(String[] args) {
         ConnectingCitiesWithMinimumCost citiesWithMinimumCost = new ConnectingCitiesWithMinimumCost();
 
@@ -29,27 +27,24 @@ public class ConnectingCitiesWithMinimumCost {
         System.out.println(citiesWithMinimumCost.minimumCost(3, connections));
     }
 
-    // ELogV
+    // ELogE
     private int minimumCost(int N, int[][] connections) {
         if (connections == null || connections.length == 0) {
             return -1;
         }
-
-        n = N; // to check if all nodes have been visited
-        parent = new int[n + 1]; // cases where nodes start with 1
+        parent = new int[N + 1]; // cases where nodes start with 1
 
         int cost = 0;
 
         // mark all nodes to be its own parents
         // also creating disjoint sets
-        for (int i = 0; i <= n; i++) {
+        for (int i = 0; i <= N; i++) {
             parent[i] = i;
         }
 
         // sort connections based on cost (ascending order)
-        Arrays.sort(connections, (a, b) -> {
-            return a[2] - b[2];
-        });
+        // we use the lowest cost to make connections, if we have more than one - then we only use the min, since we won't do another union if they are already connected
+        Arrays.sort(connections, Comparator.comparingInt(a -> a[2]));
 
         // go through each connection and perform union/find
         for (int[] connection: connections) {
@@ -59,10 +54,11 @@ public class ConnectingCitiesWithMinimumCost {
             if (find(x) != find(y)) {
                 cost += connection[2];
                 union(x, y);
+                N--;
             }
         }
 
-        return n == 1 ? cost : -1;
+        return N == 1 ? cost : -1;
     }
 
     private void union(int x, int y) {
@@ -74,13 +70,12 @@ public class ConnectingCitiesWithMinimumCost {
         // perform union
         if (px != py) {
             parent[px] = py;
-            n--;
         }
     }
 
     private int find(int x) {
         if (parent[x] == x) {
-            return parent[x];
+            return x;
         }
         // compressing the path to improve complexity
         parent[x] = find(parent[x]);

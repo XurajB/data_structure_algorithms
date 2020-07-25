@@ -72,6 +72,7 @@ public class IslandPerimeter {
         return 0;
     }
 
+    // m*n
     private int dfs2(int[][] grid, int x, int y) {
         int count = 0;
         if (x < 0 || y < 0 || x >= grid.length || y >= grid[0].length || grid[x][y] == 0) {
@@ -80,7 +81,7 @@ public class IslandPerimeter {
         if (grid[x][y] == -1) {
             return 0;
         }
-        grid[x][y] = -1;
+        grid[x][y] = -1; // can't mark 0, because it will count as perimeter
         count += dfs2(grid, x+1, y);
         count += dfs2(grid, x, y+1);
         count += dfs2(grid, x-1, y);
