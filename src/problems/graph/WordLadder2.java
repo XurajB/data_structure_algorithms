@@ -104,7 +104,7 @@ public class WordLadder2 {
         return neighbours;
     }
 
-    // step 2 - dfs
+    // step 2 - dfs, backtracking
     private void dfs(String currentWord, String endWord, List<String> path) {
         if (currentWord.equals(endWord)) {
             answer.add(new ArrayList<>(path));

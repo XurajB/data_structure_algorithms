@@ -44,6 +44,7 @@ public class ConstructBstFromPreorder {
             return null;
         }
 
+        // simulate preorder
         TreeNode node = new TreeNode(preorder[index]);
         // split into two halfs
         int inIndex = map.get(preorder[index++]);

@@ -44,18 +44,23 @@ public class Zero1Matrix {
         int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
         while (!queue.isEmpty()) {
-            int[] current = queue.poll();
-            for (int[] d : dirs) {
-                int r = current[0] + d[0];
-                int c = current[1] + d[1];
-                if (r >= 0 && c >= 0 && r < m && c < n) {
-                    int neighbour = matrix[r][c];
-                    int curr = matrix[current[0]][current[1]];
-                    if (neighbour <= curr) {
-                        continue;
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int[] current = queue.poll();
+                int x = current[0];
+                int y = current[1];
+                for (int[] dir: dirs) {
+                    int nx = x + dir[0];
+                    int ny = y + dir[1];
+
+                    if (nx >= 0 && nx < matrix.length && ny >= 0 && ny < matrix[0].length) {
+
+                        if (matrix[nx][ny] <= matrix[x][y]) {
+                            continue;
+                        }
+                        matrix[nx][ny] = matrix[x][y] + 1;
+                        queue.offer(new int[] {nx, ny});
                     }
-                    queue.add(new int[] {r, c});
-                    matrix[r][c] = curr + 1;
                 }
             }
         }

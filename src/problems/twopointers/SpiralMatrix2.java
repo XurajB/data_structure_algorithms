@@ -8,41 +8,35 @@ public class SpiralMatrix2 {
 
     // O(n*n), O(1)
     public int[][] generateMatrix(int n) {
-        int[][] answer = new int[n][n];
+        int[][] ans = new int[n][n];
 
         int startRow = 0;
-        int startColumn = 0;
+        int startCol = 0;
         int endRow = n-1;
-        int endColumn = n-1;
+        int endCol = n-1;
 
         int count = 1;
-        while (startRow <= endRow && startColumn <= endColumn) {
-
-            for (int i = startColumn; i <= endColumn; i++) {
-                answer[startRow][i] = count++;
+        while (startRow <= endRow && startCol <= endCol) {
+            for (int i = startCol; i <= endCol; i++) {
+                ans[startRow][i] = count++;
             }
             startRow++;
 
             for (int i = startRow; i <= endRow; i++) {
-                answer[i][endColumn] = count++;
+                ans[i][endCol] = count++;
             }
-            endColumn--;
+            endCol--;
 
-            if (startRow <= endRow) {
-                for (int i = endColumn; i >= startColumn; i--) {
-                    answer[endRow][i] = count++;
-                }
+            for (int i = endCol; i >= startCol; i--) {
+                ans[endRow][i] = count++;
             }
             endRow--;
 
-            if (startColumn <= endColumn) {
-                for (int i = endRow; i >= startRow; i--) {
-                    answer[i][startColumn] = count++;
-                }
+            for (int i = endRow; i >= startRow; i--) {
+                ans[i][startCol] = count++;
             }
-            startColumn++;
+            startCol++;
         }
-
-        return answer;
+        return ans;
     }
 }

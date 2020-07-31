@@ -52,7 +52,7 @@ public class ExpressiveWords {
             i += len1;
             j += len2;
         }
-        // make sure they both reached end
+        // make sure they both reached end, one of them might have ended early
         return i == S.length() && j == word.length();
     }
 

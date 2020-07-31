@@ -17,7 +17,7 @@ public class SimpleThread {
         @Override
         public void run() {
             String importantInfo[] = {
-                    "Hi this is tread",
+                    "Hi this is thread",
                     "I implement runnable",
                     "The main code is",
                     "in the Run method" };
@@ -38,6 +38,7 @@ public class SimpleThread {
         threadMessage("Starting MessageLoop thread");
         long startTime = System.currentTimeMillis();
         Thread t = new Thread(new MessageLoop());
+        t.setName("MyThread");
         t.start();
 
         threadMessage("Waiting for MessageLoop thread to finish");

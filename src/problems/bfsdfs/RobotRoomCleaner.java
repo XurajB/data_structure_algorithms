@@ -29,6 +29,8 @@ public class RobotRoomCleaner {
          backtrack(0, 0, 0); // start with 0, 0 (does not matter where the robot is placed, it is relative)
      }
 
+     // this algorithm is based on maze solving algorithm called right-hand rule.
+     // go forward, cleaning and marking all the cells on the way and turn right at obstacle
      private void backtrack(int row, int col, int dir) {
          visited.add(new Pair<>(row, col));
          robot.clean();
@@ -43,7 +45,7 @@ public class RobotRoomCleaner {
                  // backtrack
                  goBack();
              }
-             // turn robot to clockwise direction
+             // always turn right
              robot.turnRight();
          }
      }

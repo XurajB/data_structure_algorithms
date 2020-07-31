@@ -1,4 +1,4 @@
-package problems.dynamic;
+package problems.bfsdfs;
 
 /**
  * In a N x N grid representing a field of cherries, each cell is one of three possible integers.
@@ -35,7 +35,8 @@ public class CherryPickup {
     We want to collectively collect max cherries. So we have to do the traversal at the same time and select maximum global answer.
     There is a potential problem of double counting if both person are at the same spot which we can avoid using code (only collect one if they are at the same spot)
      */
-    private static int cherryPickup(int[][] grid, int n, int r1, int c1, int r2, int c2, Integer dp[][][][]) {
+    // dfs
+    private static int cherryPickup(int[][] grid, int n, int r1, int c1, int r2, int c2, Integer[][][][] dp) {
         // since we are only going down and to the right, no need to check for < 0
         // if we went out of grid or hit a throne, we discourage this path by returning MIN_VALUE
         if (r1 >= n || r2 >= n || c1 >= n || c2 >= n || grid[r1][c1] == -1 || grid[r2][c2] == -1) { // n x n matrix
@@ -58,12 +59,9 @@ public class CherryPickup {
             return dp[r1][c1][r2][c2];
         }
 
-        int cherries;
-
-        if (r1 == r2 && c1 == c2) { // both are at the same spot
-            cherries = grid[r1][c1];
-        } else {
-            cherries = grid[r1][c1] + grid[r2][c2]; // otherwise, the number of cherries collected by both is the sum of what's in the cell
+        int cherries = grid[r1][c1];
+        if (r1 != r2 || c1 != c2) {
+            cherries += grid[r2][c2]; // if they are not in the same spot then collect by summing both cells
         }
 
         // since each person can move only to the bottom or to the right, total cherries is the max of following possibilities:
