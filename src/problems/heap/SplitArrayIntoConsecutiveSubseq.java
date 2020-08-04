@@ -1,8 +1,6 @@
 package problems.heap;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,7 +19,7 @@ public class SplitArrayIntoConsecutiveSubseq {
         // we iterate one more time, for each element we either see if it can be appended to previously constructed sequence or if it can be start of a new sequence
         // if neither are true, return false
         Map<Integer, Integer> freq = new HashMap<>(); // (num, freq)
-        Map<Integer, Integer> appendFreq = new HashMap<>(); // tail of existing sequence map. (next in seq, freq)
+        Map<Integer, Integer> appendFreq = new HashMap<>(); // tail of existing sequence map. (next in seq, freq). freq because there can multiple chains ending at same integer
 
         for (int num: nums) {
             freq.put(num, freq.getOrDefault(num, 0) + 1);

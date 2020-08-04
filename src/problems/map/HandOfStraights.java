@@ -1,4 +1,4 @@
-package problems.heap;
+package problems.map;
 
 import java.util.PriorityQueue;
 import java.util.TreeMap;
@@ -14,7 +14,7 @@ public class HandOfStraights {
         System.out.println(isNStraightHand(hand, 4));
     }
 
-    // O(N * LogN * W)
+    // O(NLogN * W)
     private static boolean isNStraightHand(int[] hand, int W) {
         int len = hand.length;
         if (len % W != 0) {

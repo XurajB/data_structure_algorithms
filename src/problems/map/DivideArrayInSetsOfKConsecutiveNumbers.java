@@ -1,4 +1,4 @@
-package problems.heap;
+package problems.map;
 
 import java.util.TreeMap;
 
@@ -22,7 +22,7 @@ public class DivideArrayInSetsOfKConsecutiveNumbers {
             map.put(num, map.getOrDefault(num, 0) + 1);
         }
         while (!map.isEmpty()) {
-            int first = map.firstKey();
+            int first = map.firstKey(); // this will also poll from map
             for (int i = 1; i < k; i++) {
                 int next = first + i;
                 if (!map.containsKey(next)) {

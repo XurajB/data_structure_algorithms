@@ -21,35 +21,19 @@ public class MeetingRooms2 {
 
     // time: O(nLogn), space: O(n)
     private static int minMeetingRooms(int[][] intervals) {
-        if (intervals.length == 0) {
+        if (intervals == null || intervals.length == 0) {
             return 0;
         }
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
 
-        PriorityQueue<Integer> allocator = new PriorityQueue<>(
-                intervals.length, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1 - o2;
+        for (int i = 0; i < intervals.length; i++) {
+            int[] interval = intervals[i];
+            if (pq.size() > 0 && interval[0] >= pq.peek()[1]) {
+                pq.poll();
             }
-        });
-
-        Arrays.sort(intervals, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return o1[0] - o2[0];
-            }
-        });
-
-        allocator.add(intervals[0][1]);
-        for (int i = 1; i < intervals.length; i++) {
-
-            // previous meeting has ended (current start is higher than last meeting end time). so we don't need a room
-            if (intervals[i][0] >= allocator.peek()) {
-                allocator.poll();
-            }
-            allocator.add(intervals[i][1]);
+            pq.offer(interval);
         }
-
-        return allocator.size();
+        return pq.size();
     }
 }

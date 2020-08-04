@@ -63,13 +63,15 @@ public class KthSmallestElementInASortedMatrix {
     /////////////////////////// Using heap
     // x = min(n, k)
     // O(klogx), O(k)
+    // we are treating each row as a list, so the question is find n smallest in sorted lists
     private static int kthSmallest2(int[][] matrix, int k) {
         int n = matrix.length;
         // we only need to maintain minimum of k or n
         PriorityQueue<Node> pq = new PriorityQueue<>(Math.min(n, k), Comparator.comparingInt(a -> a.val));
 
-        // like in merge sorted lists, insert first element of each row - which is (first col)
+        // like in merge sorted lists, // insert first pointers of each row
         // we need x, y detail about a value so we can go to next
+        // insert first pointers of each row
         for (int i = 0; i < Math.min(n, k); i++) {
             pq.offer(new Node(i, 0, matrix[i][0]));
         }

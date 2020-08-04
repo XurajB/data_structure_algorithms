@@ -39,12 +39,12 @@ public class PalindromeLinkedList {
         return result;
     }
 
-    private ListNode findMidPoint(ListNode head) {
+    private ListNode findMidPoint(ListNode node) {
         // use 2 pointer approach
-        ListNode slow = head;
-        ListNode fast = head;
+        ListNode slow = node;
+        ListNode fast = node.next;
 
-        while (fast.next != null && fast.next.next != null) {
+        while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
