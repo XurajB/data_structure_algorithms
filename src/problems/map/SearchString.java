@@ -5,7 +5,7 @@ package problems.map;
  */
 public class SearchString {
     public static void main(String[] args) {
-        System.out.println(search("helloworld", "orp"));
+        System.out.println(search("helloab", "ab"));
     }
 
     // using Rabin karp algorithm

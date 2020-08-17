@@ -9,19 +9,9 @@ import java.util.Deque;
  */
 public class ShortestSubarrayWithSumAtLeastK {
     public static void main(String[] args) {
-        int[] nums = {2,-1,2};
-        System.out.println(shortestSubarray(nums, 3));
+        int[] nums = {2,-1, 3, 2};
+        System.out.println(shortestSubarray(nums, 4));
     }
-
-    // TODO: More sliding window
-    //Count Number of Nice Subarrays
-    //Replace the Substring for Balanced String
-    //Max Consecutive Ones III
-    //Binary Subarrays With Sum
-    //Subarrays with K Different Integers
-    //Fruit Into Baskets
-    //Shortest Subarray with Sum at Least K
-    //Minimum Size Subarray Sum
 
     // Similar to: #MinimumSizeSubarraySum but with negative nums
     // O(N)
@@ -38,12 +28,12 @@ public class ShortestSubarrayWithSumAtLeastK {
         for (int i = 0; i < n+1; i++) {
             // check if the sum >= k
             while (deque.size() > 0 && prefixSum[i] - prefixSum[deque.peekFirst()] >= K) {
-                ans = Math.min(ans, i - deque.pollFirst());
+                ans = Math.min(ans, i - deque.pollFirst()); // one we inserted first
             }
             // to keep our deque increasing
             // to keep the ans minimum, we have prefixsum which is smaller than last item in deque so we have greater chance to minimize ans
             while (deque.size() > 0 && prefixSum[i] <= prefixSum[deque.peekLast()]) {
-                deque.pollLast();
+                deque.pollLast(); // one we inserted last
             }
             deque.addLast(i);
         }

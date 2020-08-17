@@ -40,10 +40,6 @@ public class RemoveKDigits {
 
         sb.reverse();
 
-        if (sb.length() == 0) {
-            return "";
-        }
-
         // remove 0
         while (sb.length() > 1 && sb.charAt(0) == '0') {
             sb.deleteCharAt(0);

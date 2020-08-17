@@ -15,6 +15,11 @@ public class LongestSubstringWithAtMost2Distinct {
             return 0;
         }
 
+        // commonly used tables
+        // int[26] for Letters 'a' - 'z' or 'A' - 'Z'
+        // int[128] for ASCII
+        // int[256] for Extended ASCII
+
         int start = 0;
         int end = 0;
         int max = Integer.MIN_VALUE;

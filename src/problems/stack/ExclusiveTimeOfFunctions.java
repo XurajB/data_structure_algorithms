@@ -26,16 +26,19 @@ public class ExclusiveTimeOfFunctions {
         int prev = 0;
         for (String log : logs) {
             String[] log1 = log.split(":");
+            int id = Integer.parseInt(log1[0]);
+            int time = Integer.parseInt(log1[2]);
+
             if (log1[1].equals("start")) {
                 if (!jobs.isEmpty()) {
-                    ans[jobs.peek()] += Integer.parseInt(log1[2]) - prev;
+                    ans[jobs.peek()] += time - prev;
                 }
-                jobs.push(Integer.parseInt(log1[0]));
-                prev = Integer.parseInt(log1[2]);
+                jobs.push(id);
+                prev = time;
             } else {
-                ans[jobs.peek()] += Integer.parseInt(log1[2]) - prev + 1;
+                ans[jobs.peek()] += time - prev + 1;
                 jobs.pop();
-                prev = Integer.parseInt(log1[2]) + 1;
+                prev = time + 1;
             }
         }
 

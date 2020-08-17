@@ -44,7 +44,8 @@ public class LongestContinuousSubarrayWithAbsDiff {
         int ans = 1;
         int left = 0;
 
-        for (int right = 0; right < nums.length; right++) {
+        int right = 0;
+        while (right < nums.length) {
             // update max with new right pointer
             while (!maxDeque.isEmpty() && nums[right] > maxDeque.peekLast()) {
                 maxDeque.pollLast();
@@ -70,6 +71,7 @@ public class LongestContinuousSubarrayWithAbsDiff {
             }
 
             ans = Math.max(ans, right - left + 1);
+            right++;
         }
 
         return ans;

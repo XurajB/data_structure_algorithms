@@ -58,14 +58,11 @@ public class SearchAutocompleteSystem {
         } else {
             current.append(c);
             List<Node> nodes = lookUp();
-            Collections.sort(nodes, new Comparator<Node>() {
-                @Override
-                public int compare(Node o1, Node o2) {
-                    if (o1.times == o2.times) {
-                        return o1.sentence.compareTo(o2.sentence);
-                    } else {
-                        return o2.times - o1.times;
-                    }
+            Collections.sort(nodes, (o1, o2) -> {
+                if (o1.times == o2.times) {
+                    return o1.sentence.compareTo(o2.sentence);
+                } else {
+                    return o2.times - o1.times;
                 }
             });
 
@@ -96,14 +93,8 @@ public class SearchAutocompleteSystem {
         if (node.times > 0) {
             list.add(new Node(current, node.times));
         }
-        for (char c = 'a'; c <= 'z'; c++) {
-            if (node.children.get(c) != null) {
-                traverse(node.children.get(c), list, current + c);
-            }
-        }
-
-        if (node.children.get(' ') != null) {
-            traverse(node.children.get(' '), list, current + ' ');
+        for (char i: node.children.keySet()) {
+            traverse(node.children.get(i), list, current + i);
         }
     }
 

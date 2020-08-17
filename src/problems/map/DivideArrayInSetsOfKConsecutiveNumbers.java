@@ -22,9 +22,9 @@ public class DivideArrayInSetsOfKConsecutiveNumbers {
             map.put(num, map.getOrDefault(num, 0) + 1);
         }
         while (!map.isEmpty()) {
-            int first = map.firstKey(); // this will also poll from map
-            for (int i = 1; i < k; i++) {
-                int next = first + i;
+            int next = map.firstKey();
+            int len = k;
+            while (map.size() > 0 && len > 0) {
                 if (!map.containsKey(next)) {
                     return false;
                 }
@@ -32,10 +32,8 @@ public class DivideArrayInSetsOfKConsecutiveNumbers {
                 if (map.get(next) == 0) {
                     map.remove(next);
                 }
-            }
-            map.put(first, map.get(first) - 1);
-            if (map.get(first) == 0) {
-                map.remove(first);
+                next = next+1;
+                len--;
             }
         }
         return true;

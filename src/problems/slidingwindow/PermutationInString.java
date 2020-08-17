@@ -10,6 +10,7 @@ public class PermutationInString {
     public static void main(String[] args) {
         System.out.println(checkInclusion("ab", "sadfbade"));
     }
+    // same as #AnagramsInAString
     private static boolean checkInclusion(String s1, String s2) {
         int[] chars1 = new int[26];
         int[] chars2 = new int[26];

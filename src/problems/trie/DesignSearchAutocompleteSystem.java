@@ -70,6 +70,8 @@ public class DesignSearchAutocompleteSystem {
         }
     }
 
+    // reason we are not saving top 3 in trie node is when an existing top 4 node is searched it becomes top 3, how do you update every node?
+    // O(n * l)
     static class AutoCompleteSystem2 {
         private TrieNode root;
         private StringBuilder current;
@@ -132,13 +134,8 @@ public class DesignSearchAutocompleteSystem {
             if (node.times > 0) {
                 list.add(new Node(current, node.times));
             }
-            for (char i = 'a'; i <= 'z'; i++) {
-                if (node.children.get(i) != null) {
-                    traverse(node.children.get(i), list, current + i);
-                }
-            }
-            if (node.children.containsKey(' ')) { // above loop ignores space
-                traverse(node.children.get(' '), list, current + ' ');
+            for (char i: node.children.keySet()) {
+                traverse(node.children.get(i), list, current + i);
             }
         }
     }

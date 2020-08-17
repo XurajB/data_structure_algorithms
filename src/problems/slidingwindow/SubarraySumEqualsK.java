@@ -1,6 +1,8 @@
 package problems.slidingwindow;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Given an array of positive integers, find the contiguous subarray that sums to a given number X.
@@ -12,8 +14,24 @@ public class SubarraySumEqualsK {
         System.out.println(Arrays.toString(subarraySumK(nums, 7)));
     }
 
+    private static int subarraySum2(int[] nums, int k) {
+        int count = 0;
+        int sum = 0;
+        Map<Integer, Integer> map = new HashMap<>(); // sum, number of occurrences of sum
+        map.put(0, 1);
+
+        for (int num : nums) {
+            sum += num;
+            if (map.containsKey(sum - k)) {
+                count += map.get(sum - k);
+            }
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
+        }
+        return count;
+    }
+
     // assuming only positive values in input
-    // if positive and negative - check Arrays/SubarraySumEqualsK
+    // if positive and negative - check ^^
     private static int[] subarraySumK(int[] nums, int k) {
         int start = 0;
         int end = 0;
