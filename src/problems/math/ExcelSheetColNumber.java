@@ -9,6 +9,7 @@ public class ExcelSheetColNumber {
     }
 
     // O(N)
+    // think of 26 base number system
     private static int titleToNumber(String s) {
         int ans = 0;
         for (int i = 0; i < s.length(); i++) {

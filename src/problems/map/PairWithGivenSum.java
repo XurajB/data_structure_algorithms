@@ -25,7 +25,6 @@ public class PairWithGivenSum {
         target = target - 30; // req
         int max = Integer.MIN_VALUE;
         Map<Integer, Integer> map = new HashMap<>(); // complement, index
-
         int[] ans = new int[2];
         for (int i = 0; i < nums.length; i++) {
             int complement = target - nums[i];

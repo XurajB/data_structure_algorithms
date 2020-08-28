@@ -29,7 +29,7 @@ public class MergeIntervals {
     private static int[][] merge(int[][] intervals) {
 
         // 1. sort the intervals using start
-        // 2. iterate invervals and check if current end is greater than next start
+        // 2. iterate intervals and check if current end is greater than next start
         // 3. if yes - merge, if no add to the list
 
         if (intervals.length == 0 || intervals.length == 1) {

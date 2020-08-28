@@ -11,9 +11,15 @@ import java.util.List;
  */
 public class CountOfSmallerNumbersAfterSelf {
     public static void main(String[] args) {
-        int[] nums = {5,2,6,1};
+        int[] nums = {5,2,2,6,1};
         System.out.println(countSmaller(nums));
     }
+
+    // when you sort an array with index i: anything smaller than i will come infront of i. in nums: two numbers will come infront of 5
+    // when you sort nums, the original place for an index will change
+    // we need an index array to keep original spots. basically we sort the index array based on their original values.
+    // while doing this we count how many numbers we encounter smaller than self and record in count array - this magic happens in merge part
+    // merge sort is a stable algorithm - so when we have dupes it preserves relative order of the items.
 
     static int[] count;
     private static List<Integer> countSmaller(int[] nums) {
@@ -46,7 +52,7 @@ public class CountOfSmallerNumbersAfterSelf {
         int j = mid + 1; // right index
         int sortIndex = 0;
 
-        int rightCount = 0;
+        int rightCount = 0; // smaller count on the right
 
         int[] newIndexes = new int[end - start + 1];
         while (i <= mid && j <= end) {
@@ -61,6 +67,8 @@ public class CountOfSmallerNumbersAfterSelf {
             }
             sortIndex++;
         }
+
+        // if we didn't finish left side, that means remaining is larger than those sorted
         while (i <= mid) {
             newIndexes[sortIndex] = indexes[i];
             count[indexes[i]] += rightCount;

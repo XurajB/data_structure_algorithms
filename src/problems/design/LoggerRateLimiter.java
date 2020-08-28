@@ -39,30 +39,32 @@ public class LoggerRateLimiter {
     // only store past 10s information
     // using a different class
     static class Logger {
-        private int[] buckets;
-        private Set[] sets;
+        private int[] times;
+        private Set[] logs;
         public Logger() {
-            buckets = new int[10];
-            sets = new Set[10];
+            times = new int[10];
+            logs = new HashSet[10];
             for (int i = 0; i < 10; i++) {
-                sets[i] = new HashSet<>();
+                logs[i] = new HashSet<>();
             }
         }
 
         public boolean shouldPrintMessage(int timestamp, String message) {
             int idx = timestamp % 10;
-            if (timestamp != buckets[idx]) {
-                sets[idx].clear();
-                buckets[idx] = timestamp;
+
+            // time expired, remove it from logs
+            if (timestamp != times[idx]) {
+                logs[idx].clear();
+                times[idx] = timestamp;
             }
-            for (int i = 0; i < buckets.length; i++) {
-                if (timestamp - buckets[i] < 10) {
-                    if (sets[i].contains(message)) {
+            for (int i = 0; i < 10; i++) {
+                if (timestamp - times[i] < 10) {
+                    if (logs[i].contains(message)) {
                         return false;
                     }
                 }
             }
-            sets[idx].add(message);
+            logs[idx].add(message);
             return true;
         }
     }

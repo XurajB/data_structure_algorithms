@@ -7,6 +7,8 @@ public class Test {
         int[] nums = {4,7,9,10};
         System.out.println(missingElement(nums, 3));
 
+        System.out.println(4 % 3);
+
     }
 
     public static int missingElement(int[] nums, int k) {

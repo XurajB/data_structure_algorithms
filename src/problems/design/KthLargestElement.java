@@ -8,6 +8,10 @@ import java.util.PriorityQueue;
  * For each call to the method KthLargest.add, return the element representing the kth largest element in the stream.
  */
 public class KthLargestElement {
+
+    // follow up: what if k is not fixed
+    // A follow-up with range of numbers in the stream is smaller but the k is now variable. Binary search on a prefix sum over the frequency of the range.
+
     PriorityQueue<Integer> pq = new PriorityQueue<>(); // adding k in the constructor doesn't actually limit the size to k
     int k;
     // min heap with size K

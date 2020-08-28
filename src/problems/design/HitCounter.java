@@ -29,6 +29,7 @@ public class HitCounter {
             // several hits can arrive at the same time
             hits[index]++;
         } else {
+            // update time, add count at this new time
             times[index] = timestamp;
             hits[index] = 1;
         }

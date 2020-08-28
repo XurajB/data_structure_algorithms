@@ -60,7 +60,7 @@ public class SnakeGame {
         int head = newX * width + newY;
 
         // case 1, out of boundary or eating body
-        // you moved so remove last tail
+        // remove tail so you don't count as collision
         set.remove(body.peekLast());
         if (newX < 0 || newX >= height || newY < 0 || newY >= width || set.contains(head)) {
             score = -1;

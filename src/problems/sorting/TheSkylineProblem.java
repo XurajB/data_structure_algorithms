@@ -25,7 +25,7 @@ public class TheSkylineProblem {
             heights.add(new int[] {building[0], -building[2]}); // left edge
             heights.add(new int[] {building[1], building[2]});
         }
-        // sort the heights by left edge
+        // sort building based on x
         // also check if they have same start (because we have -ve heights)
         Collections.sort(heights, (a,b) -> {
             if (a[0] == b[0]) {
@@ -37,7 +37,7 @@ public class TheSkylineProblem {
         // we need to keep track of the max height, heap has O(n) remove. so we use TreeMap for (logn) removal
         List<List<Integer>> ans = new ArrayList<>();
         TreeMap<Integer, Integer> treeMap = new TreeMap<>(); // height, number of this height
-        treeMap.put(0, 1);
+        treeMap.put(0, 1); // for case like 12,0 and 24,0 in answer, skyline that is ending
         // prev height is 0, to make sure we are not adding same points twice if two buildings have same height
         int prev = 0;
 
@@ -56,6 +56,8 @@ public class TheSkylineProblem {
                     treeMap.remove(height[1]);
                 }
             }
+            // the idea is to check if previous larger height that has started has ended or not. lastKey will return max height so far.
+            // if another building with lower height started when we still have larger building in the background, we don't need to mark the new building
             int cur = treeMap.lastKey(); // this is like pq.peek()
             // compare current max height with prev max height, update result
             // and prev max height if necessary

@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
- * mplement FreqStack, a class which simulates the operation of a stack-like data structure.
+ * implement FreqStack, a class which simulates the operation of a stack-like data structure.
  *
  * FreqStack has two functions:
  *
@@ -17,8 +17,8 @@ import java.util.PriorityQueue;
  */
 public class FrequencyStack {
     int pushCount;
-    PriorityQueue<Node> pq;
-    Map<Integer, Integer> map; // value, freq
+    PriorityQueue<Node> pq; // for efficient max lookup
+    Map<Integer, Integer> map; // value, freq (for efficient lookup to update frequency)
     public FrequencyStack() {
         pushCount = 0;
         pq = new PriorityQueue<>(new NodeComparator());
@@ -27,16 +27,15 @@ public class FrequencyStack {
 
     // O(logn)
     public void push(int x) {
-        if (!map.containsKey(x)){
-            map.put(x, 0);
-        }
-        map.put(x, map.get(x) + 1);
+        map.put(x, map.getOrDefault(x, 0) + 1);
+        // we keep the old one in there so we don't need to decrement freq and time
         Node n = new Node(x, map.get(x), pushCount++);
         pq.offer(n);
     }
 
     // O(1)
     public int pop() {
+        // we only need to decrement map
         map.put(pq.peek().value, pq.peek().freq - 1);
         return pq.poll().value;
     }

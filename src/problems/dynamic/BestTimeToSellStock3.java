@@ -6,6 +6,10 @@ package problems.dynamic;
  * Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
  */
 public class BestTimeToSellStock3 {
+    public static void main(String[] args) {
+        int[] prices = {3,3,5,0,0,3,1,4};
+        System.out.println(twoTrades(prices));
+    }
     /*
     Let’s say we have an array of prices.
     We introduce idea of best trade ​up to​​i​.
@@ -17,7 +21,7 @@ public class BestTimeToSellStock3 {
     for i -> 0 to prices.length
              max_2_trades = Max(max_2_trades, best_till_i[i] + best_from_i[i])
      */
-    public static Integer twoTrades(Integer[] prices) {
+    private static int twoTrades(int[] prices) {
         if (prices == null || prices.length < 2) return 0;
 
         int[] bestTill = new int[prices.length];

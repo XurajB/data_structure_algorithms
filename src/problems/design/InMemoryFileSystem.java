@@ -39,9 +39,7 @@ public class InMemoryFileSystem {
         if (node.isFile) {
             ans.add(fileName);
         } else {
-            for (String s: node.directories.keySet()) {
-                ans.add(s);
-            }
+            ans.addAll(node.directories.keySet());
         }
         return ans;
     }

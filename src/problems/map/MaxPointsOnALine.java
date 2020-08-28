@@ -40,7 +40,6 @@ public class MaxPointsOnALine {
                     duplicate++;
                     continue;
                 }
-
                 // slope is stored as in irreducible fraction. to store the fraction, we need to
                 // reduce num and denominator to smallest value possible
                 int gcd = gcd(deltaX, deltaY);
