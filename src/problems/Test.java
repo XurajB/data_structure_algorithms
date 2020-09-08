@@ -1,5 +1,7 @@
 package problems;
 
+import java.util.Arrays;
+
 public class Test {
     public static void main(String[] args) {
 
@@ -8,6 +10,13 @@ public class Test {
         System.out.println(missingElement(nums, 3));
 
         System.out.println(4 % 3);
+
+        String string = "hello my name";
+        String[] splits = string.split(" ");
+        System.out.println(Arrays.toString(splits));
+
+        long a = (long) 2147483647 - (-1);
+        System.out.println(a);
 
     }
 

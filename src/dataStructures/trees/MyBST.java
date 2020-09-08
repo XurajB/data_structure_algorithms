@@ -167,7 +167,7 @@ public class MyBST {
             }
 
             // case 3 - two children. find smallest from right child
-            int smallest = findSmallest(node);
+            int smallest = findSmallest(node.right);
             node.data = smallest;
             node.right = delete(node.right, smallest);
             return node;

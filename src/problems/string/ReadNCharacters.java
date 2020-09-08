@@ -6,20 +6,20 @@ package problems.string;
 public class ReadNCharacters {
     // we want to read n number of chars from a file into provided buf and we only have a method that gives us 4 chars at a time
     // we need to return the index. The buf array also needs to be updated with read chars
+    char[] temp = new char[4];
+    int i = 0;
     public int read(char[] buf, int n) {
-        char[] buffer = new char[4];
-        int index = 0;
-        while (true) {
-            int curr = read4(buffer);
-            int currLen = Math.min(curr, n - index);
-            for (int  i = 0; i < currLen; i++) {
-                buf[i + index] = buffer[i];
+        while (n >= 0) {
+            int count = read4(temp);
+            if (count == 0) {
+                break;
             }
-            index += currLen;
-            if (index == n || currLen < 4) {
-                return index;
+            for (int j = 0; j < Math.min(count, n); j++) {
+                buf[i++] = temp[j];
             }
+            n = n - count;
         }
+        return i;
     }
 
     // stub

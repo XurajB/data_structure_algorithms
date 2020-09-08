@@ -1,4 +1,4 @@
-package systemDesign.OOD;
+package designPatterns.OOD;
 
 public class SolidPrinciples {
     // 5 principle of SOLID OO design

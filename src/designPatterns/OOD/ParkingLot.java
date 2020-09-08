@@ -1,4 +1,4 @@
-package systemDesign.OOD;
+package designPatterns.OOD;
 
 public class ParkingLot {
     // requirements

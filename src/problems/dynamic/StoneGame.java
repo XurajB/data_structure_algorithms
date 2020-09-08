@@ -1,5 +1,7 @@
 package problems.dynamic;
 
+import java.util.Arrays;
+
 /**
  * Alex and Lee play a game with piles of stones.  There are an even number of piles arranged in a row,
  * and each pile has a positive integer number of stones piles[i].
@@ -13,11 +15,47 @@ package problems.dynamic;
  */
 public class StoneGame {
     public static void main(String[] args) {
+        int[] piles = {5,3,4,5};
+        System.out.println(stoneGame(piles));
+    }
 
+    /**
+     * This is a minimax problem. each player plays optimally to win but we can't greedily choose the optimal strategy
+     * so we need to try all strategies. Alex will win if score(Alex) >= score(Lee), which means score(Alex) - score(Lee) >= 0
+     * so score is the common parameter. if alex needs to win, then he wants to maximize score. Since lee is also playing optimally
+     * he wants to minimize the score to -ve so he can win. In a current state - if Alex's turn then he can choose either left or right
+     * but can't greedily pick so he tries both of them. without dp the complexity is O(2^n). with dp: O(n^2)
+     */
+    private static boolean stoneGame(int[] piles) {
+        int n = piles.length;
+        int[][][] dp = new int[n+1][n+1][2]; // i,j,score
+        for (int[][] arr: dp) {
+            for (int[] subarr: arr) {
+                Arrays.fill(subarr, -1);
+            }
+        }
+
+        return helper(0, n - 1, piles, 1, dp) >= 0; // score >= 0 means Alex wins. ID 1 = alex, 0 = lee
+    }
+
+    private static int helper(int i, int j, int[] piles, int id, int[][][] dp) {
+        if (i >= j) {
+            return 0;
+        }
+        if (dp[i][j][id] != -1) {
+            return dp[i][j][id];
+        }
+        int next = Math.abs(id - 1);
+        if (id == 1) {
+            dp[i][j][id] = Math.max(piles[i] + helper(i + 1, j, piles, next, dp), piles[j] + helper(i, j - 1, piles, next, dp)); // maximize
+        } else {
+            dp[i][j][id] = Math.min(-piles[i] + helper(i + 1, j, piles, next, dp), -piles[j] + helper(i, j - 1, piles, next, dp)); // minimize
+        }
+        return dp[i][j][id];
     }
 
     // O(N^2), O(N^2)
-    private static boolean stoneGame(int[] piles) {
+    private static boolean stoneGame1(int[] piles) {
         int n = piles.length;
         int dp[][][] = new int[n][n][2]; // i, j, {score of alex, lee}
 
