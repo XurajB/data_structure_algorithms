@@ -36,6 +36,8 @@ public class SumRootToLeaf {
             return;
         }
         current = current * 10 + root.val;
+        // if question is sum root to leaf: binary numbers (with each nodes only holding 0 or 1)
+        // current = (current << 1) | root.val
         if (root.left == null && root.right == null) {
             sum += current;
         } else {

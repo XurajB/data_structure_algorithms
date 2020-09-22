@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class Test {
     public static void main(String[] args) {
 
-
         int[] nums = {4,7,9,10};
         System.out.println(missingElement(nums, 3));
 
