@@ -32,7 +32,7 @@ public class SortList {
         if (head == null || head.next == null) {
             return head;
         }
-        // step 1: cut the list to two halfs
+        // step 1: cut the list to two halves
         ListNode prev = null;
         ListNode slow = head;
         ListNode fast = head;

@@ -29,13 +29,37 @@ public class MaximumPointsYouCanObtain {
             } else {
                 // update the max
                 max = Math.max(max, totalSum - windowSum);
-                // slide the window, subtract last element and next element
+                // slide the window, subtract last element and add next element
                 windowSum = windowSum - cardPoints[i - windowSize] + cardPoints[i];
             }
         }
 
         // for remaining element
         max = Math.max(max, totalSum - windowSum);
+        return max;
+    }
+
+    ///
+    /// now our travelling window is of size k
+    // we create window upto k from left, and move window to left (remove from left and add from right)
+    public int maxScore2(int[] cardPoints, int k) {
+        int n = cardPoints.length;
+
+        int leftSum = 0;
+        int rightSum = 0;
+
+        for (int i = 0; i < k; i++) {
+            leftSum += cardPoints[i];
+        }
+
+        int max = leftSum;
+
+        for (int i = 0; i < k; i++) {
+            leftSum -= cardPoints[k-1-i];
+            rightSum += cardPoints[n-1-i];
+            max = Math.max(max, leftSum + rightSum);
+        }
+
         return max;
     }
 }

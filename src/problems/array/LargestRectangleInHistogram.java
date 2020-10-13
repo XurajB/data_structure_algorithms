@@ -9,7 +9,7 @@ import java.util.Deque;
 public class LargestRectangleInHistogram {
     public static void main(String[] args) {
         int[] heights = {2,1,5,6,2,3};
-        System.out.println(largestRectangleArea(heights));
+        System.out.println(largestRectangleArea2(heights));
     }
 
     // O(N^2), O(1)
@@ -36,19 +36,20 @@ public class LargestRectangleInHistogram {
         }
         int maxArea = Integer.MIN_VALUE;
         Deque<Integer> stack = new ArrayDeque<>(); // stack of index, to calculate width
-        stack.push(-1); //to offset width calculation
 
         for (int i = 0; i < heights.length; i++) {
-            // if we encounter smaller height that what we have on top of stack
+            // if we encounter smaller height than what we have on top of stack
             // we pop because we have smaller height so won;t have any overlap for larger area
-            while (stack.peek() != -1 && heights[stack.peek()] >= heights[i]) {
-                maxArea = Math.max(maxArea, stack.pop() * (i - stack.peek() - 1));
+            while (!stack.isEmpty() && heights[stack.peek()] >= heights[i]) {
+                // example: 2,1,5,6,2,3: i:4, if stack.peek is 5. 5 * (4 - 1 + 1) //1 because 5 is popped
+                int area = heights[stack.pop()] * (i - (stack.isEmpty() ? 0 : stack.peek() + 1));
+                maxArea = Math.max(maxArea, area);
             }
             stack.push(i);
         }
-        // stack may not be empty
-        while (stack.peek() != - 1) {
-            maxArea = Math.max(maxArea, stack.pop() * (heights.length - stack.peek() - 1));
+
+        while (!stack.isEmpty()) {
+            maxArea = Math.max(maxArea, heights[stack.pop()] * (heights.length - (stack.isEmpty() ? 0 : stack.peek() + 1)));
         }
         return maxArea;
     }

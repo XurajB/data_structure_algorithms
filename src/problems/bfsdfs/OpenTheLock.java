@@ -19,45 +19,59 @@ public class OpenTheLock {
     // There are N number of elements in dial
     // A is the numbers possible (0-9) in our case
     // D is the size of deadends
-    // substring operations for 4 * size = O(4N) = O(N^2)
-    // O(A^N * N^2 + D) = O(10^N * N^2 + D)
+
+    // O(A^N + D) = O(10^N + D)
     // SPACE: O(A^N + D) for visited and dead sets
     private static int openLock(String[] deadends, String target) {
+        Set<String> invalid = new HashSet<>(Arrays.asList(deadends));
         Queue<String> q = new LinkedList<>();
-        Set<String> deads = new HashSet<>(Arrays.asList(deadends));
         Set<String> visited = new HashSet<>();
         q.offer("0000");
         visited.add("0000");
+        if (invalid.contains("0000")) {
+            return -1;
+        }
         int level = 0;
         while (!q.isEmpty()) {
             int size = q.size();
-            for (int i = 0; i < size; i++) {
-                String s = q.poll();
-                if (deads.contains(s)) {
-                    continue;
-                }
-                if (s.equals(target)) {
+            for (int k = 0; k < size; k++) {
+                String current = q.poll();
+                if (current.equals(target)) {
                     return level;
                 }
-                StringBuilder sb = new StringBuilder(s);
-                for (int j = 0; j < 4; j++) {
-                    char c = s.charAt(j);
-                    // either you can go +1 or -1 from each position
-                    // for +1, if it is 9, goto 0
-                    String s1 = sb.substring(0, j) + (c == '9' ? 0 : c - '0' + 1) + sb.substring(j+1);
-                    String s2 = sb.substring(0, j) + (c == '0' ? 9 : c - '0' - 1) + sb.substring(j+1);
-                    if (!visited.contains(s1) && !deads.contains(s1)) {
-                        q.offer(s1);
-                        visited.add(s1);
+
+                for (int i = 0; i < 4; i++) {
+                    char[] cur = current.toCharArray();
+                    char temp = cur[i];
+
+                    if (cur[i] == '9') {
+                        cur[i] = '0';
+                    } else {
+                        cur[i]++;
                     }
-                    if (!visited.contains(s2) && !deads.contains(s1)) {
-                        q.offer(s2);
-                        visited.add(s2);
+
+                    String next = new String(cur);
+                    if (!visited.contains(next) && !invalid.contains(next)) {
+                        visited.add(next);
+                        q.offer(next);
+                    }
+                    cur[i] = temp;
+                    if (cur[i] == '0') {
+                        cur[i] = '9';
+                    } else {
+                        cur[i]--;
+                    }
+                    next = new String(cur);
+                    if (!visited.contains(next) && !invalid.contains(next)) {
+                        visited.add(next);
+                        q.offer(next);
                     }
                 }
+
             }
             level++;
         }
+
         return -1;
     }
 }

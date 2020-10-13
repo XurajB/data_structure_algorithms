@@ -15,16 +15,19 @@ import java.util.*;
  */
 public class TheMostSimilarPathInAGraph {
     public static void main(String[] args) {
-
+        int[][] roads = {{0,2},{0,3},{1,2},{1,3},{1,4},{2,4}};
+        String[] names = {"ATL", "PEK", "LAX", "DXB", "HND"};
+        String[] targetPath = {"ATL", "DXB", "HND", "LAX"};
+        System.out.println(mostSimilar(5, roads, names, targetPath));
     }
 
     // can also be solved with dijkstra's algo
     // DFS with memo
     // names * roads (r * j)
-    public List<Integer> mostSimilar(int n, int[][] roads, String[] names, String[] targetPath) {
+    private static List<Integer> mostSimilar(int n, int[][] roads, String[] names, String[] targetPath) {
         Map<Integer, List<Integer>> graph = new HashMap<>();
         int[][] dp = new int[names.length][targetPath.length]; // edit distance from name to target, also visited
-        int[][] nextChoiceForMin = new int[names.length][targetPath.length];
+        int[][] nextChoiceForMin = new int[names.length][targetPath.length]; // next choice with lowest edit distance from name, target
         for (int[] x: dp) {
             Arrays.fill(x, -1);
         }
@@ -36,7 +39,7 @@ public class TheMostSimilarPathInAGraph {
             graph.get(road[0]).add(road[1]);
             graph.get(road[1]).add(road[0]);
         }
-        // for each node, calculate min edit distance (or cost) and the city that gave the min cost
+        // for each node, calculate min cost and the city that gave the min cost
         int min = Integer.MAX_VALUE;
         int start = 0;
         for (int i = 0; i < names.length; i++) {
@@ -46,16 +49,18 @@ public class TheMostSimilarPathInAGraph {
                 min = dist;
             }
         }
+
         // build the ans based on best next choice
         List<Integer> ans = new ArrayList<>();
-        while (ans.size() < targetPath.length) {
+        for (int i = 0; i < targetPath.length; i++) {
             ans.add(start);
-            start = nextChoiceForMin[start][ans.size() - 1];
+            start = nextChoiceForMin[start][i];
         }
+
         return ans;
     }
 
-    private int dfs(int nameIndex, int pathIndex, String[] names, String[] targetPath, int[][] dp, int[][] nextChoiceForMin, Map<Integer, List<Integer>> graph) {
+    private static int dfs(int nameIndex, int pathIndex, String[] names, String[] targetPath, int[][] dp, int[][] nextChoiceForMin, Map<Integer, List<Integer>> graph) {
         if (dp[nameIndex][pathIndex] != -1) {
             return dp[nameIndex][pathIndex];
         }

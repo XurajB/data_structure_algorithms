@@ -53,7 +53,7 @@ public class MaximumSumOfTwoSubarrays {
         // i+1 so they don't overlap
         int ans = Integer.MIN_VALUE;
         for(int i = L-1; i <= len-M-1; i++) {
-            ans = Math.max(leftSum[i] + rightSum[i+1], ans);
+            ans = Math.max(leftSum[i] + rightSum[i+1], ans); // NOTE: i+1
         }
 
         return ans;

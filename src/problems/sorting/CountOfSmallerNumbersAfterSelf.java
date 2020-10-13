@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class CountOfSmallerNumbersAfterSelf {
     public static void main(String[] args) {
-        int[] nums = {5,2,2,6,1};
+        int[] nums = {5,2,6,1};
         System.out.println(countSmaller(nums));
     }
 
@@ -50,38 +50,39 @@ public class CountOfSmallerNumbersAfterSelf {
     private static void merge(int[] nums, int[] indexes, int start, int mid, int end) {
         int i = start; // left index
         int j = mid + 1; // right index
-        int sortIndex = 0;
+
+        int k = 0; //sort index
 
         int rightCount = 0; // smaller count on the right
 
-        int[] newIndexes = new int[end - start + 1];
+        int[] temp = new int[end - start + 1];
         while (i <= mid && j <= end) {
             if (nums[indexes[j]] < nums[indexes[i]]) {
-                newIndexes[sortIndex] = indexes[j];
+                temp[k] = indexes[j];
                 rightCount++;
                 j++;
             } else {
-                newIndexes[sortIndex] = indexes[i];
+                temp[k] = indexes[i];
                 count[indexes[i]] += rightCount;
                 i++;
             }
-            sortIndex++;
+            k++;
         }
 
         // if we didn't finish left side, that means remaining is larger than those sorted
         while (i <= mid) {
-            newIndexes[sortIndex] = indexes[i];
+            temp[k] = indexes[i];
             count[indexes[i]] += rightCount;
             i++;
-            sortIndex++;
+            k++;
         }
         while (j <= end) {
-            newIndexes[sortIndex] = indexes[j];
+            temp[k] = indexes[j];
             j++;
-            sortIndex++;
+            k++;
         }
         for (int x = start; x <= end; x++) {
-            indexes[x] = newIndexes[x - start];
+            indexes[x] = temp[x - start];
         }
     }
 }

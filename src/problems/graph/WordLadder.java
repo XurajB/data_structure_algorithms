@@ -31,7 +31,12 @@ public class WordLadder {
             level++;
             // go through this level (bfs)
             for (int i = 0; i < size; i++) {
-                char[] chars = queue.poll().toCharArray();
+                String cur = queue.poll();
+                if (cur.equals(endWord)) {
+                    return level;
+                }
+
+                char[] chars = cur.toCharArray();
                 // go through each character in the word
                 for (int j = 0; j < chars.length; j++) {
                     char temp = chars[j];
@@ -42,10 +47,6 @@ public class WordLadder {
                         String newWord = String.valueOf(chars);
                         // check if this new word is in provided list
                         if (words.contains(newWord)) {
-                            // check if this new word equals the end word
-                            if (newWord.equals(endWord)) {
-                                return level;
-                            }
                             queue.offer(newWord);
                             words.remove(newWord); // or keep a visited set
                         }

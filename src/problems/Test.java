@@ -17,6 +17,8 @@ public class Test {
         long a = (long) 2147483647 - (-1);
         System.out.println(a);
 
+        System.out.println((char) ('1' + 1));
+
     }
 
     public static int missingElement(int[] nums, int k) {

@@ -23,6 +23,7 @@ public class SubarraySumEqualsK {
                 sum += nums[j];
                 if (sum == k) {
                     count++;
+                    // can't break here, because of 0,0,0,0,0 case
                 }
             }
         }
@@ -32,15 +33,15 @@ public class SubarraySumEqualsK {
     private static int subarraySum2(int[] nums, int k) {
         int count = 0;
         int sum = 0;
-        Map<Integer, Integer> map = new HashMap<>(); // sum, number of occurrences of sum
-        map.put(0, 1);
+        Map<Integer, Integer> preSum = new HashMap<>(); // sum, number of occurrences of sum
+        preSum.put(0, 1); // think of 1,1,1. k =2. sum: 0, 1, 2, 3. 2-0, 3-1
 
         for (int num : nums) {
             sum += num;
-            if (map.containsKey(sum - k)) {
-                count += map.get(sum - k);
+            if (preSum.containsKey(sum - k)) {
+                count += preSum.get(sum - k);
             }
-            map.put(sum, map.getOrDefault(sum, 0) + 1);
+            preSum.put(sum, preSum.getOrDefault(sum, 0) + 1);
         }
         return count;
     }

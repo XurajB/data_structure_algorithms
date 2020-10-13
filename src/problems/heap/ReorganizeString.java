@@ -38,7 +38,7 @@ public class ReorganizeString {
 
         StringBuilder sb = new StringBuilder();
 
-        while (q.size() >= 2) {
+        while (q.size() > 1) {
             CharacterCount count = q.poll();
             CharacterCount count2 = q.poll();
             sb.append(count.c);

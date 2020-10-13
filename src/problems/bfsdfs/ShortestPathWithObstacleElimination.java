@@ -21,7 +21,7 @@ public class ShortestPathWithObstacleElimination {
         int n = grid[0].length;
 
         Queue<int[]> queue = new LinkedList<>(); // x,y,k
-        boolean[][][] visited = new boolean[m][n][k+1];
+        boolean[][][] visited = new boolean[m][n][k+1]; // k+1, coz k is size, this is index
         visited[0][0][0] = true;
 
         queue.offer(new int[] {0, 0, 0});

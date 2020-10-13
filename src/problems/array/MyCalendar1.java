@@ -47,4 +47,20 @@ public class MyCalendar1 {
         return false;
     }
 
+    // same as above, diff style
+    private boolean book3(int start, int end) {
+        Integer prev = map.floorKey(start); // anything smaller or eq to start
+        Integer next = map.ceilingKey(start); // anything higher or eq to start
+
+        // check if smaller-their end is lower than start
+        // and higher is higher than end to be valid
+        if ((prev == null || map.get(prev) <= start) &&
+                (next == null || next >= end)) {
+            map.put(start, end);
+            return true;
+        }
+
+        return false;
+    }
+
 }

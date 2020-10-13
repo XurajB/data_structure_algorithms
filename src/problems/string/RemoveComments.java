@@ -26,16 +26,16 @@ public class RemoveComments {
                         hasBlockComment = false;
                         i++;        //skip '/' on next iteration of i
                     }
-                }
-                else {
+                } else {
                     if (s.charAt(i) == '/' && i < s.length() - 1 && s.charAt(i + 1) == '/') {
                         break;      //ignore remaining characters on line s
                     }
                     else if (s.charAt(i) == '/' && i < s.length() - 1 && s.charAt(i + 1) == '*') {
                         hasBlockComment = true;
                         i++;           //skip '*' on next iteration of i
+                    } else {
+                        sb.append(s.charAt(i));     //not a comment
                     }
-                    else    sb.append(s.charAt(i));     //not a comment
                 }
             }
             if (!hasBlockComment && sb.length() > 0) {

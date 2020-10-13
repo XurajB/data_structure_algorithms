@@ -27,7 +27,7 @@ public class StringTransformationIntoAnotherString {
         // same char should transform to the same char
         //
         Map<Character, Character> map = new HashMap<>();
-        Set<Character> set = new HashSet<>();
+        Set<Character> set = new HashSet<>(); // used characters
 
         for (int i = 0; i < str1.length(); i++) {
             char c1 = str1.charAt(i);

@@ -45,7 +45,7 @@ public class RobotRoomCleaner {
                  // backtrack
                  goBack();
              }
-             // always turn right
+             // if cannot move then always turn right
              robot.turnRight();
          }
      }

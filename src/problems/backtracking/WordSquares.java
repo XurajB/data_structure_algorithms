@@ -41,6 +41,7 @@ public class WordSquares {
         return ans;
     }
 
+    // we can also use Trie instead of HashMap. Except for building and search for prefix (sb) from trie, the backtracking is same
     private static void backtrack(List<String> candidates, int index, int length, Map<String, Set<String>> prefix, List<List<String>> ans) {
         if (index == length) {
             ans.add(new ArrayList<>(candidates));

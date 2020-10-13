@@ -11,6 +11,10 @@ import java.util.*;
  */
 public class SequenceReconstruction {
     public static void main(String[] args) {
+        List<List<Integer>> seqs = new ArrayList<>();
+        seqs.add(Arrays.asList(5,2,6,3));
+        seqs.add(Arrays.asList(4,1,5,2));
+        System.out.println(sequenceReconstruction(new int[] {4,1,5,2,6,3}, seqs));
     }
 
     // The question is asking for 3 conditions to be met:
@@ -18,14 +22,14 @@ public class SequenceReconstruction {
     // 2. whether the topo sort order is the only one (aka Hamilton path in Topological sort, see wikipedia)
     // 3. The only topo sort constructed should be equal to org.
     // O(n*m)
-    public boolean sequenceReconstruction(int[] org, List<List<Integer>> seqs) {
+    private static boolean sequenceReconstruction(int[] org, List<List<Integer>> seqs) {
         Map<Integer, List<Integer>> graph = new HashMap<>();
         Map<Integer, Integer> indegree = new HashMap<>();
 
         for (List<Integer> seq: seqs) {
             for (int i = 0; i < seq.size(); i++) {
                 graph.putIfAbsent(seq.get(i), new ArrayList<>());
-                indegree.put(seq.get(i), 0);
+                indegree.putIfAbsent(seq.get(i), 0);
 
                 if (i > 0) {
                     graph.get(seq.get(i-1)).add(seq.get(i));

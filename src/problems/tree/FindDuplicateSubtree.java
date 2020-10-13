@@ -26,7 +26,7 @@ public class FindDuplicateSubtree {
         if (node == null) {
             return "*";
         }
-        String serial = node.val + "-" + serialize(node.left, map, ans) + "-" + serialize(node.right, map, ans);
+        String serial = node.val + "-" + serialize(node.left, map, ans) + "-" + serialize(node.right, map, ans); // post order
         map.put(serial, map.getOrDefault(serial, 0) + 1);
 
         if (map.get(serial) == 2) {

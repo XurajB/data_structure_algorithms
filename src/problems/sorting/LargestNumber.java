@@ -23,7 +23,7 @@ public class LargestNumber {
             String s1 = a + b;
             String s2 = b + a;
 
-            return s2.compareTo(s1);
+            return s2.compareTo(s1); // because we are returning higher number
         });
 
         if (strs[0].equals("0")) {

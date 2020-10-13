@@ -20,8 +20,8 @@ public class GuessTheWord {
     public void findSecretWord(String[] wordlist, Master master) {
         List<String> dict = new ArrayList<>(Arrays.asList(wordlist));
         Collections.sort(dict);
-        // we have 10 guesses to makes
-        for (int i = 0; i < 10; i++) {
+        // i < wordlist.length or i < 10 both fine
+        for (int i = 0; i < wordlist.length; i++) {
 
             String word = dict.get(0);
             int match = master.guess(word);
@@ -35,7 +35,7 @@ public class GuessTheWord {
             // remove all items that have words character match than current word
             // we know that correct answer will meet the match all the time
             while (j < dict.size()) {
-                if ((compare(dict.get(j), word) != match) || (match == 0 && compare(dict.get(j), word) > 0)) {
+                if ((compare(dict.get(j), word) != match)) {
                     dict.remove(j);
                     // we removed a word, so we keep j the same
                 } else {

@@ -67,33 +67,34 @@ public class SerializeAndDeserializeBst {
     /////////////////////
     /// recursive
     private String serialize2(TreeNode root) {
-        return rSerialize(root, "");
+        return rSerialize(root);
     }
 
-    private String rSerialize(TreeNode root, String str) {
+    // preorder
+    private String rSerialize(TreeNode root) {
         if (root == null) {
-            str += "x,";
-        } else {
-            str += root.val + ",";
-            str += rSerialize(root.left, str);
-            str += rSerialize(root.right, str);
+            return "x,";
         }
+
+        String str = root.val + ",";
+        str += rSerialize(root.left);
+        str += rSerialize(root.right);
+
         return str;
     }
 
     private TreeNode deserialize2(String data) {
         String[] splits = data.split(",");
-        List<String> dataSplits = new ArrayList<>(Arrays.asList(splits));
+        Queue<String> dataSplits = new LinkedList<>(Arrays.asList(splits));
         return rDeserialize(dataSplits);
     }
 
-    private TreeNode rDeserialize(List<String> dataSplits) {
-        if (dataSplits.get(0).equals("x")) {
-            dataSplits.remove(0);
+    private TreeNode rDeserialize(Queue<String> dataSplits) {
+        if (dataSplits.peek().equals("x")) {
+            dataSplits.poll();
             return null;
         }
-        TreeNode node = new TreeNode(Integer.parseInt(dataSplits.get(0)));
-        dataSplits.remove(0);
+        TreeNode node = new TreeNode(Integer.parseInt(dataSplits.poll()));
         node.left = rDeserialize(dataSplits);
         node.right = rDeserialize(dataSplits);
         return node;

@@ -1,7 +1,9 @@
 package problems.string;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * To some string S, we will perform some replacement operations that replace groups of letters with new ones (not necessarily the same size).
@@ -65,6 +67,46 @@ public class FindAndReplaceInString {
         String target;
         Node(int index, String source, String target) {
             this.index = index;
+            this.source = source;
+            this.target = target;
+        }
+    }
+
+    ///////////////////
+    /// O(N)
+    public String findReplaceString2(String S, int[] indexes, String[] sources, String[] targets) {
+        StringBuilder sb = new StringBuilder();
+        Map<Integer, Node2> map = new HashMap<>();
+        for (int i = 0; i < indexes.length; i++) {
+            map.put(indexes[i], new Node2(sources[i], targets[i]));
+        }
+        int i = 0;
+        while (i < S.length()) {
+            if (map.containsKey(i)) {
+                int k = 0;
+                String source = map.get(i).source;
+                String target = map.get(i).target;
+                while (k < source.length() && S.charAt(i+k) == source.charAt(k)) {
+                    k++;
+                }
+                if (k == source.length()) {
+                    sb.append(target);
+                    i += source.length();
+                } else {
+                    sb.append(S.charAt(i));
+                    i++;
+                }
+            } else {
+                sb.append(S.charAt(i));
+                i++;
+            }
+        }
+        return sb.toString();
+    }
+    static class Node2 {
+        String source;
+        String target;
+        Node2(String source, String target) {
             this.source = source;
             this.target = target;
         }

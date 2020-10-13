@@ -24,7 +24,7 @@ public class CherryPickup {
 
     private static int cherryPickup(int[][] grid) {
         int n = grid.length;
-        return Math.max(0, cherryPickup(grid, n, 0, 0, 0, 0, new Integer[n][n][n][n]));
+        return Math.max(0, cherryPickup(grid, n, 0, 0, 0, 0, new Integer[n][n][n][n])); // return 0 if impossible
     }
 
     /*

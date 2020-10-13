@@ -1,7 +1,6 @@
 package problems.map;
 
-import java.util.PriorityQueue;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Alice has a hand of cards, given as an array of integers.
@@ -12,6 +11,36 @@ public class HandOfStraights {
     public static void main(String[] args) {
         int[] hand = {1,2,3,3,4,4,5,6};
         System.out.println(isNStraightHand(hand, 4));
+    }
+
+    // sorting
+    // n * w
+    public boolean isNStraightHand3(int[] hand, int W) {
+        if (hand == null || hand.length == 0) {
+            return false;
+        }
+        int n = hand.length;
+        if (n % W != 0) {
+            return false;
+        }
+        Arrays.sort(hand);
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int num: hand) {
+            count.put(num, count.getOrDefault(num, 0) + 1);
+        }
+        for (int num: hand) {
+            if (count.get(num) == 0) {
+                continue;
+            }
+            for (int i = 0; i < W; i++) {
+                if (count.getOrDefault(num+i, 0) > 0) {
+                    count.put(num+i, count.get(num+i) - 1);
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     // O(NLogN * W)

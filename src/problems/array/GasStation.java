@@ -43,23 +43,25 @@ public class GasStation {
     private static int canCompleteCircuit2(int[] gas, int[] cost) {
         int n = gas.length;
 
-        int currentTank = 0;
-        int totalTank = 0;
-        int index = 0; // starting position
+        int surplus = 0;
+        int deficit = 0;
 
+        int start = 0;
         for (int i = 0; i < n; i++) {
-            totalTank += gas[i] - cost[i];
-            currentTank += gas[i] - cost[i];
+            surplus += gas[i] - cost[i];
 
-            // if current tank is < 0, we can reach next station
-            if (currentTank < 0) {
-                // start from another index
-                index = i + 1;
-                // empty tank
-                currentTank = 0;
+            if (surplus < 0) {
+                // we need to pick next station as starting point because we can't go next
+                start = i + 1;
+                deficit += surplus;
+                surplus = 0; // reset surplus
             }
         }
 
-        return totalTank >= 0 ? index : -1;
+        // at the end, check if sum of surplus and deficit is >= 0
+        if (surplus + deficit >= 0) {
+            return start;
+        }
+        return -1;
     }
 }

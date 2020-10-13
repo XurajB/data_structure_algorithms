@@ -30,4 +30,32 @@ public class WordBreak {
         }
         return wordMark[s.length()];
     }
+
+    ////// dfs
+    public boolean wordBreak2(String s, List<String> wordDict) {
+        Set<String> dict = new HashSet<>(wordDict);
+        return canBreak(s, dict, new HashMap<>());
+    }
+
+    private boolean canBreak(String cur, Set<String> dict, Map<String, Boolean> map) {
+        if (cur.length() == 0) {
+            return true;
+        }
+        if (map.containsKey(cur)) {
+            return map.get(cur);
+        }
+        for (int i = 0; i < cur.length(); i++) {
+            String newStr = cur.substring(0, i+1);
+            if (dict.contains(newStr)) {
+                boolean result = canBreak(cur.substring(i+1), dict, map);
+                if (result) {
+                    map.put(newStr, true);
+                    return true;
+                }
+
+            }
+        }
+        map.put(cur, false);
+        return false;
+    }
 }

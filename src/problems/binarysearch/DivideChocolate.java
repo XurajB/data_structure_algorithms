@@ -13,6 +13,7 @@ public class DivideChocolate {
     }
 
     // O(NlogN)
+    // binary search - the array is not sorted but we are searching between max - total
     private static int maximizeSweetness(int[] sweetness, int K) {
         if (sweetness == null || sweetness.length == 0) {
             return 0;
