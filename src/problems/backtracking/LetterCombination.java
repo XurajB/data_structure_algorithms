@@ -31,9 +31,26 @@ public class LetterCombination {
             answer.add(current);
             return;
         }
+        // this is still backtracking but since we are using string which is immutable we can restore previous state
+        // we would remove last char if we were using mutable object like StringBuilder or list.. see below
         String letters = map[digits.charAt(index) - '0'];
         for (int i = 0; i < letters.length(); i++) {
             letterCombinationsRecursive(answer, digits, current + letters.charAt(i), index + 1, map);
+        }
+    }
+
+    // backtrack with sb
+    private void backtrack(String[] letters, String digits, List<String> ans, int index, StringBuilder sb) {
+        if (index == digits.length()) {
+            ans.add(sb.toString());
+            return;
+        }
+
+        String next = letters[digits.charAt(index) - '0'];
+        for (int i = 0; i < next.length(); i++) {
+            sb.append(next.charAt(i));
+            backtrack(letters, digits, ans, index+1, sb);
+            sb.deleteCharAt(sb.length() - 1);
         }
     }
 

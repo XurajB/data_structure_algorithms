@@ -38,16 +38,16 @@ public class MinDepthOfBst {
         } else {
             stack.add(new Pair(root, 1)); // start with height 1
         }
-        int minDepth = Integer.MAX_VALUE;
+        int currentDepth = 0;
 
         while (!stack.isEmpty()) {
-            Pair<TreeNode, Integer> current = stack.pollLast();
+            Pair<TreeNode, Integer> current = stack.poll();
             root = current.getKey();
-            int currentDepth = current.getValue();
+            currentDepth = current.getValue();
 
-            // if leaf, note height
+            // if leaf, you can return here because we are going level order
             if ((root.left == null) && (root.right == null)) {
-                minDepth = Math.min(minDepth, currentDepth);
+                return currentDepth;
             }
 
             // increment height or level
@@ -58,6 +58,6 @@ public class MinDepthOfBst {
                 stack.add(new Pair(root.right, currentDepth + 1));
             }
         }
-        return minDepth;
+        return currentDepth;
     }
 }

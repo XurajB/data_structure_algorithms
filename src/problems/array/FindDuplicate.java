@@ -33,4 +33,38 @@ public class FindDuplicate {
         }
         return fast;
     }
+
+    // nlogn
+    private static int findDuplicate2(int[] nums) {
+        int lo = 1;
+        int high = nums.length - 1;
+        while (lo <= high) {
+            int mid = lo + (high - lo) / 2;
+            int count = 0;
+            for (int num: nums) {
+                if (num <= mid) {
+                    count++;
+                }
+            }
+            // if count is less than mid, then the duplicate must be on the right side
+            if (count <= mid) {
+                lo = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return lo;
+    }
+
+    // modifying the array
+    //public int findDuplicate(int[] nums) {
+    //        for (int num: nums) {
+    //            int index = Math.abs(num) - 1;
+    //            if (nums[index] < 0) {
+    //                return index+1;
+    //            }
+    //            nums[index] = -nums[index];
+    //        }
+    //        return -1;
+    //    }
 }

@@ -15,18 +15,25 @@ public class Find132Pattern {
 
     // o(n)
     private static boolean find132pattern1(int[] nums) {
-        int max = Integer.MIN_VALUE; // previous max. for 1 3 2 pattern
-        Stack<Integer> stack = new Stack<>(); // max stack
-        // maintain max stack, anything less than the max on the left fulfills 132 pattern
-        for (int i = nums.length - 1; i >= 0; i--) {
-            while (!stack.isEmpty() && stack.peek() > nums[i]) {
-                max = stack.pop();
-            }
-            if (nums[i] > max) {
-                stack.push(max);
-            }
-            if (nums[i] < max) {
-                return true;
+        if (nums.length < 3) {
+            return false;
+        }
+        Stack<Integer> stack = new Stack<>();
+        int[] min = new int[nums.length];
+        min[0] = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            min[i] = Math.min(nums[i], min[i - 1]);
+        }
+        for (int j = nums.length - 1; j >= 0; j--) {
+            if (nums[j] > min[j]) {
+                while (!stack.isEmpty() && stack.peek() <= min[j]) {
+                    stack.pop();
+                }
+                if (!stack.isEmpty() && stack.peek() < nums[j]) {
+                    return true;
+                }
+                stack.push(nums[j]);
             }
         }
         return false;

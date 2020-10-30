@@ -15,6 +15,7 @@ public class UniquePaths3 {
         System.out.println(uniquePathsIII(grid));
     }
 
+    // 4^n
     private static int uniquePathsIII(int[][] grid) {
         int m = grid.length;
         int n = grid[0].length;

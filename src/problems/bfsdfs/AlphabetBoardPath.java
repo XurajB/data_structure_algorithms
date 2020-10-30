@@ -15,35 +15,35 @@ public class AlphabetBoardPath {
 
     private static String alphabetBoardPath2(String target) {
         StringBuilder sb = new StringBuilder();
-        int lastx = 0;
-        int lasty = 0;
+        int lastRow = 0;
+        int lastCol = 0;
 
         for (int i = 0; i < target.length(); i++) {
-            int curx = (target.charAt(i) - 'a') / 5;
-            int cury = (target.charAt(i) - 'a') % 5;
+            int curRow = (target.charAt(i) - 'a') / 5;
+            int curCol = (target.charAt(i) - 'a') % 5;
 
             // order is important, LU should come before RD because of z being the only char in last line
             // other char to z: L then D
             // z to other char: U then R
             // only only loop: LDUR or URLD
-            while (lastx > curx) {
+            while (lastRow > curRow) {
                 sb.append("U");
-                lastx--;
+                lastRow--;
             }
 
-            while (lasty < cury) {
+            while (lastCol < curCol) {
                 sb.append("R");
-                lasty++;
+                lastCol++;
             }
 
-            while (lasty > cury) {
+            while (lastCol > curCol) {
                 sb.append("L");
-                lasty--;
+                lastCol--;
             }
 
-            while (lastx < curx) {
+            while (lastRow < curRow) {
                 sb.append("D");
-                lastx++;
+                lastRow++;
             }
 
             sb.append("!");

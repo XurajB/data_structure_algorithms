@@ -5,7 +5,7 @@ package problems.array;
  */
 public class MaximumProductSubarray {
     public static void main(String[] args) {
-        int[] nums = {2,3,-2,4};
+        int[] nums = {2,1,-1,-4};
         System.out.println(maxProduct(nums));
     }
 
@@ -14,23 +14,24 @@ public class MaximumProductSubarray {
         // since we also have -ve numbers
         // this will introduce the situation where two -ve numbers can create max product
         // so we will need to keep track of both min and max
-        int[] currentMin = new int[nums.length];
-        int[] currentMax = new int[nums.length];
+        int n = nums.length;
+        int[] max = new int[n];
+        int[] min = new int[n];
 
-        currentMax[0] = nums[0];
-        currentMin[0] = nums[0];
+        max[0] = nums[0];
+        min[0] = nums[0];
+
+        int ans = nums[0];
         for (int i = 1; i < nums.length; i++) {
-            // multiplying by -ve number makes big number smaller and small number bigger
-            int currentMaxSoFar = Math.max(currentMax[i-1] * nums[i], currentMin[i-1] * nums[i]); // currentMin * nums can produce positive result (if both are -ve)
-            int currentMinSoFar = Math.min(currentMax[i-1] * nums[i], currentMin[i-1] * nums[i]);
 
-            currentMax[i] = Math.max(nums[i], currentMaxSoFar);
-            currentMin[i] = Math.min(nums[i], currentMinSoFar);
-        }
+            int curMax = Math.max(nums[i], Math.max(max[i-1] * nums[i], min[i-1] * nums[i]));
+            int curMin = Math.min(nums[i], Math.min(max[i-1] * nums[i], min[i-1] * nums[i]));
 
-        int ans = Integer.MIN_VALUE;
-        for (int num: currentMax) {
-            ans = Math.max(ans, num);
+            max[i] = curMax;
+            min[i] = curMin;
+
+            ans = Math.max(ans, curMax);
+
         }
 
         return ans;
@@ -43,9 +44,8 @@ public class MaximumProductSubarray {
         int ans = nums[0];
 
         for (int i = 1; i < nums.length; i++) {
-            int temp = max;
             max = Math.max(Math.max(max * nums[i], min * nums[i]), nums[i]);
-            min = Math.min(Math.min(temp * nums[i], min * nums[i]), nums[i]);
+            min = Math.min(Math.min(max * nums[i], min * nums[i]), nums[i]);
 
             ans = Math.max(ans, max);
         }

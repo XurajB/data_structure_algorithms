@@ -55,7 +55,7 @@ public class NQueens {
                 // check 4 things
                 // 1. no conflict in col: which we true because we are doing it col by col
                 // 2. no conflict in row: i == row
-                // 3. 4. no diagonal conflicts: Math.abs(row - i) == Math.abs(col - j)
+                // 3. 4. no diagonal conflicts: Math.abs(row - i) == Math.abs(col - j). if distance between the columns == distance between rows, they are in the same diagonal
 
                 if(board[i][j] == 'Q' && (Math.abs(row - i) == Math.abs(col - j) || row == i)) {
                     return false;

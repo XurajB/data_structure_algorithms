@@ -1,6 +1,5 @@
 package problems.array;
 
-import javax.swing.plaf.IconUIResource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +31,7 @@ public class XofAKindInADeck {
         return ans > 1; // gcd needs to be at least 2
     }
 
+    // or gcf
     private static int gcd(int a, int b) {
         if (b > 0) {
             return gcd(b, a % b);

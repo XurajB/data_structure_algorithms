@@ -49,11 +49,6 @@ public class InsertInterval {
             i++;
         }
 
-        int[][] sol = new int[ans.size()][2];
-        for (int j = 0; j < ans.size(); j++) {
-            sol[j] = ans.get(j);
-        }
-
-        return sol;
+        return ans.toArray(new int[ans.size()][2]);
     }
 }

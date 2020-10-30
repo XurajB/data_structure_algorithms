@@ -1,7 +1,5 @@
 package problems.array;
 
-import problems.twopointers.Palindrome;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;

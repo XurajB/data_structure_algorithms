@@ -16,6 +16,34 @@ public class BullsAndCows {
 
     // O(N), O(1)
     private static String getHint(String secret, String guess) {
+        int[] chars = new int[10];
+        for (int i = 0; i < secret.length(); i++) {
+            chars[secret.charAt(i) - '0']++;
+        }
+
+        int bulls = 0;
+        int cows = 0;
+        for (int i = 0; i < secret.length(); i++) {
+            char c1 = secret.charAt(i);
+            char c2 = guess.charAt(i);
+
+            if (c1 == c2) {
+                bulls++;
+                chars[c1-'0']--;
+                if (chars[c1-'0'] < 0) {
+                    cows--;
+                }
+            } else if (chars[c2-'0'] > 0) {
+                cows++;
+                chars[c2-'0']--;
+            }
+        }
+
+        return bulls + "A" + cows + "B";
+    }
+
+    // O(N), O(1)
+    private static String getHint2(String secret, String guess) {
         int[] secretArr = new int[10]; // 0 - 9 numbers
         int[] guessArr = new int[10];
 

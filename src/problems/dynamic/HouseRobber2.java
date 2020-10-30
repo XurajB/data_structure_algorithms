@@ -33,4 +33,53 @@ public class HouseRobber2 {
         }
         return prev1;
     }
+
+    ////
+    public int rob2(int[] nums) {
+
+        int n = nums.length;
+
+        if (n == 1) {
+            return nums[0];
+        }
+
+        int[] first = new int[n+1];
+        first[0] = 0;
+        first[1] = nums[0];
+
+        for (int i = 2; i <= n - 1; i++) {
+            first[i] = Math.max(first[i-1], first[i-2] + nums[i-1]);
+        }
+
+        int[] second = new int[n+1];
+        second[0] = 0;
+        second[1] = 0;
+
+        for (int i = 2; i <= n; i++) {
+            second[i] = Math.max(second[i-1], second[i-2] + nums[i-1]);
+        }
+
+        return Math.max(first[n-1], second[n]);
+    }
+
+    /////// simplified ^
+    public int rob3(int[] nums) {
+        int n = nums.length;
+        if (n == 1) {
+            return nums[0];
+        }
+        int[] first = new int[n+1];
+        first[0] = 0;
+        first[1] = nums[0];
+        int[] second = new int[n+1];
+        second[0] = 0;
+        second[1] = 0;
+
+        for (int i = 2; i <= n; i++) {
+            first[i] = Math.max(first[i-1], first[i-2] + nums[i-1]);
+            second[i] = Math.max(second[i-1], second[i-2] + nums[i-1]);
+        }
+
+        return Math.max(first[n-1], second[n]);
+    }
 }

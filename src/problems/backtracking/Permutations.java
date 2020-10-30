@@ -35,10 +35,7 @@ public class Permutations {
     }
 
     static int k = 3;
-    private static void backtrack(int n,
-                          ArrayList<Integer> nums,
-                          List<List<Integer>> output,
-                          int index) {
+    private static void backtrack(int n, ArrayList<Integer> nums, List<List<Integer>> output, int index) {
         // if all integers are used up
         if (index == n) {
             output.add(new ArrayList<>(nums));
@@ -57,6 +54,25 @@ public class Permutations {
         }
     }
 
+    // more efficient
+    private void backtrack(List<List<Integer>> ans, int[] nums, int index, List<Integer> cur, boolean[] visited) {
+        if (index == nums.length) {
+            ans.add(new ArrayList<>(cur));
+            return;
+        }
+        // note: permutation: 0 to n
+        for (int i = 0; i < nums.length; i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                cur.add(nums[i]);
+                backtrack(ans, nums, index+1, cur, visited);
+                visited[i] = false;
+                cur.remove(cur.size() - 1);
+            }
+        }
+    }
+
+    // no visited array
     private void backtrack2(List<List<Integer>> ans, List<Integer> current, int[] nums) {
         if (current.size() == nums.length) {
             ans.add(new ArrayList<>(current));

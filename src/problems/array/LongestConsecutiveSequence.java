@@ -49,7 +49,7 @@ public class LongestConsecutiveSequence {
         int tempMax = 1;
         int max = 1;
 
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 0; i < nums.length - 1; i++) {
             if (Math.abs(nums[i] - nums[i-1]) == 1) {
                 tempMax++;
             } else if (nums[i] != nums[i-1]) {

@@ -11,10 +11,13 @@ public class CloneGraph {
     static class Node {
         public int val;
         public List<Node> neighbors;
-
         public Node(int _val, ArrayList<Node> _neighbors) {
             val = _val;
             neighbors = _neighbors;
+        }
+        public Node(int _val) {
+            val = _val;
+            neighbors = new ArrayList<>();
         }
     }
 
@@ -53,5 +56,25 @@ public class CloneGraph {
 
         // Return the clone of the node from visited.
         return visited.get(node);
+    }
+
+    // dfs
+    public Node cloneGraph2(Node node) {
+        if (node == null) {
+            return null;
+        }
+        Map<Node, Node> map = new HashMap<>();
+        map.put(node, new Node(node.val));
+        dfs(node, map);
+        return map.get(node);
+    }
+    private void dfs(Node node, Map<Node, Node> map) {
+        for (Node neigh: node.neighbors) {
+            if (!map.containsKey(neigh)) {
+                map.put(neigh, new Node(neigh.val));
+                dfs(neigh, map);
+            }
+            map.get(node).neighbors.add(map.get(neigh));
+        }
     }
 }

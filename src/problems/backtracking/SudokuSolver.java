@@ -48,13 +48,11 @@ public class SudokuSolver {
                         if (isValid(board, i, j, c)) {
                             // if valid put c in that cell
                             board[i][j] = c;
-
                             if (solve(board)) {
                                 return true;
-                            } else {
-                                // other wise backtrack
-                                board[i][j] = '.';
                             }
+                            // other wise backtrack
+                            board[i][j] = '.';
                         }
                     }
                     return false;
@@ -65,6 +63,7 @@ public class SudokuSolver {
     }
 
     private static boolean isValid(char[][] board, int row, int col, char c) {
+        // row by row
         for (int i = 0; i < 9; i++) {
             // check row
             if (board[row][i] == c) {

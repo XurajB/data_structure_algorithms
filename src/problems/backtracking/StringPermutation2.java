@@ -5,13 +5,39 @@ import java.util.List;
 
 public class StringPermutation2 {
     public static void main(String[] args) {
-        List<String> answer = permutation("hello");
+        List<String> answer = permutation("hel");
         System.out.println(answer);
 
         List<String> a2 = new ArrayList<>();
         dfs(a2, "hello", "");
-        System.out.println(a2);
+        //System.out.println(a2);
+
+        System.out.println(findPerm("hel"));
     }
+
+    // -------
+    private static ArrayList<String> findPerm(String s) {
+        ArrayList<String> ans = new ArrayList<>();
+        dfs2(ans, new StringBuilder(), s, new boolean[s.length()]);
+        return ans;
+    }
+
+    private static void dfs2(ArrayList<String> ans, StringBuilder current, String s, boolean[] visited) {
+        if (current.length() == s.length()) {
+            ans.add(current.toString());
+            return;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                current.append(s.charAt(i));
+                dfs2(ans, current, s, visited);
+                visited[i] = false;
+                current.deleteCharAt(current.length() - 1);
+            }
+        }
+    }
+    // ---------
 
     public static ArrayList<String> permutation(String s) {
         // The result

@@ -39,15 +39,14 @@ public class MaxSumOfRectangleNoLargerThanK {
         int max = Integer.MIN_VALUE;
         int sum = 0; // sum of subarray from array element 0 to i
         TreeSet<Integer> set = new TreeSet<>();
-        set.add(0);
+        set.add(0); // start with sum = 0
         for (int value : colSum) {
-            int t = sum + value; // rectangle sum
-            sum = t;
+            sum = sum + value; // rectangle sum
             Integer gap = set.ceiling(sum - k); // ceiling = least element greater than or equals to sum-k or null
             if (gap != null) {
                 max = Math.max(max, sum - gap); // computes smallest previously encountered subarray sum that is >= sum - k
             }
-            set.add(t);
+            set.add(sum);
         }
         return max;
     }

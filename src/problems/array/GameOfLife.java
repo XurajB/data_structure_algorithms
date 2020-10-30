@@ -36,7 +36,7 @@ public class GameOfLife {
                 // rule 1 and 3
                 // denote -1 as dead and 2 as live
                 if (board[i][j] == 1 && (livecount < 2 || livecount > 3)) {
-                    board[i][j] = -1;
+                    board[i][j] = -1; // -1 means living before now dead. Since it happens simultaneously we need to know if it was living before
                 }
                 // rule 4
                 if (board[i][j] == 0 && livecount == 3) {

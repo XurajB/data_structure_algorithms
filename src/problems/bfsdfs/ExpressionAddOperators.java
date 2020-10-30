@@ -21,7 +21,7 @@ public class ExpressionAddOperators {
     // remember to use long, int can overflow quickly
     // for multiplication, if you have a sequence of 12345 and you have proceeded to 1 + 2 + 3, now your eval is 6 right? If you want
     // to add a * between 3 and 4, you would take 3 as the digit to be multiplied,
-    // so you want to take it out from the existing eval. You have 1 + 2 + 3 * 4 and the eval now is (1 + 2 + 3) - 3 + (3 * 4)
+    // so you want to take it out from the existing eval. You have 1 + 2 + 3 * 4 and the eval now is (1 + 2 + 3) - 3 + (3 * 4). we already have 1+2+3, but mult happens between 3*4
     // O(4^N) - there are 4 operations (noop, +,-,*)
     private static void dfs(List<String> ans, String expr, char[] nums, int index, int target, long calcVal, long prev) {
         if (index == nums.length) {
@@ -35,7 +35,7 @@ public class ExpressionAddOperators {
             // corner case: if current num is 0, we can only use it as a single digit number
             // if it is not a single digit number with leading 0, it should be considered as an invalid number
             if (nums[i] == '0' && i != index) {
-                break;
+                continue;
             }
             curr = 10 * curr + nums[i] - '0';
             if (index == 0) {
