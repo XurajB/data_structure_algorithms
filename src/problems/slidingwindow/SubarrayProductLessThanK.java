@@ -22,7 +22,7 @@ public class SubarrayProductLessThanK {
             while (j >= i && prod >= k) {
                 prod = prod / nums[i++];
             }
-            count = count + j - i + 1;
+            count = count + j - i + 1; // note
             j++;
         }
 

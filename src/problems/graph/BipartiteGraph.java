@@ -48,7 +48,7 @@ public class BipartiteGraph {
                     if (colors[next] == 0) { // hasn't been colored
                         colors[next] = -colors[cur]; // color it with a different color
                         queue.offer(next);
-                    } else if (colors[next] != -colors[cur]) {
+                    } else if (colors[next] == colors[cur]) {
                         return false; // they are same color
                     }
                 }

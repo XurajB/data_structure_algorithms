@@ -1,5 +1,8 @@
 package problems.dynamic;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * You are given a number of steps. You can climb 1 step, 3 steps or 5 steps at a time.
  * Calculate the number of ways to get to the top of the steps
@@ -9,6 +12,8 @@ public class ClimbingSteps {
         System.out.println(countSteps(10));
         System.out.println(countSteps2(10));
         System.out.println(countSteps3(10));
+
+        //Arrays.sort(args, Collections.reverseOrder());
     }
 
     // Top down

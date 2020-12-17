@@ -77,6 +77,8 @@ public class ParseLispExpression {
         }
     }
 
+    // ex: let x 2 (mult x 5)
+    // list: let, x, 2, mult x 5 // 4 items
     private static List<String> parse(String s) {
         List<String> ans = new ArrayList<>();
         StringBuilder sb = new StringBuilder();

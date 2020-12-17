@@ -61,7 +61,7 @@ public class JumpGame4 {
                         q.offer(neigh);
                     }
                 }
-                next.clear(); // clear to avoid lookup map for same arr[i] later. this will reduce complexity to O(N)
+                next.clear(); // clear to avoid lookup map for same arr[i] later. this will reduce complexity to O(N). for case like 7,7,7,7,7,7,7
             }
             steps++;
 

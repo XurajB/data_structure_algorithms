@@ -18,7 +18,7 @@ public class BestTimeToBuyAndSellWithCooldown {
 
         sell[1] = prices[1] - prices[0];
         for (int i = 2; i < prices.length; i++) {
-            cooldown[i] = Math.max(cooldown[i-1], sell[i-1]); // since it is a cooldown day, max profit will be colldown so far or if we sold yesterday
+            cooldown[i] = Math.max(cooldown[i-1], sell[i-1]); // since it is a cooldown day, max profit will be cooldown so far or if we sold yesterday
             sell[i] = prices[i] - prices[i-1] + Math.max(sell[i-1], cooldown[i-2]); // not a cool down day so we sell. profit today + max profit yesterday or cooldown 2 days ago
         }
         // we are only using data until i-2 so we can improve space complexity by introducing two variables

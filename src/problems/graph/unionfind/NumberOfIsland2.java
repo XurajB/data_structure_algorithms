@@ -31,7 +31,7 @@ public class NumberOfIsland2 {
         Arrays.fill(parents, -1);
         for (int[] position: positions) {
             int parent = n * position[0] + position[1]; // transform 2d to 1d using linear mapping
-            if (parents[parent] != -1) { // prevent duplicate
+            if (parents[parent] != -1) { // already part of another island
                 ans.add(count);
                 continue;
             }
@@ -47,11 +47,10 @@ public class NumberOfIsland2 {
                     continue;
                 }
                 // find
-                int parentNext = find(parents, next);
+                int parentNext = find(parents, next); // logn. for N find: NlogN, worst case N^2 since no balancing
                 // union
                 if (parent != parentNext) {
-                    parents[parent] = parentNext; // combine two islands
-                    parent = parentNext;
+                    parents[parentNext] = parent;
                     count--;
                 }
             }

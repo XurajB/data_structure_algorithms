@@ -32,7 +32,8 @@ public class RegularExpressionMatching {
         // for checking if it matches #*#*#*#*.
 
         // empty s, non empty p
-        for (int i = 2; i < n + 1; i += 2) {
+        // fill first row
+        for (int i = 2; i <= n; i += 2) {
             if (p.charAt(i - 1) == '*') {
                 dp[0][i] = dp[0][i-2];
             }
@@ -52,7 +53,7 @@ public class RegularExpressionMatching {
         //       ######a(i)
         //       ####.*(j)
         //
-        // 	  	 #####a(i)
+        // 	  	 #####a(i)ed
         //    	 ###a*(j)
         //      2.1 if p.charAt(j - 1) is counted as empty, then dp[i][j] = dp[i][j - 2]
         //      2.2 if counted as one, then dp[i][j] = dp[i - 1][j - 2]
@@ -70,10 +71,12 @@ public class RegularExpressionMatching {
                     if (preCurP != '.' && preCurP != curS) {
                         // check if we can assume 0 number of preceding element
                         // imagine #* is not there
-                        dp[i][j] = dp[i][j-2];
+                        dp[i][j] = dp[i][j-2]; // we can do j-2 when we start j=1, because we have valid input (* has a char in front)
                     } else {
                         dp[i][j] = (dp[i][j-2] || dp[i-1][j-2] || dp[i-1][j]); // empty case, one, multiple
                     }
+                } else {
+                    dp[i][j] = false;
                 }
             }
         }

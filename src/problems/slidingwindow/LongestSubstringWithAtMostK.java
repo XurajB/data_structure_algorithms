@@ -15,7 +15,7 @@ public class LongestSubstringWithAtMostK {
     // O(N), O(1)
     private static int lengthOfLongestSubstring2(String s, int k) {
         int[] map = new int[256];
-        int start = 0, end = 0, maxLen = Integer.MIN_VALUE, counter = 0;
+        int start = 0, end = 0, maxLen = 0, counter = 0;
 
         while (end < s.length()) {
             char c1 = s.charAt(end);
@@ -35,9 +35,6 @@ public class LongestSubstringWithAtMostK {
             end++;
         }
 
-        if (maxLen == Integer.MIN_VALUE) {
-            return 0;
-        }
         return maxLen;
     }
 

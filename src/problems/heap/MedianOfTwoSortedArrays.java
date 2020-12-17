@@ -56,6 +56,41 @@ public class MedianOfTwoSortedArrays {
         return 0.0;
     }
 
+    // O(m+n)
+    private static double findMedianSortedArrays1(int[] nums1, int[] nums2) {
+        int n1 = nums1.length;
+        int n2 = nums2.length;
+
+        int[] num = new int[n1+n2];
+
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        while (i < n1 && j < n2) {
+            if (nums1[i] <= nums2[j]) {
+                num[k] = nums1[i];
+                i++;
+            } else {
+                num[k] = nums2[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < n1) {
+            num[k++] = nums1[i++];
+        }
+        while (j < n2) {
+            num[k++] = nums2[j++];
+        }
+
+        int mid = num.length/2;
+        if (num.length % 2 == 0) {
+            return (num[mid] + num[mid-1])/2.0;
+        } else {
+            return num[mid];
+        }
+    }
 
     // (m+n)log(m+n)
     // more efficient is to merge sorted arrays and get median

@@ -1,5 +1,7 @@
 package problems.tree;
 
+import java.util.HashSet;
+
 /**
  * Given two non-empty binary trees s and t, check whether tree t has exactly the same structure and node values with a subtree of s.
  * A subtree of s is a tree consists of a node in s and all of this node's descendants. The tree s could also be considered as a subtree of itself.
@@ -39,5 +41,20 @@ public class SubtreeOfAnotherTree {
             return false;
         }
         return isSame(s.left, t.left) && isSame(s.right, t.right);
+    }
+
+    /////////////////////////
+    ///
+    HashSet<String> trees = new HashSet<>();
+    public boolean isSubtree2(TreeNode s, TreeNode t) {
+        String tree1 = preorder(s);
+        String tree2 = preorder(t);
+        return tree1.indexOf(tree2) >= 0;
+    }
+    public String preorder(TreeNode t) {
+        if (t == null) {
+            return "null";
+        }
+        return "#"+t.val + " " +preorder(t.left)+" " +preorder(t.right);
     }
 }

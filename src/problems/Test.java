@@ -1,24 +1,30 @@
 package problems;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Stack;
 
 public class Test {
     public static void main(String[] args) {
 
-        int[] nums = {4,7,9,10};
-        System.out.println(missingElement(nums, 3));
+        System.out.println(Arrays.toString(increasingCount(new int[] {100,10,50,60,20,90,110})));
 
-        System.out.println(4 % 3);
+    }
 
-        String string = "hello my name";
-        String[] splits = string.split(" ");
-        System.out.println(Arrays.toString(splits));
+    private static int[] increasingCount(int[] input) {
+        Stack<int[]> stack = new Stack<>();
+        int[] ans = new int[input.length];
 
-        long a = (long) 2147483647 - (-1);
-        System.out.println(a);
-
-        System.out.println((char) ('1' + 1));
-
+        for (int i = 0; i < input.length; i++) {
+            int span = 1;
+            while (!stack.isEmpty() && stack.peek()[0] < input[i]) {
+                span += stack.pop()[1];
+            }
+            ans[i] = span;
+            stack.push(new int[] {input[i], span});
+        }
+        return ans;
     }
 
     public static int missingElement(int[] nums, int k) {
@@ -41,5 +47,25 @@ public class Test {
 
         return nums[nums.length - 1] + k;
 
+    }
+
+    public static long taskOfPairing(List<Long> freq) {
+        long ans = 0;
+
+        long last = 0;
+        for (int i = 1; i < freq.size(); i++) {
+            long cur = freq.get(i) + last;
+            ans += cur / 2;
+            last = cur % 2;
+        }
+
+        return ans;
+    }
+
+    private static int quiz(int n) {
+        if (n == 0) {
+            return 1;
+        }
+        return quiz(n-1) + quiz(n-1);
     }
 }

@@ -26,7 +26,7 @@ public class DivideChocolate {
         }
         int left = min;
         int right = sum;
-        while(left < right) {
+        while(left <= right) {
             int targetSweetness = left + (right - left) / 2;
             int chunks = 0;
             int currentSweetness = 0;
@@ -37,10 +37,10 @@ public class DivideChocolate {
                     currentSweetness = 0;
                 }
             }
-            if(chunks > K) {
+            if (chunks > K+1) { // friends + me
                 left = targetSweetness + 1;
             } else {
-                right = targetSweetness;
+                right = targetSweetness - 1;
             }
         }
         return left;

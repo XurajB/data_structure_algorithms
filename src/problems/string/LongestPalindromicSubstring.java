@@ -60,6 +60,6 @@ public class LongestPalindromicSubstring {
             right++;
         }
 
-        return right - left - 1;
+        return right - left - 1; // -1 coz we updated left,right before exiting while ^
     }
 }

@@ -24,8 +24,8 @@ public class MinimumDistanceToTypeAWord {
         if (index >= word.length()) {
             return 0;
         }
-        int dist1 = getDistance(c1, word.charAt(index)) + minDist(word, index + 1, word.charAt(index), c2);
-        int dist2 = getDistance(c2, word.charAt(index)) + minDist(word, index + 1, word.charAt(index), c1);
+        int dist1 = getDistance(c1, word.charAt(index)) + minDist2(word, index + 1, word.charAt(index), c2);
+        int dist2 = getDistance(c2, word.charAt(index)) + minDist2(word, index + 1, word.charAt(index), c1);
 
         return Math.min(dist1, dist2);
     }

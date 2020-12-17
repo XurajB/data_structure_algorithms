@@ -38,8 +38,8 @@ public class PathSum3 {
             count++;
         }
         // current prefix starts somewhere downward
-        // number of times currSum-sum has occured already
-        // is the number of times a path with sum sum has occured upto current node
+        // number of times currSum-sum has occurred already
+        // is the number of times a path with sum sum has occurred upto current node
         count += map.getOrDefault(currSum - sum, 0);
         // add current sum into hashmap to use it during the child node processing
         map.put(currSum, map.getOrDefault(currSum, 0) + 1);

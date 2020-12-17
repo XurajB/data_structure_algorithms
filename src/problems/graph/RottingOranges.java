@@ -47,11 +47,16 @@ public class RottingOranges {
                 }
             }
         }
+
+        if (freshCount == 0) {
+            return 0;
+        }
+
         // direction array
         int[][] dirs = new int[][] {{1,0}, {-1, 0}, {0, 1}, {0, -1}};
 
         // bfs starting from initially rotten oranges
-        while (!queue.isEmpty() && freshCount > 0) {
+        while (!queue.isEmpty()) {
             count++; // counting number of levels
             int size = queue.size();
 
@@ -68,19 +73,23 @@ public class RottingOranges {
                     if (x < 0 || y < 0 || x >= cols || y >= rows || grid[x][y] == 2 || grid[x][y] == 0) {
                         continue;
                     }
+
+                    // decrement fresh count
+                    freshCount--;
+
+                    if (freshCount == 0) {
+                        return count;
+                    }
+
                     // mark the orange at x,y as rotten
                     grid[x][y] = 2;
                     // put the newly rotten orange into the queue
                     queue.offer(new int[] {x, y});
-                    // decrement fresh count
-                    freshCount--;
+
                 }
             }
         }
 
-        if (freshCount == 0) {
-            return count;
-        }
         return -1;
     }
 }

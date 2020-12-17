@@ -1,12 +1,12 @@
 package problems.bfsdfs;
 
 /**
- *
+ * Given a rectangle of size n x m, find the minimum number of integer-sided squares that tile the rectangle.
  */
 public class TilingARectangleWithTheFewestSquares {
 
     public static void main(String[] args) {
-
+        System.out.println(tilingRectangle(2, 3));
     }
 
     /**

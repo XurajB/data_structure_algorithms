@@ -20,14 +20,15 @@ public class DailyTemperatures {
     // O(N)
     private static int[] dailyTemperatures(int[] T) {
         int[] ans = new int[T.length];
-        Deque<Integer> stack = new ArrayDeque<>();
+        Deque<Integer> stack = new ArrayDeque<>(); // index
         for (int i = 0; i < T.length; i++) {
             while (!stack.isEmpty() && T[stack.peek()] < T[i]) {
                 int index = stack.poll();
-                ans[index] = i - index;
+                ans[index] = i - index; // what popped it - my index
             }
             stack.push(i);
         }
+        // anything remaining in stack is 0
         return ans;
     }
 }

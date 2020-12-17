@@ -37,6 +37,7 @@ public class FlattenBinaryTreeToLinkedList {
         if (root == null) {
             return;
         }
+        // post order, so start with right
         flatten2(root.right);
         flatten2(root.left);
         root.right = prev;

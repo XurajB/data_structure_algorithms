@@ -8,6 +8,7 @@ import java.util.List;
  * Given a nested list of integers, implement an iterator to flatten it.
  *
  * Each element is either an integer, or a list -- whose elements may also be integers or other lists.
+ * Flatten nested list iterator
  */
 public class NestedIterator implements Iterator<Integer> {
     List<Integer> data = new ArrayList<>();

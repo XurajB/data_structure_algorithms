@@ -54,9 +54,6 @@ public class MinimumKnightMove {
     }
 
     private void addNode(int x, int y, Queue<Node> q) {
-        if((Math.abs(x) + Math.abs(y)) > 300) {
-            return;
-        }
         Node n = new Node(x, y);
         if (!visited.contains(n.getId())) {
             q.offer(n);

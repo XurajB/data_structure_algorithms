@@ -33,7 +33,7 @@ public class NetworkDelayTime {
         pq.offer(new int[] {K, 0});
 
         // keep a visited array
-        boolean[] visited = new boolean[N+1];
+        boolean[] visited = new boolean[N+1]; // 1..N nodes
         int ans = 0;
         while (!pq.isEmpty()) {
             int[] current = pq.poll();

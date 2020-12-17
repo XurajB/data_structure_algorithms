@@ -62,4 +62,41 @@ public class BasicCalculator {
         }
         return total;
     }
+
+
+    ////// different style. similar to BasicCalculator2
+    public int calculate2(String s) {
+        Stack<Integer> stack = new Stack<>();
+        int num = 0;
+        int lastSign = 1;
+        int sum = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (Character.isDigit(s.charAt(i))) {
+                num = num * 10 + s.charAt(i) - '0';
+            }
+            if (!Character.isDigit(s.charAt(i)) && s.charAt(i) != ' ' || i == s.length() - 1) {
+                if (s.charAt(i) == '(') {
+                    stack.push(lastSign);
+                    stack.push(sum);
+
+                    sum = 0;
+                    lastSign = 1;
+                } else if (s.charAt(i) == ')') {
+                    sum += lastSign == 1 ? num : -num;
+
+                    int prevSum = stack.pop();
+                    int prevSign = stack.pop();
+
+                    sum = prevSum + (prevSign == 1 ? sum : - sum);
+                } else {
+                    sum += lastSign == 1 ? num : -num;
+                    lastSign = s.charAt(i) == '+' ? 1 : -1;
+                }
+                num = 0;
+            }
+        }
+
+        return sum;
+    }
 }

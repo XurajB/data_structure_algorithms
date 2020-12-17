@@ -58,4 +58,20 @@ public class ValidateBST {
         }
         return true;
     }
+
+    ///////
+    TreeNode prev2;
+    public boolean isValidBST(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        if (!isValidBST(root.left)) {
+            return false;
+        }
+        if (prev2 != null && prev2.val >= root.val) {
+            return false;
+        }
+        prev2 = root;
+        return isValidBST(root.right);
+    }
 }

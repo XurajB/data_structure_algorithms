@@ -28,21 +28,16 @@ public class StoneGame {
      */
     private static boolean stoneGame(int[] piles) {
         int n = piles.length;
-        int[][][] dp = new int[n+1][n+1][2]; // i,j,score
-        for (int[][] arr: dp) {
-            for (int[] subarr: arr) {
-                Arrays.fill(subarr, -1);
-            }
-        }
+        Integer[][][] dp = new Integer[n+1][n+1][2];
 
         return helper(0, n - 1, piles, 1, dp) >= 0; // score >= 0 means Alex wins. ID 1 = alex, 0 = lee
     }
 
-    private static int helper(int i, int j, int[] piles, int id, int[][][] dp) {
+    private static int helper(int i, int j, int[] piles, int id, Integer[][][] dp) {
         if (i >= j) {
             return 0;
         }
-        if (dp[i][j][id] != -1) {
+        if (dp[i][j][id] != null) {
             return dp[i][j][id];
         }
         int next = Math.abs(id - 1);

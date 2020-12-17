@@ -19,7 +19,7 @@ public class BinaryTreeMaxPathSum {
         if (treeNode == null) {
             return 0;
         }
-        int left = Math.max(helper(treeNode.left), 0);
+        int left = Math.max(helper(treeNode.left), 0); // for neg values
         int right = Math.max(helper(treeNode.right), 0);
         int total = left + right + treeNode.val;
 

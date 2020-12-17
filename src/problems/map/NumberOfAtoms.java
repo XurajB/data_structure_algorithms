@@ -40,7 +40,7 @@ public class NumberOfAtoms {
                     count = count * 10 + formula.charAt(j) - '0';
                     j++;
                 }
-
+                count = count == 0 ? 1 : count;
                 if (!stack.isEmpty()) {
                     TreeMap<String, Integer> temp = map;
                     map = stack.pop();

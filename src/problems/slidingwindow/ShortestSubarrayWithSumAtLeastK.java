@@ -25,17 +25,17 @@ public class ShortestSubarrayWithSumAtLeastK {
         }
 
         Deque<Integer> deque = new ArrayDeque<>(); // stores index
-        for (int i = 0; i < n+1; i++) {
+        for (int i = 0; i <= n; i++) {
             // check if the sum >= k
-            while (deque.size() > 0 && prefixSum[i] - prefixSum[deque.peekFirst()] >= K) {
-                ans = Math.min(ans, i - deque.pollFirst()); // one we inserted first
+            while (deque.size() > 0 && prefixSum[i] - prefixSum[deque.peek()] >= K) {
+                ans = Math.min(ans, i - deque.poll()); // one we inserted first
             }
             // to keep our deque increasing
             // to keep the ans minimum, we have prefixsum which is smaller than last item in deque so we have greater chance to minimize ans
             while (deque.size() > 0 && prefixSum[i] <= prefixSum[deque.peekLast()]) {
                 deque.pollLast(); // one we inserted last
             }
-            deque.addLast(i);
+            deque.offer(i);
         }
         return ans != Integer.MAX_VALUE ? ans : -1;
     }

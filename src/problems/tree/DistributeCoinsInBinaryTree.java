@@ -30,7 +30,7 @@ public class DistributeCoinsInBinaryTree {
         if (root.val == 0) {
             coin += 1; // need
         } else {
-            coin += root.val - 1; // access
+            coin += 1 - root.val; // access
         }
 
         steps += Math.abs(coin);

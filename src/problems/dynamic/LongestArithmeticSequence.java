@@ -19,7 +19,7 @@ public class LongestArithmeticSequence {
     public static int longestArithSeqLength(int[] A) {
         int res = 2; // min ans
         int n = A.length;
-        HashMap<Integer, Integer>[] dp = new HashMap[n]; // (difference, frequencies)
+        HashMap<Integer, Integer>[] dp = new HashMap[n]; // (difference, frequencies)lo
         for (int j = 0; j < n; j++) {
             dp[j] = new HashMap<>();
             for (int i = 0; i < j; i++) { // i < j because dp[j] has not been initialized after i

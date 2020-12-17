@@ -1,4 +1,4 @@
-package problems.map;
+package problems.dynamic;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,7 +35,7 @@ public class FrogJump {
 
         for (int i = 0; i < stones.length - 1; i++) {
             int stone = stones[i];
-            for (int step: map.get(stone)) {
+            for (int step: map.get(stone)) { // step = k
                 int reach = stone + step;
                 if (reach == stones[stones.length - 1]) {
                     return true;

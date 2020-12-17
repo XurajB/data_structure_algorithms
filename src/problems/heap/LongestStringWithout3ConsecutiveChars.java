@@ -23,13 +23,7 @@ public class LongestStringWithout3ConsecutiveChars {
     }
 
     public static String longestDiverseString(int a, int b, int c) {
-        PriorityQueue<Pair> pq = new PriorityQueue<>((a1, b1) -> {
-            if (a1.count == b1.count) {
-                return a1.c - b1.c;
-            } else {
-                return b1.count - a1.count;
-            }
-        });
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a1, b1) -> (b1.count - a1.count));
 
         if (a > 0) {
             pq.offer(new Pair('a', a));

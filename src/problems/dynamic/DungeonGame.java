@@ -20,6 +20,7 @@ public class DungeonGame {
         System.out.println(calculateMinimumHP(dungeon));
     }
 
+    // negative values - dijkstra's cannot handle it
     // O(m*n)
     private static int calculateMinimumHP(int[][] dungeon) {
         if(dungeon == null || dungeon.length == 0 || dungeon[0].length == 0){

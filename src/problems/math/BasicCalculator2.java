@@ -49,6 +49,8 @@ public class BasicCalculator2 {
     }
 
     // O(N), O(1)
+    // if sign is + or -, the operation will be based on next operation
+    // if sign is * or /, the operation can be done right away
     private static int calculate2(String s) {
         if (s == null || s.length() == 0) {
             return 0;

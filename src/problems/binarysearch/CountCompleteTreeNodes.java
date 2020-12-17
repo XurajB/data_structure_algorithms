@@ -52,6 +52,7 @@ public class CountCompleteTreeNodes {
         }
 
         return (int) Math.pow(2, depth) - 1 + low;
+        // return (1 << depth) - 1 + low;
     }
 
     private boolean exists(int id, int d, TreeNode node) {

@@ -20,7 +20,7 @@ public class TestJustification {
         // findRight - greedily try to go as far as possible until we fill our line
         // justify one line at a time
         //   - If it is one word, just return that word
-        //   - If it is the last line, then just seperate each word with one space (left justified)
+        //   - If it is the last line, then just separate each word with one space (left justified)
         //   - Else - calculate the size of each space evenly and if there is a reminder, distribute until it is gone
         int left = 0; // index
         List<String> lines = new ArrayList<>();

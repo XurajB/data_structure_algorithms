@@ -62,9 +62,11 @@ public class WordLadder2 {
 
         while (!queue.isEmpty()) {
             int size = queue.size();
-            boolean found = false;
             for (int i = 0; i < size; i++) {
                 String current = queue.poll();
+                if (current.equals(endWord)) {
+                    return;
+                }
                 int curDistance = distance.get(current);
                 List<String> neighbours = getNeighbours(current);
 
@@ -72,15 +74,8 @@ public class WordLadder2 {
                     graph.get(current).add(neighbour);
                     if (!distance.containsKey(neighbour)) {
                         distance.put(neighbour, curDistance + 1);
-                        if (neighbour.equals(endWord)) {
-                            found = true;
-                        } else {
-                            queue.offer(neighbour);
-                        }
+                        queue.offer(neighbour);
                     }
-                }
-                if (found) {
-                    break;
                 }
             }
         }

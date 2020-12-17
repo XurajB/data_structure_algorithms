@@ -26,7 +26,7 @@ public class BuddyString {
             for (int i = 0; i < A.length(); i++) {
                 set.add(A.charAt(i));
             }
-            return set.size() < A.length();
+            return set.size() < B.length();
         }
         List<Integer> diff = new ArrayList<>();
         for (int i = 0; i < A.length(); i++) {

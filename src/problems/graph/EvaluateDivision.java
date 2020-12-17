@@ -49,6 +49,7 @@ public class EvaluateDivision {
         if (!graph.containsKey(start)) {
             return -1.0;
         }
+        // going from a->a : a->b, b->a == 1.0
         if (graph.get(start).containsKey(end)) {
             return graph.get(start).get(end);
         }

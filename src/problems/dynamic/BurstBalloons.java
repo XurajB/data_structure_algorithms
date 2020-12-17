@@ -12,6 +12,7 @@ public class BurstBalloons {
         System.out.println(maxCoins(nums));
     }
 
+    // the sub problems are overlapped, so we can use divide and conquer + memo
     // divide and conquer: for i, we can find max on the left side and right side and sum
     // i = i-1 * i * i+1 + best left + best right
     // top down memoization (vs bottom up dp)
@@ -31,6 +32,7 @@ public class BurstBalloons {
         return helper(memo, newNums, 0, n-1);
     }
 
+    // top-down
     private static int helper(int[][] memo, int[] nums, int left, int right) {
         // no more balloons can be added
         if (left + 1 == right) {
@@ -44,7 +46,7 @@ public class BurstBalloons {
         int ans = 0;
         for (int i = left + 1; i < right; i++) {
             ans = Math.max(ans,
-                    nums[left] * nums[i] * nums[right] + helper(memo, nums, left, i) + helper(memo, nums, i, right));
+                    helper(memo, nums, left, i) + nums[left] * nums[i] * nums[right] + helper(memo, nums, i, right));
         }
         memo[left][right] = ans;
         return ans;

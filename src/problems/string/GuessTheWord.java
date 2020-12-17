@@ -36,7 +36,7 @@ public class GuessTheWord {
             // we know that correct answer will meet the match all the time
             while (j < dict.size()) {
                 if ((compare(dict.get(j), word) != match)) {
-                    dict.remove(j);
+                    dict.remove(j); // converse
                     // we removed a word, so we keep j the same
                 } else {
                     j++;

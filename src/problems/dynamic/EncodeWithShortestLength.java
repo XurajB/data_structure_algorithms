@@ -36,8 +36,8 @@ public class EncodeWithShortestLength {
         String ans = s;
 
         // pattern's length has to at most half of the original string's length
-        for (int k = s.length() / 2; k < s.length(); k++) {
-            String pattern = s.substring(k);
+        for (int i = 0; i < s.length()/2; i++) {
+            String pattern = s.substring(0, i+1);
             int times = countPattern(s, pattern);
             if (times * pattern.length() != s.length()) {
                 continue; // the total length should be equal

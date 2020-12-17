@@ -38,7 +38,7 @@ public class ExclusiveTimeOfFunctions {
             } else {
                 ans[jobs.peek()] += time - prev + 1;
                 jobs.pop();
-                prev = time + 1;
+                prev = time + 1; // time+1 because we counted +1 above (time-prev+1)
             }
         }
 

@@ -77,9 +77,9 @@ public class CriticalConnectionsInANetwork {
     //   visit its neighbour - 0 - parent skip
     //   visit its neighbour - 1 - update (2,2)
     //     visit its neighbour - 2 - parent skip
-    //     visit its neighbour - 0 - has been visited so update lowtime - this means we found a node already visited that is not our parent,
+    //     visit its neighbour - 0 - has been visited so update low-time - this means we found a node already visited that is not our parent,
     //                               so we found an alternative way to get to (1) via 0. So parent cannot be an articulation point. Update lowTimes of current to be min of current or visited time of neighbour (2 to 0)
-    // if 3 had backedge and connected to 2 then when we visit its neighbour 2 - then we know we already visited and we would have updated its (3) lowtimes.
+    // if 3 had backedge and connected to 2 then when we visit its neighbour 2 - then we know we already visited and we would have updated its (3) low-times.
 
     private void buildGraph(int n, List<List<Integer>> connections) {
         for (int i = 0; i < n; i++) {

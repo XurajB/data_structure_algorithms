@@ -38,4 +38,36 @@ public class StudentAttendanceRecord2 {
 
         return (int) ans;
     }
+
+    //TLE
+    private static int checkRecord2(int n) {
+        dfs("", n);
+        return count;
+    }
+    static int count = 0;
+
+    private static void dfs(String s, int n) {
+        if (n < 0) {
+            return;
+        }
+        if (n == 0 && checkValid(s)) {
+            count = (count + 1) % mod;
+            return;
+        }
+
+        dfs(s + "A", n - 1);
+        dfs(s + "P", n - 1);
+        dfs(s + "L", n - 1);
+    }
+
+    private static boolean checkValid(String s) {
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == 'A') {
+                count++;
+            }
+        }
+        // not 2 As, or more than 2 consecutive Ls
+        return s.length() > 0 && count < 2 && !s.contains("LLL");
+    }
 }

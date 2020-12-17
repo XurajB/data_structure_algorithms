@@ -11,7 +11,7 @@ import java.util.Map;
  *
  * Note:
  * You cannot construct tree only from inorder because we won't know root,
- * We need either reorder (first root) and postorder (last) so we can identify root
+ * We need either preorder (first root) and postorder (last) so we can identify root
  * Now we can use inorder to find out left and right subtrees (left and right side of root)
  *
  * However- for BST - we can create a tree using only preorder, since BSt has lower and upper limit properties
@@ -19,7 +19,6 @@ import java.util.Map;
 public class ConstructBstFromPreorder {
     int[] inorder;
     int[] preorder;
-    int preIndex = 0;
     Map<Integer, Integer> map = new HashMap<>();
 
     // O(nLogn)

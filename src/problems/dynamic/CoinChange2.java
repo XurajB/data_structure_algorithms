@@ -14,7 +14,7 @@ public class CoinChange2 {
     }
 
     // BOTTOM UP (space optimization)
-    // O(n * amount), O(amount)
+    // O(k * amount), O(amount)
     private static int change(int amount, int[] coins) {
         int[] dp = new int[amount + 1];
         dp[0] = 1;

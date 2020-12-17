@@ -31,9 +31,9 @@ public class Candy {
         }
 
         // make sure higher rating gets more candy than its right
-        for (int i = candies.length - 1; i > 0; i--) {
-            if (ratings[i-1] > ratings[i]) {
-                candies[i-1] = Math.max(candies[i-1], candies[i] + 1);
+        for (int i = candies.length - 2; i >= 0; i--) {
+            if (ratings[i] > ratings[i+1]) {
+                candies[i] = Math.max(candies[i], candies[i+1] + 1); // candy[i] could already be higher
             }
         }
 

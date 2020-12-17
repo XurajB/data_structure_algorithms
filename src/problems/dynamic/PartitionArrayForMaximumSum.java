@@ -44,4 +44,18 @@ public class PartitionArrayForMaximumSum {
 
         return dp[n-1];
     }
+
+    private static int maxSumAfterPartitioning2(int[] A, int K) {
+        int n = A.length;
+        int[] dp = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            int curMax = A[i];
+            for (int k = 1; k <= K && i - k + 1 >= 0; k++) {
+                curMax = Math.max(curMax, A[i-k+1]);
+                dp[i] = Math.max(dp[i], (i >= k ? dp[i-k] : 0) + curMax * k);
+            }
+        }
+        return dp[n-1];
+    }
 }

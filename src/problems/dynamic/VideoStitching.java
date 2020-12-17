@@ -27,21 +27,26 @@ public class VideoStitching {
         }
 
         // now the problem becomes similar to #JumpGame2 or #MinimumNumberOfTaps
-        int max = 0;
-        int current = 0;
+        int curEnd = 0;
         int cuts = 0;
 
         for (int i = 0; i < clips.length; i++) {
-            if (clips[i][0] > max) {
+            if (clips[i][0] > curEnd) {
                 return -1;
             }
-            max = Math.max(max, clips[i][1]);
-            if (clips[i][0] < clips.length - 1 && clips[i][0] >= current) {
-                cuts++;
-                current = max;
+            int maxEnd = curEnd;
+            while (i < clips.length && clips[i][0] <= curEnd) {
+                maxEnd = Math.max(maxEnd, clips[i][1]);
+                i++;
+            }
+
+            cuts++;
+            curEnd = maxEnd;
+            if (curEnd >= T) {
+                return cuts;
             }
         }
 
-        return cuts;
+        return -1;
     }
 }

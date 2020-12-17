@@ -22,23 +22,21 @@ public class MaxDepthOfBst {
 
     // iterative - O(N), space - O(logN) or depth
     public int maxDepth2(TreeNode root) {
-        LinkedList<TreeNode> stack = new LinkedList<>();
-        LinkedList<Integer> depths = new LinkedList<>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
         if (root == null) return 0;
-
-        stack.add(root);
-        depths.add(1);
-
-        int depth = 0, current_depth = 0;
-        while(!stack.isEmpty()) {
-            root = stack.pollLast();
-            current_depth = depths.pollLast();
-            if (root != null) {
-                depth = Math.max(depth, current_depth);
-                stack.add(root.left);
-                stack.add(root.right);
-                depths.add(current_depth + 1);
-                depths.add(current_depth + 1);
+        queue.offer(root);
+        int depth = 0;
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            depth++; // bfs will visit all levels
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = queue.poll();
+                if (cur.left != null) {
+                    queue.offer(cur.left);
+                }
+                if (cur.right != null) {
+                    queue.offer(cur.right);
+                }
             }
         }
         return depth;

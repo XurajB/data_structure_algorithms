@@ -18,8 +18,9 @@ public class ContinuousSubarraySum {
     // O(N), O(N)
     private static boolean checkSubarraySum(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>(); // sum%k, index
-        map.put(0, -1); // special case when (because 0 index)
+        map.put(0, -1); // special case when sum of all numbers so far is multiple of k (because 0 index)
 
+        // a%k = x, b%k = x, (a-b)%k = x-x = 0
         int sum = 0;
         for (int i = 0; i < nums.length; i++) {
             sum += nums[i];

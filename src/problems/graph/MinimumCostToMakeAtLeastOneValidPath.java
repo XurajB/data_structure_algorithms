@@ -43,6 +43,10 @@ public class MinimumCostToMakeAtLeastOneValidPath {
             int c = current[1];
             int cost = current[2];
 
+            if (r == grid.length - 1 && c == grid[0].length - 1) {
+                return cost;
+            }
+
             for (int i = 0; i < dirs.length; i++) {
                 int nr = r + dirs[i][0];
                 int nc = c + dirs[i][1];
@@ -53,6 +57,10 @@ public class MinimumCostToMakeAtLeastOneValidPath {
                         ncost++;
                     }
                     // take this path only if cost is lower
+                    // we still need to keep costs, instead of visited because we need to update cost with new cost if lower and visit again
+                    // eg: 1 1 3
+                    //     3 2 2
+                    //     1 1 4  location 1,0 has cost 1 in pq coming from 0,0, but coming from 1 1 3 2 2 to 3, cost is 0 so far
                     if (ncost < costs[nr][nc]) {
                         // update with minimum cost
                         costs[nr][nc] = ncost;
@@ -61,6 +69,6 @@ public class MinimumCostToMakeAtLeastOneValidPath {
                 }
             }
         }
-        return costs[grid.length-1][grid[0].length-1];
+        return -1;
     }
 }

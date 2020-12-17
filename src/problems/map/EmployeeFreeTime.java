@@ -27,13 +27,13 @@ public class EmployeeFreeTime {
 
         int end = pq.poll().end;
         while (!pq.isEmpty()) {
-            if (end < pq.peek().start) {
-                Interval interval = pq.poll();
+            Interval interval = pq.poll();
+            if (end < interval.start) {
                 ans.add(new Interval(end, interval.start));
                 end = interval.end;
             } else {
                 // merge
-                end = Math.max(end, pq.poll().end);
+                end = Math.max(end, interval.end);
             }
         }
 

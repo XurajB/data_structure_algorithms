@@ -16,11 +16,12 @@ public class ShortestPathVisitingAllNodes {
         System.out.println(shortestPathLength(graph));
     }
 
+    // O(2^n * n). doing bfs from each node
     private static int shortestPathLength(int[][] graph) {
         // the trick is we need to represent a path that has already been visited
         // we can use bit mask to represent path
         int n = graph.length;
-        int fullMask = (1 << n) - 1; // from question: 1 <= n <= 12
+        int fullMask = (1 << n) - 1; // from question: 1 <= n <= 12 // if n=5, 1 << 5 = 100000 = 32 (left shift)
 
         Set<String> visited = new HashSet<>();
         Queue<Node> queue = new LinkedList<>();
@@ -37,11 +38,12 @@ public class ShortestPathVisitingAllNodes {
             int size = queue.size();
             for (int i = 0; i < size; i++) {
                 Node node = queue.poll();
-                if (node.mask == fullMask) {
+                if (node.mask == fullMask) { // see if we covered all nodes
                     return level;
                 }
                 for (int id: graph[node.id]) {
                     Node next = new Node(id, node.mask | (1 << id));
+                    System.out.println(next.toString());
                     if (visited.contains(next.toString())) {
                         continue;
                     }

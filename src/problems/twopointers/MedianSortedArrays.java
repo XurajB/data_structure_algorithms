@@ -22,7 +22,7 @@ public class MedianSortedArrays {
             findMedianSortedArrays2(nums2, nums1);
         }
 
-        // we do binary search in the smaller array
+        // we do binary search in the smaller array = o(log(min(m,n))
         int low = 0;
         int high = x;
 

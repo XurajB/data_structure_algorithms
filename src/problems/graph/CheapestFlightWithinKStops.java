@@ -38,9 +38,6 @@ public class CheapestFlightWithinKStops {
                 return cost;
             }
             if (stop > 0) {
-                if (!graph.containsKey(cur)) {
-                    continue;
-                }
                 for (int[] next: graph.get(cur)) {
                     pq.offer(new int[] {next[0], stop-1, cost+next[1]}); // next is from graph, next[1] cost
                 }

@@ -28,13 +28,7 @@ public class GroupShiftedStrings {
             }
             map.get(key).add(string);
         }
-
-        List<List<String>> ans = new ArrayList<>();
-        for (String key: map.keySet()) {
-            ans.add(map.get(key));
-        }
-
-        return ans;
+        return new ArrayList<>(map.values());
     }
 
     private static String findKey(String string) {

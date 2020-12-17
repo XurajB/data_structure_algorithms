@@ -19,6 +19,7 @@ public class KClosestPointToOrigin {
     // nLogK, n
     private static int[][] kClosest(int[][] points, int K) {
         // max heap
+        // can't return distanceb - distancea, coz return type is int
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> {
             if (getDistance(b) > getDistance(a)) {
                 return 1;

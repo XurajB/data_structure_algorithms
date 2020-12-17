@@ -36,7 +36,7 @@ public class TaskScheduler {
         Arrays.sort(freq); // since the size is 26, we can consider this constant time
 
         // max unit of idle time
-        int maxFreq = freq[25];
+        int maxFreq = freq[25]; // sort descending
         int maxIdle = (maxFreq - 1) * n;
 
         for (int i = freq.length - 2; i >= 0; i--) {

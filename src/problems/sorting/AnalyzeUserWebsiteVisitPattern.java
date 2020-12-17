@@ -61,7 +61,8 @@ public class AnalyzeUserWebsiteVisitPattern {
                             count.put(seq, count.getOrDefault(seq, 0) + 1);
                         }
                         // store global max visit to string
-                        if (maxSeq.equals("") || count.get(maxSeq) < count.get(seq) || (count.get(maxSeq).equals(count.get(seq)) && maxSeq.compareTo(seq) > 0)) {
+                        if (maxSeq.equals("") || count.get(maxSeq) < count.get(seq)
+                                || (count.get(maxSeq).equals(count.get(seq)) && maxSeq.compareTo(seq) > 0)) { // lexicographically ordered if equal
                             maxSeq = seq;
                         }
                     }
@@ -70,11 +71,6 @@ public class AnalyzeUserWebsiteVisitPattern {
         }
 
         // grab web visits from the max sequence
-        String[] r = maxSeq.split(" ");
-        List<String> ans = new ArrayList<>();
-        for (String s: r) {
-            ans.add(s);
-        }
-        return ans;
+        return Arrays.asList(maxSeq.split(" "));
     }
 }

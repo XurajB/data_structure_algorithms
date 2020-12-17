@@ -15,7 +15,8 @@ public class SnakesAndLadders {
         boolean[] visited = new boolean[n * n + 1]; // 1 based
         int move = 0;
         while (!queue.isEmpty()) {
-            for (int size = queue.size(); size > 0; size--) {
+            int size = queue.size();
+            for (int k = 0; k < size; k++) {
                 int num = queue.poll();
                 if (visited[num]) {
                     continue;

@@ -20,6 +20,7 @@ public class FindMedianFromDataStream {
     // other approach would be to sort the elements on every addNum and return the middle
     // that is what we are doing with heaps - store smaller half in max heap and other in max heap
 
+    // divide the array into two halves such that median is at the top
     PriorityQueue<Integer> max;
     PriorityQueue<Integer> min;
     public FindMedianFromDataStream() {

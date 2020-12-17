@@ -37,25 +37,23 @@ public class WordBreak {
         return canBreak(s, dict, new HashMap<>());
     }
 
-    private boolean canBreak(String cur, Set<String> dict, Map<String, Boolean> map) {
-        if (cur.length() == 0) {
+    private boolean canBreak(String s, Set<String> dict, Map<String, Boolean> map) {
+        if (s.length() == 0) {
             return true;
         }
-        if (map.containsKey(cur)) {
-            return map.get(cur);
+        if (map.containsKey(s)) {
+            return map.get(s);
         }
-        for (int i = 0; i < cur.length(); i++) {
-            String newStr = cur.substring(0, i+1);
-            if (dict.contains(newStr)) {
-                boolean result = canBreak(cur.substring(i+1), dict, map);
+        for (String word: dict) {
+            if (s.startsWith(word)) {
+                boolean result = canBreak(s.substring(word.length()), dict, map);
                 if (result) {
-                    map.put(newStr, true);
+                    map.put(s, true);
                     return true;
                 }
-
             }
         }
-        map.put(cur, false);
+        map.put(s, false);
         return false;
     }
 }

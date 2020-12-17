@@ -24,7 +24,7 @@ public class MinimumNumberOfTaps {
                 continue;
             }
             int left = Math.max(0, i - ranges[i]); // we don't care about -ve ranges
-            arr[left] = Math.max(arr[left], i + ranges[i]);
+            arr[left] = Math.min(arr.length - 1, i + ranges[i]);
         }
 
         // below is same as jump game
@@ -36,8 +36,8 @@ public class MinimumNumberOfTaps {
             if (i > maxFarthest) {
                 return -1; // we can't reach this
             }
-            maxFarthest = Math.max(maxFarthest, arr[i]); // no need to add i + arr[i], we already did that
-            if (i < arr.length - 1 && i == curFarthest) {
+            maxFarthest = Math.max(maxFarthest, i + arr[i]);
+            if (i < arr.length - 1 && i == curFarthest) { // no need to jump at nums.length - 1, eg [2,3,1,1,4]
                 // need to move to next
                 pumps++;
                 curFarthest = maxFarthest;

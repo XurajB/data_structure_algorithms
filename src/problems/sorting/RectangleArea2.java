@@ -25,7 +25,7 @@ public class RectangleArea2 {
             events.add(new int[] {rect[3], CLOSE, rect[0], rect[2]});
         }
 
-        // sort this based on y (height), allows us to linesweep from y = bottom of lowerst rectangle
+        // sort this based on y (height), allows us to linesweep from y = bottom of lowest rectangle
         events.sort((a, b) -> a[0] - b[0]);
 
         // use treemap to store interval (start, end), count. sorted by start then by end

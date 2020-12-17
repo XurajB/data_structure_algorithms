@@ -46,17 +46,16 @@ public class AddAndSearchWord {
             return node.isEnd;
         }
         char c = word.charAt(index);
-        boolean ans = false;
         if (c == '.') {
             for (char ch: node.children.keySet()) {
                 if (search(node.children.get(ch), word, index+1)){
                     return true;
                 }
             }
-            return false;
         } else {
             return search(node.children.get(c), word, index+1);
         }
+        return false;
     }
 
     static class TrieNode {

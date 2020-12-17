@@ -10,7 +10,7 @@ import java.util.Queue;
 public class MovingAverage {
     int sum = 0;
     Queue<Integer> q;
-    int size = 0;
+    int size;
 
     /** Initialize your data structure here. */
     public MovingAverage(int size) {
@@ -19,13 +19,12 @@ public class MovingAverage {
     }
 
     public double next(int val) {
-
         q.offer(val);
         sum += val;
         if (q.size() > size) {
             sum -= q.poll();
         }
 
-        return sum / (double) q.size();
+        return (double) sum / q.size();
     }
 }

@@ -26,7 +26,7 @@ public class CapacityToShipPackagesWithinDDays {
             right += w;
         }
         // binary search
-        while (left < right) {
+        while (left <= right) {
             int mid = left + (right - left) / 2;
             int days = 1;
             int cur = 0;
@@ -40,7 +40,7 @@ public class CapacityToShipPackagesWithinDDays {
             if (days > D) {
                 left = mid + 1;
             } else {
-                right = mid;
+                right = mid -1;
             }
         }
 

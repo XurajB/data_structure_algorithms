@@ -108,8 +108,8 @@ public class JumpGame2 {
             if (i > maxFarthest) {
                 return -1; // we can't reach this
             }
-            maxFarthest = Math.max(maxFarthest, nums[i]); // no need to add i + arr[i], we already did that
-            if (i < nums.length - 1 && i == curFarthest) {
+            maxFarthest = Math.max(maxFarthest, i + nums[i]);
+            if (i < nums.length - 1 && i == curFarthest) { // no need to jump at nums.length - 1, eg [2,3,1,1,4]
                 // need to move to next
                 jumps++;
                 curFarthest = maxFarthest;
