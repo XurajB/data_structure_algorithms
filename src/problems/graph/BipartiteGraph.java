@@ -34,7 +34,7 @@ public class BipartiteGraph {
         }
         int n = graph.length;
         int[] colors = new int[n]; // n nodes, 0: haven;t been colored, 1: blue, -1: red
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) { // the graph could be disconnected
             if (colors[i] != 0) {
                 continue;
             }

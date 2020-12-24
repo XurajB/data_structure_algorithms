@@ -25,7 +25,7 @@ public class RemoveInvalidParentheses {
 
         queue.offer(s);
         visited.add(s);
-        boolean valid = false;
+        boolean valid = false; // NOTE, valid here: we don't want to go further if we found min removal at a level, only check remaining item in that level
         while (!queue.isEmpty()) {
             String current = queue.poll();
 

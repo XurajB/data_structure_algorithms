@@ -57,6 +57,7 @@ public class IntegerToEnglishWords {
         return convert(num);
     }
 
+    // O(N)
     private String convert(int num) {
         StringBuilder sb = new StringBuilder();
         if (num >= B) {

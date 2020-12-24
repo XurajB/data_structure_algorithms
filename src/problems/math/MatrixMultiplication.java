@@ -26,12 +26,12 @@ public class MatrixMultiplication {
     }
 
     private static int[][] multiply(int[][] A, int[][] B) {
+        // result size: A row. B col
+        // A col should have same size as B row
         int n1 = A.length;
         int m1 = B[0].length;
 
         int[][] answer = new int[n1][m1];
-
-        int count = 0;
 
         for (int i = 0; i < n1; i++) {
             int[] row = A[i];

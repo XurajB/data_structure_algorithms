@@ -32,7 +32,7 @@ public class ContinuousSubarraySum {
                     return true;
                 }
             } else {
-                map.put(sum, i);
+                map.put(sum, i); // else because we don't want to update previous i if already exists. Example: 0,0 k = 0
             }
         }
 

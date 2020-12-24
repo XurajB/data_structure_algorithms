@@ -51,4 +51,22 @@ public class BstToSortedDll {
             helper(node.right);
         }
     }
+
+    ///// same thing, different way
+    private void inOrder(Node root) {
+        if (root == null) {
+            return;
+        }
+        inOrder(root.left);
+
+        if (first == null) {
+            first = root;
+        } else if (last != null) {
+            last.right = root;
+            root.left = last;
+        }
+        last = root;
+
+        inOrder(root.right);
+    }
 }

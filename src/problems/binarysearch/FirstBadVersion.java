@@ -13,10 +13,10 @@ public class FirstBadVersion {
     private static int firstBadVersion(int n) {
         int start = 1;
         int end = n;
-        while (start < end) {
+        while (start <= end) { // if you want termination to be start < end, then end = mid
             int mid = start + (end - start) / 2;
             if (isBadVersion(mid)) {
-                end = mid;
+                end = mid - 1;
             } else {
                 start = mid + 1;
             }

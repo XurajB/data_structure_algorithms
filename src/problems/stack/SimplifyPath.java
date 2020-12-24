@@ -27,7 +27,7 @@ public class SimplifyPath {
             }
         }
         StringBuilder sb = new StringBuilder();
-        for(String v : stack){
+        for(String v : stack){ //// NOTE: this will give us from the bottom LIFO. unlike stack.pop() that will give us the FIFO
             sb.append("/").append(v);
         }
         return sb.length() == 0 ? "/" : sb.toString();

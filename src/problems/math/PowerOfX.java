@@ -8,7 +8,7 @@ public class PowerOfX {
         System.out.println(power(2, 10));
     }
 
-    private static float power(int x, int power) {
+    private static double power(double x, int power) {
         // if power is -ve, then it is 1/x^power
         // if power is 0, it is 1
         // if power is +ve, x^power/2 * x^power/2
@@ -16,7 +16,7 @@ public class PowerOfX {
         if (x == 0 && power <= 0) {
             throw new ArithmeticException("Undefined");
         }
-        int result = positivePower(Math.abs(x), Math.abs(power));
+        double result = positivePower(Math.abs(x), Math.abs(power));
         // handle -ve power
         if (power < 0) {
             result = 1/result;
@@ -29,14 +29,14 @@ public class PowerOfX {
     }
 
     // O(logP)
-    private static int positivePower(int x, int power) {
+    private static double positivePower(double x, int power) {
         if (power == 0) {
             return 1;
         }
         if (power == 1) {
             return x;
         }
-        int halfpower = positivePower(x, power/2);
+        double halfpower = positivePower(x, power/2);
         if (power % 2 == 0) {
             return halfpower * halfpower;
         } else {

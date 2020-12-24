@@ -1,8 +1,5 @@
 package problems.array;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 /**
  * Given a non-negative integer, you could swap two digits at most once to get the maximum valued number. Return the maximum valued number you could get.
  */
@@ -12,22 +9,23 @@ public class MaximumSwap {
     }
 
     private static int maximumSwap(int num) {
-        char[] chars = Integer.toString(num).toCharArray();
+        char[] digits = Integer.toString(num).toCharArray();
 
         int[] last = new int[10];
-        for (int i = 0; i < chars.length; i++) {
-            last[chars[i] - '0'] = i;
+        for (int i = 0; i < digits.length; i++) {
+            last[digits[i] - '0'] = i;
         }
 
-        for (int i = 0; i < chars.length; i++) {
-            // check if there exists any number greater than chars[i] (check from chars[i] to 9)
-            for (int k = 9; k > chars[i] - '0'; k--) {
-                if (last[k] > i) {
-                    char temp = chars[i];
-                    chars[i] = chars[last[k]];
-                    chars[last[k]] = temp;
+        for (int i = 0; i < digits.length; i++) {
+            // check if there exists any number greater than digits[i] (check from digits[i] to 9)
+            // do don't have to start from 9, we can also start from max.. which will improve runtime a little
+            for (int k = 9; k > digits[i] - '0'; k--) {
+                if (last[k] > i) { // compare index
+                    char temp = digits[i];
+                    digits[i] = digits[last[k]];
+                    digits[last[k]] = temp;
 
-                    return Integer.parseInt(new String(chars));
+                    return Integer.parseInt(new String(digits));
                 }
             }
         }

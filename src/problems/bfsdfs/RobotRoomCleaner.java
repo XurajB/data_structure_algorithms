@@ -23,7 +23,7 @@ public class RobotRoomCleaner {
      Set<Pair<Integer, Integer>> visited = new HashSet<>();
      Robot robot;
 
-     // O(4 ^ E), E = empty cells
+     // O(4 * E), E = empty cells
      public void cleanRoom(Robot robot) {
          this.robot = robot;
          backtrack(0, 0, 0); // start with 0, 0 (does not matter where the robot is placed, it is relative)
@@ -37,6 +37,7 @@ public class RobotRoomCleaner {
 
          // going clock wise
          for (int i = 0; i < 4; i++) {
+             // (dir+i) to make sure we continue clock wise, other wise we will be lost of we just follow for(int[] dir:dirs)
              int newDirection = (dir + i) % 4; // dir + i, can be more than 4
              int newR = row + dirs[newDirection][0];
              int newC = col + dirs[newDirection][1];

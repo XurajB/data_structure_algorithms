@@ -42,7 +42,7 @@ public class RandomPickWithWeight {
                 high = mid;
             }
         }
-        return low;
+        return high;
     }
 
     // linear

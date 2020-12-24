@@ -70,18 +70,15 @@ public class KthLargestElement {
         nums[j] = temp;
     }
 
+    // Nlogk
     private static int KthLargest2(int[] nums, int k) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> b-a);
-
-        for (int value : nums) {
-            pq.add(value);
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for (int num: nums) {
+            pq.offer(num);
+            if (pq.size() > k) {
+                pq.poll();
+            }
         }
-
-        int num = 0;
-        for (int i = 0 ; i < k; i++) {
-            num = pq.poll();
-        }
-
-        return num;
+        return pq.poll();
     }
 }

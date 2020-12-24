@@ -8,6 +8,7 @@ public class MultiplyStrings {
         System.out.println(multiply("10", "20"));
     }
 
+    // (m*n)
     private static String multiply(String num1, String num2) {
         int n = num1.length();
         int m = num2.length();
@@ -37,7 +38,8 @@ public class MultiplyStrings {
         sb.reverse();
 
         // remove leading 0s
-        while (sb.length() > 0 && sb.charAt(0) == '0') {
+        // > 1 coz, if last one is 0, return 0
+        while (sb.length() > 1 && sb.charAt(0) == '0') {
             sb.deleteCharAt(0);
         }
 
