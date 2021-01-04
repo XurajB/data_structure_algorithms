@@ -46,6 +46,18 @@ public class SumRootToLeaf {
         }
     }
 
+    /// pre order
+    private int sum(TreeNode root, int cur) {
+        if (root == null) {
+            return 0;
+        }
+        cur = cur * 10 + root.val;
+        if (root.left == null && root.right == null) {
+            return cur;
+        }
+        return sum(root.left, cur) + sum(root.right, cur);
+    }
+
     // -----------
     // iterative
     public int sumNumbers2(TreeNode root) {

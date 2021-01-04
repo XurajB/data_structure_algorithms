@@ -10,24 +10,25 @@ import java.util.Stack;
 public class RangeSumBst {
     // O(H)
     public int rangeSumBST(TreeNode root, int low, int high) {
-        dfs(root, low, high);
-        return ans;
+        return dfs(root, low, high);
     }
-    int ans = 0;
 
-    private void dfs(TreeNode root, int low, int high) {
+    // 10+7+15
+    private int dfs(TreeNode root, int low, int high) {
         if (root == null) {
-            return;
+            return 0;
         }
+        int ans = 0;
         if (root.val >= low && root.val <= high) {
             ans += root.val;
         }
         if (root.val > low) {
-            dfs(root.left, low, high);
+            ans += dfs(root.left, low, high);
         }
         if (root.val < high) {
-            dfs(root.right, low, high);
+            ans += dfs(root.right, low, high);
         }
+        return ans;
     }
 
     // iterative

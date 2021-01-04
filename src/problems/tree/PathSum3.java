@@ -22,6 +22,7 @@ public class PathSum3 {
             return 0;
         }
         this.sum = sum;
+        map.put(0, 1); // for cases where curSum == sum
         // preorder because we are summing from root to nodes
         preorder(root, 0);
         return count;
@@ -33,10 +34,7 @@ public class PathSum3 {
         }
         // prefix sum
         currSum += node.val;
-        // prefix sum = sum starts from the root
-        if (currSum == sum) {
-            count++;
-        }
+
         // current prefix starts somewhere downward
         // number of times currSum-sum has occurred already
         // is the number of times a path with sum sum has occurred upto current node
@@ -47,6 +45,7 @@ public class PathSum3 {
         preorder(node.left, currSum);
         preorder(node.right, currSum);
         // remove current sum from hashmap, so as not to use it during parallel subtree processing
+        // remove previous sum as we backtrack up the tree
         map.put(currSum, map.get(currSum)-1);
     }
 }

@@ -23,6 +23,8 @@ public class BinaryTreePaths {
         return ans;
     }
 
+    // O(N) time
+    // O(hln) => number of leaves (l) * max path length (n) * height (height)
     private void constructPath(TreeNode node, String path, List<String> ans) {
         if (node == null) {
             return;

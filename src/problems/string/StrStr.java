@@ -32,4 +32,11 @@ public class StrStr {
 
         return -1;
     }
+
+    // Rabin karp - pattern matching algorithm
+    // first find the hash for needle using this:
+    // example: abc => 0 * 26^2 + 1*26^1 + 2*26^0 = n1
+    // then get hash for the first needle.length() from haystack
+    // then do a rolling hash and compare
+    // rolling hash example: abc -> bcd: (n1 - 0*26^2) * 26 + 3*26^0
 }

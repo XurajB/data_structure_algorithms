@@ -34,7 +34,7 @@ public class FriendsOfAppropriateAges {
             for (int b: count.keySet()) {
                 if (request(a, b)) {
                     if (a==b) {
-                        // if they have same age
+                        // if they have same age, reduce 1 as you can not friend yourself
                         request += count.get(a) * (count.get(b) - 1);
                     } else {
                         request += count.get(a) * count.get(b);

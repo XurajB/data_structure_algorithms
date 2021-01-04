@@ -12,6 +12,7 @@ public class LongestCommonPrefix {
 
         // this can also be solved using Trie
         // same complexity, space is O(total chars)
+        // Trie version: go down the root as long as it has only one child
     }
 
     // Time complexity: O(number of all chars), Space: O(1)

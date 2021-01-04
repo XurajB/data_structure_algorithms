@@ -24,6 +24,14 @@ public class MedianOfTwoSortedArrays {
         int low = 0;
         int high = x;
 
+        // x: x1 x2 | x3 x4 x5 x6
+        // y: y1 y2 y3 y4 y5 | y6 y7 y8
+        // divide into two halves: not among themselves but the total length
+        // leftMaxX: x2, rightMinX: x3, leftMaxY: y5, rightMinY: y6
+        // if we can find partition such that: x2 <= y6 && x3 >= y5
+        // this means all elements to the left are smaller than all elements to the right
+        // we found the correct partitions. then the median will be odd: max(x2, y5), even: avg(max(x2, y5), min(x3, y6))
+
         while (low <= high) {
             int partitionX = low + (high - low)/2;
             int partitionY = (x + y + 1) / 2 - partitionX;
@@ -38,7 +46,8 @@ public class MedianOfTwoSortedArrays {
 
             // check the condition
             if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
-                // we have paritioned array at correct place
+                // median partitions an array into two halves
+                // we have partitioned array at correct place
                 // get max of left elements and min of right elements to get the median in case of even combined array
                 // or get max of left for odd combined array size
                 if ((x + y) % 2 == 0) {

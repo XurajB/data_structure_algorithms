@@ -21,10 +21,10 @@ public class PalindromePermutation {
         for (int i = 0; i < s.length(); i++) {
             map[s.charAt(i)]++;
         }
-        int count = 0;
-        for (int i = 0; i < map.length; i++) {
-            count += map[i] % 2;
+        int sum = 0;
+        for (int count: map) {
+            sum += count % 2;
         }
-        return count <= 1;
+        return sum <= 1;
     }
 }

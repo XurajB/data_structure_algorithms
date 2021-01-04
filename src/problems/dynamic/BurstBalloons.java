@@ -29,7 +29,8 @@ public class BurstBalloons {
         // cache the result
         int[][] memo = new int[n][n];
 
-        return helper(memo, newNums, 0, n-1);
+        int ans = helper(memo, newNums, 0, n-1);
+        return ans;
     }
 
     // top-down

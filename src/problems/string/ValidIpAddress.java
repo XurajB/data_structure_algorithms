@@ -66,4 +66,74 @@ public class ValidIpAddress {
         }
         return "IPv6";
     }
+
+    //////////////
+    // simple version
+    public String validIPAddress2(String IP) {
+        if (IP.isEmpty()) {
+            return "Neither";
+        }
+        int countDot = 0;
+        int countColon = 0;
+        for (char c: IP.toCharArray()) {
+            if (c == '.') {
+                countDot++;
+            } else if (c == ':') {
+                countColon++;
+            }
+        }
+        if (countDot == 3) {
+            if (validateIPV4(IP)) {
+                return "IPv4";
+            }
+        } else if (countColon == 7) {
+            if (validateIPV6(IP)) {
+                return "IPv6";
+            }
+        }
+        return "Neither";
+    }
+
+    private boolean validateIPV6(String ip) {
+        String[] parts = ip.split(":");
+        if (parts.length != 8) {
+            return false;
+        }
+        String hexdigits = "0123456789abcdefABCDEF";
+        for (String part: parts) {
+            if (part.length() == 0 || part.length() > 4) {
+                return false;
+            }
+            for (char c: part.toCharArray()) {
+                if (hexdigits.indexOf(c) == -1) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean validateIPV4(String ip) {
+        String[] parts = ip.split("\\.");
+        if (parts.length != 4) {
+            return false;
+        }
+        for (String part: parts) {
+            if (part.length() == 0 || part.length() > 3) {
+                return false;
+            }
+            if (part.length() > 1 && part.charAt(0) == '0') {
+                return false;
+            }
+            for (char c: part.toCharArray()) {
+                if (!Character.isDigit(c)) {
+                    return false;
+                }
+            }
+            if (Integer.parseInt(part) > 255) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

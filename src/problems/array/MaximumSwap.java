@@ -15,7 +15,7 @@ public class MaximumSwap {
         for (int i = 0; i < digits.length; i++) {
             last[digits[i] - '0'] = i;
         }
-
+        // want to the last pace for each digit because we want to swap with the last position, ex 6996
         for (int i = 0; i < digits.length; i++) {
             // check if there exists any number greater than digits[i] (check from digits[i] to 9)
             // do don't have to start from 9, we can also start from max.. which will improve runtime a little

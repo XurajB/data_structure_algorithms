@@ -30,7 +30,7 @@ public class RemoveDuplicateLetters {
             }
         }
         StringBuilder sb = new StringBuilder();
-        for (Character c: stack) {
+        for (Character c: stack) { // Note: dq will still return like stack.pop(), unlike stack
             sb.append(c.charValue());
         }
         return sb.reverse().toString();

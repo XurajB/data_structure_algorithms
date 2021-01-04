@@ -26,7 +26,7 @@ public class WordBreak2 {
             if (s.startsWith(word)) {
                 String next = s.substring(word.length());
                 if (next.isEmpty()) { // we reached end of s (start adding the word and back)
-                    res.add(word);
+                    res.add(word); // like base case
                     continue;
                 }
                 List<String> sublist = dfs(next, wordDict, cache);

@@ -15,6 +15,7 @@ public class SerializeAndDeserializeNary {
     // In n-ary, we need to encode that information. there is no null except for root, because children count could be 0 but no null children
 
     // recursive
+    // 1,3,3,2,5,0,6,0,2,0,4,0: from example
     public String serialize(Node root) {
         if (root == null) {
             return "";

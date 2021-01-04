@@ -38,6 +38,7 @@ public class BuddyString {
         if (diff.size() != 2) {
             return false;
         }
+        // cd, ef
         return A.charAt(diff.get(0)) == B.charAt(diff.get(1)) &&
                 A.charAt(diff.get(1)) == B.charAt(diff.get(0));
     }

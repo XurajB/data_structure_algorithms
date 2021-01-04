@@ -23,7 +23,7 @@ public class PowerOfX {
         }
         // handle -ve x
         if (x < 0 && power % 2 != 0) {
-            result = -1 * result; // power needs to be neg to be neg
+            result = -result; // power needs to be neg to be neg
         }
         return result;
     }
@@ -42,5 +42,29 @@ public class PowerOfX {
         } else {
             return x * halfpower * halfpower;
         }
+    }
+
+
+    /////////////////////
+    // similar solution
+    // log(n)
+    private double fastPow(double x, long n) {
+        if (n == 0) {
+            return 1.0;
+        }
+        double half = fastPow(x, n / 2);
+        if (n % 2 == 0) {
+            return half * half;
+        } else {
+            return half * half * x;
+        }
+    }
+    public double myPow(double x, int n) {
+        long N = n;
+        if (N < 0) {
+            x = 1 / x;
+            N = -N;
+        }
+        return fastPow(x, N);
     }
 }

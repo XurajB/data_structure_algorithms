@@ -85,4 +85,17 @@ public class AccountsMerge {
             }
         }
     }
+
+    ////////////////
+    //
+    // DFS ^^
+    private void dfs(Map<String, List<String>> graph, String s, List<String> ans, Set<String> visited) {
+        ans.add(s);
+        visited.add(s);
+        for (String next: graph.get(s)) {
+            if (!visited.contains(next)) {
+                dfs(graph, next, ans, visited);
+            }
+        }
+    }
 }

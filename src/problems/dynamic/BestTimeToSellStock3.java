@@ -8,7 +8,7 @@ package problems.dynamic;
 public class BestTimeToSellStock3 {
     public static void main(String[] args) {
         int[] prices = {3,3,5,0,0,3,1,4};
-        System.out.println(twoTrades(prices));
+        System.out.println(twoTrades2(prices));
     }
     /*
     Let’s say we have an array of prices.
@@ -46,5 +46,27 @@ public class BestTimeToSellStock3 {
             maxTwoTrades = Math.max(maxTwoTrades, bestTill[i] + bestFrom[i]);
         }
         return maxTwoTrades;
+    }
+
+    ////////////////////
+    ///
+    // O(N), O(1)
+    private static int twoTrades2(int[] prices) {
+        int buy1 = Integer.MAX_VALUE;
+        int buy2 = Integer.MAX_VALUE;
+
+        int sell1 = 0;
+        int sell2 = 0;
+
+        for (int price: prices) {
+            // first transaction
+            buy1 = Math.min(buy1, price);
+            sell1 = Math.max(sell1, price - buy1);
+            // second transaction
+            buy2 = Math.min(buy2, price - sell1); // use previous gain to maximize current gain
+            sell2 = Math.max(sell2, price - buy2);
+        }
+
+        return sell2;
     }
 }

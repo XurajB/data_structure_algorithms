@@ -112,4 +112,53 @@ public class RestoreIpAddresses {
         }
         return ans;
     }
+
+    ///////////////////////////
+    // backtrack
+    //
+    public List<String> restoreIpAddresses3(String s) {
+        List<String> ans = new ArrayList<>();
+
+        if (s.length() < 4 || s.length() > 12) {
+            return ans;
+        }
+
+        helper(s, 0, new ArrayList<>(), ans);
+        return ans;
+    }
+
+    private void helper(String s, int index, List<Integer> cur, List<String> ans) {
+        if (cur.size() > 4) {
+            return;
+        }
+        if (index == s.length()) {
+            if (cur.size() == 4) {
+                String gen = generateIp(cur);
+                if (gen.length() == s.length() + 3) {
+                    ans.add(generateIp(cur));
+                }
+            }
+            return;
+        }
+
+        int part = 0;
+        for (int i = index; i < s.length(); i++) {
+            part = part * 10 + (s.charAt(i) - '0');
+
+            if (part <= 255) {
+                cur.add(part);
+                helper(s, i+1, cur, ans);
+                cur.remove(cur.size() - 1);
+            }
+        }
+    }
+
+    private String generateIp(List<Integer> parts) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(parts.get(0));
+        for (int i = 1; i < parts.size(); i++) {
+            sb.append(".").append(parts.get(i));
+        }
+        return sb.toString();
+    }
 }

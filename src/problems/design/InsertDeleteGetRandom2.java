@@ -45,7 +45,6 @@ public class InsertDeleteGetRandom2 {
         map.get(val).remove(index);
 
         int lastItem = list.get(list.size()-1);
-
         list.set(index, lastItem);
 
         map.get(lastItem).add(index);

@@ -10,15 +10,15 @@ public class MirrorReflection {
         System.out.println(mirrorReflection(3, 2));
     }
     private static int mirrorReflection(int p, int q) {
-        int m = q;
-        int n = p;
-        while(m % 2 == 0 && n % 2 == 0){
-            m /= 2;
-            n /= 2;
+        while(q % 2 == 0 && p % 2 == 0){
+            q /= 2;
+            p /= 2;
         }
-        if (m % 2 == 0 && n % 2 == 1) return 0;
-        if (m % 2 == 1 && n % 2 == 1) return 1;
-        if (m % 2 == 1 && n % 2 == 0) return 2;
-        return -1;
+        if (p % 2 == 0) {
+            return 2;
+        } else if (q % 2 == 0) {
+            return 0;
+        }
+        return 1;
     }
 }

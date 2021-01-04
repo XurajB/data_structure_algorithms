@@ -13,6 +13,7 @@ public class FractionToRecurringDecimal {
         System.out.println(fractionToDecimal(4,333));
     }
 
+    // O(N)
     private static String fractionToDecimal(int numerator, int denominator) {
         if (numerator == 0) {
             return "0";
@@ -22,6 +23,7 @@ public class FractionToRecurringDecimal {
         if (numerator < 0 ^ denominator < 0) {
             ans.append("-");
         }
+        // convert to long for cases like: MIN_VALUE/-1 that will overflow
         long top = Math.abs((long) numerator);
         long bottom = Math.abs((long) denominator);
         ans.append(top/bottom);
@@ -30,7 +32,7 @@ public class FractionToRecurringDecimal {
             return ans.toString();
         }
         ans.append(".");
-        Map<Long, Integer> map = new HashMap<>();
+        Map<Long, Integer> map = new HashMap<>(); // reminder, index
         map.put(reminder, ans.length());
         while (reminder != 0) {
             reminder = reminder * 10;

@@ -18,7 +18,7 @@ public class RobotRoomCleaner {
          public void clean();
      }
 
-     // we are going clock wise (always taking right turn), up, right, down, left
+     // we are going clock wise (always taking right turn), up, right, down, left. can be any order but always right
      int[][] dirs = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
      Set<Pair<Integer, Integer>> visited = new HashSet<>();
      Robot robot;

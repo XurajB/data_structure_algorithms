@@ -59,9 +59,14 @@ public class MergeTwoBinaryTrees {
 
     //---------
     // iterative
+    // stack or queue, same thing
     public TreeNode mergeTrees2(TreeNode t1, TreeNode t2) {
-        if (t1 == null)
+        if (t1 == null) {
             return t2;
+        }
+        if (t2 == null) {
+            return t1;
+        }
         Stack<TreeNode[]> stack = new Stack<>();
         stack.push(new TreeNode[] {t1, t2});
         while (!stack.isEmpty()) {

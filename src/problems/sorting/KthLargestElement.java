@@ -14,11 +14,14 @@ public class KthLargestElement {
         System.out.println(kthLargest(nums, 2));
     }
 
-    // O(N)
+    // This algorithm is similar to quick sort, instead of recurring on both sides of pivot, we only recur one side depending on the partitioned element
+    // if the partitioned element is larger than k, we only recur left side and vice versa. This reduces complexity from nlogn to n (n^2 worst case)
+
+    // O(N), O(1)
     private static int kthLargest(int[] nums, int k) {
         int n = nums.length;
-        // kth largest is (n-k)th largest
-        // this algorithm finds kth smallest element
+        // kth largest is (n-k)th smallest
+        // this algorithm finds (n-k)th smallest element
         return quickSelect(nums, n-k, 0, n-1);
     }
 
@@ -29,7 +32,7 @@ public class KthLargestElement {
             return nums[left];
         }
 
-        // select a random pivot index
+        // select a random pivot index, making this random reduces complexity by a lot
         Random random = new Random();
         int pivot = left + random.nextInt(right - left);
         pivot = partition(nums, left, right, pivot);
@@ -46,7 +49,7 @@ public class KthLargestElement {
 
     private static int partition(int[] nums, int left, int right, int pivotIndex) {
         int pivot = nums[pivotIndex];
-        // move pivot to end
+        // move pivot to end, so we don't over write this
         swap(nums, pivotIndex, right);
 
         // move all smaller elements to the left

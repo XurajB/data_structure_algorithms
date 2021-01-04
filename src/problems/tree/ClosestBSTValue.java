@@ -21,4 +21,24 @@ public class ClosestBSTValue {
         }
         return ans;
     }
+
+    //////////////////////////////
+    // recursive
+    double diff = Double.MAX_VALUE;
+    int val = 0;
+    public int closestValue2(TreeNode root, double target) {
+        if (root == null) {
+            return val;
+        }
+        double curDiff = Math.abs(root.val - target);
+        if (diff > curDiff) {
+            diff = curDiff;
+            val = root.val;
+        }
+        if (root.val > target) {
+            return closestValue2(root.left, target);
+        } else {
+            return closestValue2(root.right, target);
+        }
+    }
 }

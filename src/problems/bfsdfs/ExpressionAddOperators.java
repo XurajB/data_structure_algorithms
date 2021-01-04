@@ -34,7 +34,7 @@ public class ExpressionAddOperators {
         for (int i = index; i < nums.length; i++) {
             // corner case: if current num is 0, we can only use it as a single digit number
             // if it is not a single digit number with leading 0, it should be considered as an invalid number
-            if (nums[i] == '0' && i != index) {
+            if (nums[index] == '0' && i != index) {
                 continue;
             }
             curr = 10 * curr + nums[i] - '0';

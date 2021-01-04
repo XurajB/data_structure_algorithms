@@ -2,6 +2,7 @@ package problems.array;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -43,5 +44,29 @@ public class IntersectionOfTwoArrays2 {
             p++;
         }
         return answer;
+    }
+
+    // use hasmaps
+    // O(max(n, m))
+    // O(max(n, m)). or use smaller to store for O(min(n,m))
+    public int[] intersect2(int[] nums1, int[] nums2) {
+        HashMap<Integer, Integer> map1 = new HashMap<>();
+        for (int num: nums1) {
+            map1.put(num, map1.getOrDefault(num, 0) + 1);
+        }
+
+        int i = 0;
+        for (int num: nums2) {
+            if (map1.containsKey(num)) {
+                nums1[i++] = num;
+                map1.put(num, map1.get(num) - 1);
+
+                if (map1.get(num) == 0) {
+                    map1.remove(num);
+                }
+            }
+        }
+
+        return Arrays.copyOfRange(nums1, 0, i);
     }
 }

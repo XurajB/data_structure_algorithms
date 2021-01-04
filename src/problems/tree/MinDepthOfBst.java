@@ -25,7 +25,6 @@ public class MinDepthOfBst {
         int right = helper(root.right);
 
         int height = Math.min(left, right);
-
         return 1 + (height > 0 ? height: Math.max(left, right));
     }
 

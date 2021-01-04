@@ -32,6 +32,7 @@ public class MaxConsecutiveOnes3 {
                 }
                 left++;
             }
+            // case: 001, k = 3.
             max = Math.max(max, right-left+1);
             right++;
         }

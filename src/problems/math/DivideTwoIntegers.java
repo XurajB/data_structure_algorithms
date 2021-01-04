@@ -39,7 +39,7 @@ public class DivideTwoIntegers {
             divisor = -divisor;
         }
 
-        // using first approach, we do repeated substraction
+        // using first approach, we do repeated subtraction
         int quotient = 0;
         while (dividend - divisor <= 0) {
             quotient--;
@@ -80,10 +80,12 @@ public class DivideTwoIntegers {
 
         int quotient = 0;
         // coz we converted to -ve
-        while (divisor >= dividend) {
+        while (divisor >= dividend) { // dividend - divisor <= 0 will result in overflow
             int powerOfTwo = -1;
             int value = divisor;
 
+            // try to double the divisor until it no longer fits into dividend
+            // value >= HALF_INT_MIN so that we don't run into same issue like approach 1 for small divisor
             while (value >= HALF_INT_MIN && value + value >= dividend) {
                 value += value;
                 powerOfTwo += powerOfTwo;

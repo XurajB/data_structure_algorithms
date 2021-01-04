@@ -21,41 +21,33 @@ public class AddTwoNumbersAsLists {
         //
     }
 
-    public ListNode addTwoNumbers(ListNode A, ListNode B) {
-        Queue<Integer> s1 = new LinkedList<>();
-        Queue<Integer> s2 = new LinkedList<>();
-        while (A != null) {
-            s1.add(A.val);
-            A = A.next;
-        }
-        while (B != null) {
-            s2.add(B.val);
-            B = B.next;
-        }
-        ListNode answer = new ListNode(-1);
-        ListNode current = answer;
+    // O(max(l1, l2)), O(1)
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode ans = new ListNode(-1);
+        ListNode node = ans;
 
         int carry = 0;
-        while (!s1.isEmpty() || !s2.isEmpty()) {
-            int num1 = 0, num2 = 0;
-            if (!s1.isEmpty()) {
-                num1 = s1.remove();
-            }
-            if (!s2.isEmpty()) {
-                num2 = s2.remove();
-            }
-            int sum = num1 + num2 + carry;
+        while (l1 != null || l2 != null) {
+            int num1 = (l1 == null) ? 0 : l1.val;
+            int num2 = (l2 == null) ? 0 : l2.val;
 
-            current.next = new ListNode(sum % 10);
+            int sum = num1 + num2 + carry;
+            node.next = new ListNode(sum%10);
             carry = sum / 10;
 
-            current = current.next;
+            node = node.next;
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                l2 = l2.next;
+            }
         }
 
-        if (carry == 1) {
-            current.next = new ListNode(1);
+        if (carry > 0) {
+            node.next = new ListNode(carry);
         }
 
-        return answer.next;
+        return ans.next;
     }
 }

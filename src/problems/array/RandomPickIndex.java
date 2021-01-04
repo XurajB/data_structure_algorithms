@@ -33,4 +33,29 @@ public class RandomPickIndex {
         int size = map.get(target).size();
         return map.get(target).get(random.nextInt(size));
     }
+
+    ///////////
+    // reservoir sampling
+    // when the data-set has unknown length
+    // probability of selecting is: 1/f (f is the frequency of target)
+    int[] nums;
+    Random rnd;
+    public int pick2(int target) {
+        int result = 0;
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == target) {
+                // increase total candidate count
+                count++;
+                // we pick index with probability 1/count (reservoir sampling)
+                // java Random: All possible values are produced with (approximately) equal probability.
+                if (rnd.nextInt(count) == 0) {
+                    // ^ it could be = 0 or count - 1, what is the probability of selecting random = 0? => equal probability.
+                    // it has probability 1 when count = 1, 1/2 when count = 2, 2/3 when count = 3. total: 1 * 1/2 * 2/3 = 1/3.
+                    result = i;
+                }
+            }
+        }
+        return result;
+    }
 }

@@ -64,11 +64,9 @@ public class LeftmostColumnWithAtLeastAOne {
                 else {
                     hi = mid;
                 }
-                // If the last element in the search space is a 1, then this row
-                // contained a 1.
-                if (binaryMatrix.get(row, lo) == 1) {
-                    smallestIndex = Math.min(smallestIndex, lo);
-                }
+            }
+            if (binaryMatrix.get(row, lo) == 1) {
+                smallestIndex = Math.min(smallestIndex, lo);
             }
         }
         // If smallest_index is still set to cols, then there were no 1's in
