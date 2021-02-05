@@ -21,7 +21,7 @@ public class CloneGraph {
         }
     }
 
-    // Time: O(N), Space: O(N) - space occupied by queue will be O(W) where W is width of the graph, overall is O(N)
+    // Time: O(V+E), space occupied by queue will be O(W) where W is width of the graph, overall is O(V+E)
     public Node cloneGraph(Node node) {
         if (node == null) {
             return null;

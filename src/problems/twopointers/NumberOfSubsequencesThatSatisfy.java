@@ -1,4 +1,4 @@
-package problems.array;
+package problems.twopointers;
 
 import java.util.Arrays;
 

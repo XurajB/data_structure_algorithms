@@ -32,7 +32,7 @@ public class PalindromePairs {
             for (String suffix: allValidSuffixes(word)) {
                 String reverseSuffix = new StringBuilder(suffix).reverse().toString();
                 if (map.containsKey(reverseSuffix)) {
-                    ans.add(Arrays.asList(map.get(reverseSuffix), currentIndex));
+                    ans.add(Arrays.asList(map.get(reverseSuffix), currentIndex)); // suffix first
                 }
             }
             // case 3 - different length, valid prefix

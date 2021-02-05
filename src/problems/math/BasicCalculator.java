@@ -9,7 +9,49 @@ import java.util.Stack;
  */
 public class BasicCalculator {
     public static void main(String[] args) {
-        System.out.println(calculate("2 + 5 + ( 3 - 5 ) + 3"));
+        System.out.println(calculate3("(1+(4+2)-3)+(6+8)"));
+    }
+
+    // recursive
+    private static int calculate3(String s) {
+        if (s.isEmpty()) {
+            return 0;
+        }
+        int lastSign = 1;
+        int num = 0;
+        int total = 0;
+        int i = 0;
+        while (i < s.length()) {
+            if (s.charAt(i) == '(') {
+                int open = 1;
+                i = i + 1;
+                int end = i;
+                while (open > 0) {
+                    if (s.charAt(end) == ')') {
+                        open--;
+                    } else if (s.charAt(end) == '(') {
+                        open++;
+                    }
+                    end++;
+                }
+                num = calculate3(s.substring(i, end-1));
+                i = end;
+            }
+            if (i < s.length() && Character.isDigit(s.charAt(i))) {
+                num = num * 10 + s.charAt(i) - '0';
+            }
+            if (i < s.length() && s.charAt(i) != ' ' && !Character.isDigit(s.charAt(i)) || i == s.length() - 1) {
+                total = total + (lastSign == 1 ? num: -num);
+                if (s.charAt(i) == '-') {
+                    lastSign = -1;
+                } else {
+                    lastSign = 1;
+                }
+                num = 0;
+            }
+            i++;
+        }
+        return total + (lastSign == 1 ? num: -num);
     }
 
     private static int calculate(String s) {

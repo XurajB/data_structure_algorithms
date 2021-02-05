@@ -40,6 +40,7 @@ public class AccountsMerge {
         }
     }
 
+    // M*NlogN M = accounts, N = max length of an account
     private static List<List<String>> accountsMerge(List<List<String>> accounts) {
         List<List<String>> res = new ArrayList<>();
         Map<String, Set<String>> graph = new HashMap<>();

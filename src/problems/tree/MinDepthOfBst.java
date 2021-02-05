@@ -4,6 +4,7 @@ import dataStructures.trees.TreeNode;
 import javafx.util.Pair;
 
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Given a binary tree, find its minimum depth.
@@ -21,42 +22,44 @@ public class MinDepthOfBst {
         if (root == null) {
             return 0;
         }
+        // what happens when left is null? we still return depth of right
+        if (root.left == null) {
+            return helper(root.right) + 1;
+        }
+        if (root.right == null) {
+            return helper(root.left) + 1;
+        }
+        // else
         int left = helper(root.left);
         int right = helper(root.right);
-
-        int height = Math.min(left, right);
-        return 1 + (height > 0 ? height: Math.max(left, right));
+        return Math.min(left, right) + 1;
     }
 
     // depending on tree, it might be beneficial to use bfs or dfs. if the height is larger, then bfs will be a better choice
     /// -- iteration
     public int minDepth2(TreeNode root) {
-        LinkedList<Pair<TreeNode, Integer>> stack = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
         if (root == null) {
             return 0;
-        } else {
-            stack.add(new Pair(root, 1)); // start with height 1
         }
-        int currentDepth = 0;
-
-        while (!stack.isEmpty()) {
-            Pair<TreeNode, Integer> current = stack.poll();
-            root = current.getKey();
-            currentDepth = current.getValue();
-
-            // if leaf, you can return here because we are going level order
-            if ((root.left == null) && (root.right == null)) {
-                return currentDepth;
+        queue.add(root);
+        int level = 1;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode current = queue.poll();
+                if (current.left == null && current.right == null) {
+                    return level;
+                }
+                if (current.left != null) {
+                    queue.offer(current.left);
+                }
+                if (current.right != null) {
+                    queue.offer(current.right);
+                }
             }
-
-            // increment height or level
-            if (root.left != null) {
-                stack.add(new Pair(root.left, currentDepth + 1));
-            }
-            if (root.right != null) {
-                stack.add(new Pair(root.right, currentDepth + 1));
-            }
+            level++;
         }
-        return currentDepth;
+        return level;
     }
 }

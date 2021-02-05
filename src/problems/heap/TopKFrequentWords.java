@@ -45,6 +45,11 @@ public class TopKFrequentWords {
         }
         Collections.reverse(ans);
         return ans;
+
+        // or use LinkedList
+        // while (!pq.isEmpty()) {
+        //   ans.offerFirst(pq.poll().word);
+        // }
     }
 
     // O(nlogn), O(n)

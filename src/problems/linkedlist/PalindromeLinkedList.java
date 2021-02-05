@@ -6,10 +6,31 @@ import dataStructures.ListNode;
  * Given a singly linked list, determine if it is a palindrome.
  */
 public class PalindromeLinkedList {
+
+    public boolean isPalindrome(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
+        slow = reverseList(slow);
+        fast = head;
+        while (slow != null) {
+            if (fast.val != slow.val) {
+                return false;
+            }
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return true;
+    }
+
     // O(N), O(1)
     // we are modifying the input, which is in general bad practice because it could be used somewhere else outside of this function
     // so we restored it back
-    public boolean isPalindrome(ListNode head) {
+    public boolean isPalindrome2(ListNode head) {
         // first find the middle point
         // reverse in place from mid to end
         // compare elements from first to mid

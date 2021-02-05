@@ -38,7 +38,7 @@ public class SlidingWindowMaximum {
                 dq.pollLast();
             }
             // we insert index so we know the window size
-            dq.offer(i);
+            dq.offerLast(i);
             if (i-k+1 >= 0) {
                 answer[i-k+1] = nums[dq.peek()];
             }

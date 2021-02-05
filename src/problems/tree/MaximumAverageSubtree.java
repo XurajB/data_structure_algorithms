@@ -9,31 +9,27 @@ import dataStructures.trees.TreeNode;
  */
 public class MaximumAverageSubtree {
     private double max = 0.0;
-    public double maximumAverageSubtree(TreeNode node) {
-        if (node == null) {
-            return max;
+    public double maximumAverageSubtree(TreeNode root) {
+        if (root == null) {
+            return 0;
         }
-        helper(node);
-        return max;
+        return helper(root)[2];
+
     }
 
-    // int[] = {num, sum}
-    // pre-order
-    // O(N), O(N)
-    private int[] helper(TreeNode node) {
-        if (node == null) {
-            return new int[] {0, 0};
+    private double[] helper(TreeNode root) {
+        if (root == null) {
+            return new double[] {0,0, Double.MIN_VALUE};
         }
-        int sum = node.val;
-        int num = 1;
 
-        int[] left = helper(node.left);
-        int[] right = helper(node.right);
+        double[] left = helper(root.left);
+        double[] right = helper(root.right);
 
-        num += left[0] + right[0];
-        sum += left[1] + right[1];
+        double total = left[1] + right[1] + 1;
+        double sum = left[0] + right[0] + root.val;
 
-        max = Math.max(max, (double)sum/(double)num);
-        return new int[] {num, sum};
+        double max = Math.max(left[2], right[2]);
+
+        return new double[] {sum, total, Math.max(max, sum/total)};
     }
 }

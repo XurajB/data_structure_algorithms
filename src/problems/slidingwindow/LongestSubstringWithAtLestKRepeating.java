@@ -9,45 +9,46 @@ public class LongestSubstringWithAtLestKRepeating {
     public static void main(String[] args) {
         System.out.println(longestSubstring("aaabb", 3));
     }
+
+    // O(26 * n)
     private static int longestSubstring(String s, int k) {
         int longest = 0;
-        // sanity check
-        if(s == null || s.isEmpty()) {
-            return longest;
-        }
-
-        final int L = s.length();
-        if (k < 2) return L;
-        final char[] CHS = s.toCharArray();
+        final int n = s.length();
         int[] freq = new int[26];
-        for(int i = 1; i <= 26; ++i){
+        // go from 1 to 26 length of unique chars to consider
+        for (int i = 1; i <= 26; i++) {
             Arrays.fill(freq, 0);
 
-            int lo = 0, hi = 0, distinct = 0;
-            while(hi < L){
+            int left = 0;
+            int right = 0;
+            int distinct = 0;
+
+            // standard sliding window
+            while (right < n) {
                 boolean isValid = true;
-                if(freq[CHS[hi] - 'a']++ == 0)
-                    ++distinct;
-
-                while(distinct > i){
-                    if(--freq[CHS[lo] - 'a'] == 0)
-                        --distinct;
-
-                    ++lo;
+                if (freq[s.charAt(right)- 'a']++ == 0) {
+                    distinct++;
                 }
+                while (distinct > i) {
+                    freq[s.charAt(left) - 'a']--;
+                    if (freq[s.charAt(left) - 'a'] == 0) {
+                        distinct--;
+                    }
 
-                for(int num : freq) {
+                    left++;
+                }
+                for (int num : freq) {
                     if (num > 0 && num < k) {
                         isValid = false;
+                        break; // if this char freq < k, no point going forward
                     }
                 }
-                if(isValid)
-                    longest = Math.max(longest, hi - lo + 1);
-
-                ++hi;
+                if (isValid) {
+                    longest = Math.max(longest, right - left + 1);
+                }
+                right++;
             }
         }
-
         return longest;
     }
 }

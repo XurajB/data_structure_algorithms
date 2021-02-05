@@ -31,6 +31,9 @@ public class MinimumCostForTickets {
             // if this is a travel day
             if (days[d] == i) {
                 int min = dp[i-1] + costs[0];
+                // for case like this, we have to check if weekly pass is cheaper than daily
+                //[1,4,6,7,8,20]
+                //[7,2,15]
                 min = Math.min(min, costs[1] + (i >= 7 ? dp[i-7] : 0));
                 min = Math.min(min, costs[2] + (i >= 30 ? dp[i-30] : 0));
 

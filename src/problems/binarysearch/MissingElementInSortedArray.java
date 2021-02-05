@@ -11,22 +11,32 @@ public class MissingElementInSortedArray {
     }
 
     private static int missingElement(int[] nums, int k) {
-        int n = nums.length;
-        if (n == 1) {
-            return nums[0] + k;
-        }
-
-        int reminder = k;
         for (int i = 1; i < nums.length; i++) {
             int diff = nums[i] - nums[i-1] - 1;
             if (diff >= k) {
                 return nums[i-1] + k;
+            } else {
+                k = k - diff;
             }
-            k = k - diff;
         }
 
-        // last case
-        return nums[n - 1] + reminder;
+        return nums[nums.length - 1] + k;
+    }
+
+    // binary search
+    private static int missingElement3(int[] nums, int k) {
+        int left = 0, right = nums.length;
+        int target = nums[0] + k;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] <= target + mid - 1) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return target + left - 1;
     }
 
     // log(n)

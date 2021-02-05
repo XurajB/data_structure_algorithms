@@ -48,13 +48,10 @@ public class RandomPickWithWeight {
     // linear
     private int pickIndex2() {
         double target = total * Math.random();
-
-        for (int i = 0; i < prefixSums.length; i++) {
-            if (target < prefixSums[i]) {
-                return i;
-            }
+        int i = 0;
+        while (prefixSums[i] < target) {
+            i++;
         }
-
-        return -1;
+        return i;
     }
 }

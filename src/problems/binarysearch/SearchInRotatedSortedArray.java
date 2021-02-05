@@ -22,37 +22,33 @@ public class SearchInRotatedSortedArray {
         if (nums.length == 1) {
             return nums[0] == target ? 0 : -1;
         }
-        // first find the rotation index - which is the index of the smallest number
         int index = findIndex(nums);
         if (nums[index] == target) {
             return index;
         }
-        // then do binary search on one of the side
-        if (nums[0] < target) {
-            return search(nums, 0, index - 1, target); // search in left side
-        } else {
+        // if index is 0, search entire array
+        if (index == 0) {
+            return search(nums, 0, nums.length - 1, target);
+        }
+        if (nums[0] > target) {
             return search(nums, index, nums.length - 1, target); // search in right side
+        } else {
+            return search(nums, 0, index, target); // search in left side
         }
     }
 
     private static int findIndex(int[] nums) {
-        int low = 0;
-        int n = nums.length - 1;
-        int high = n;
-        while (low <= high) {
-            int mid = low + (high - low)/2;
-            int left = (mid - 1 + n) % n;
-            if (nums[low] <= nums[high]) {
-                return low;
-            } else if (nums[left] > nums[mid]) {
-                return mid;
-            } else if (nums[mid] >= nums[low]) {
-                low = mid + 1;
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            int mid = left + (right-left)/2;
+            if (nums[mid] > nums[right]) {
+                left = mid + 1;
             } else {
-                high = mid - 1;
+                right = mid;
             }
         }
-        return -1;
+        return left;
     }
 
     private static int search(int[] nums, int low, int high, int target) {
@@ -60,7 +56,7 @@ public class SearchInRotatedSortedArray {
             int mid = low + (high - low) / 2;
             if (nums[mid] == target) {
                 return mid;
-            } else if (nums[mid] > target) {
+            } else if (target > nums[mid]) {
                 low = mid + 1;
             } else {
                 high = mid - 1;

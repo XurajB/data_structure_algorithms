@@ -28,6 +28,20 @@ public class DiameterOfBinaryTree {
         return Math.max(left, right) + 1;
     }
 
+    // dfs without using global variable
+    private int[] helper2(TreeNode root) {
+        if (root == null) {
+            return new int[] {0, 0};
+        }
+        int[] left = helper2(root.left);
+        int[] right = helper2(root.right);
+
+        int depth = Math.max(left[0], right[0]) + 1;
+        int diameter = Math.max(Math.max(left[1], right[1]), left[0] + right[0]);
+
+        return new int[] {depth, diameter};
+    }
+
     // iterative
     public int diameterOfBinaryTree2(TreeNode root) {
         int maxDiameter = 0;

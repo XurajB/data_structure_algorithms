@@ -1,5 +1,7 @@
 package problems.graph;
 
+import javafx.util.Pair;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -11,53 +13,41 @@ import java.util.Set;
  * https://leetcode.com/problems/minimum-knight-moves/
  */
 public class MinimumKnightMove {
-    public static class Node {
-        private int x, y;
-        public Node(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-        public int getId() {
-            return x * 1000 + y;
-        }
-    }
-
-    Queue<Node> q = new LinkedList<>();
-    Set<Integer> visited = new HashSet<>(); // adding int[] into visited set won't work
-
-    // Time: O(n), n = max no of moves, Space: O(n)
     public int minKnightMoves(int x, int y) {
-        int level = 0;
-        q.offer(new Node(0, 0));
-        while (!q.isEmpty()) {
-            int currentSize = q.size();
-            for (int i = 0; i < currentSize; i++) {
-                Node node = q.poll();
-                if (node.x == x && node.y == y) {
-                    return level;
+
+        int[][] dirs = new int[][] {{2, 1}, {1, 2}, {-1, 2}, {-2, 1}, {-2, -1}, {-1, -2}, {1, -2}, {2, -1}};
+
+        x = Math.abs(x); // from origin, same distance if positive. this way we don't have to travel -ve space
+        y = Math.abs(y);
+
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(new int[] {0, 0});
+
+        Set<Pair<Integer, Integer>> visited = new HashSet<>();
+        visited.add(new Pair<>(0, 0));
+
+        int result = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int[] cur = queue.remove();
+                int curX = cur[0];
+                int curY = cur[1];
+                if (curX == x && curY == y) {
+                    return result;
                 }
-                addNode(node.x + 1, node.y + 2, q);
-                addNode(node.x + 2, node.y + 1, q);
 
-                addNode(node.x + 2, node.y - 1, q);
-                addNode(node.x + 1, node.y - 2, q);
-
-                addNode(node.x - 1, node.y - 2, q);
-                addNode(node.x - 2, node.y - 1, q);
-
-                addNode(node.x - 1, node.y + 2, q);
-                addNode(node.x - 2, node.y + 1, q);
+                for (int[] d : dirs) {
+                    int newX = curX + d[0];
+                    int newY = curY + d[1];
+                    if (!visited.contains(new Pair<>(newX, newY)) && newX >= -1 && newY >= -1) {
+                        queue.add(new int[] {newX, newY});
+                        visited.add(new Pair<>(newX, newY));
+                    }
+                }
             }
-            level++;
+            result++;
         }
         return -1;
-    }
-
-    private void addNode(int x, int y, Queue<Node> q) {
-        Node n = new Node(x, y);
-        if (!visited.contains(n.getId())) {
-            q.offer(n);
-            visited.add(n.getId());
-        }
     }
 }

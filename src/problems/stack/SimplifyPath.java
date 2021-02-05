@@ -14,7 +14,7 @@ public class SimplifyPath {
     public static String simplifyPath(String path) {
         String[] strs = path.split("/");
         Stack<String> stack = new Stack<>();
-        for(String v : strs){
+        for(String v : strs) {
             if(v.length() == 0 || v.equals(".")){
                 continue;
             }

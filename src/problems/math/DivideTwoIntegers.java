@@ -81,17 +81,17 @@ public class DivideTwoIntegers {
         int quotient = 0;
         // coz we converted to -ve
         while (divisor >= dividend) { // dividend - divisor <= 0 will result in overflow
-            int powerOfTwo = -1;
+            int multiple = -1;
             int value = divisor;
 
             // try to double the divisor until it no longer fits into dividend
             // value >= HALF_INT_MIN so that we don't run into same issue like approach 1 for small divisor
             while (value >= HALF_INT_MIN && value + value >= dividend) {
                 value += value;
-                powerOfTwo += powerOfTwo;
+                multiple += multiple;
             }
 
-            quotient += powerOfTwo;
+            quotient += multiple;
             dividend -= value;
         }
 

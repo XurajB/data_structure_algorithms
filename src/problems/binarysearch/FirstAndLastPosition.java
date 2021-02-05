@@ -33,7 +33,7 @@ public class FirstAndLastPosition {
                 low = mid + 1;
             } else if (mid > 0 && nums[mid-1] < target) {
                 return mid;
-            } else {
+            } else { // >=
                 high = mid-1;
             }
         }

@@ -16,10 +16,9 @@ public class AllNodesDistanceKinBst {
 
     ////////////////
     /// Keep track of parent and BFS
-    Map<TreeNode, TreeNode> parent;
     public List<Integer> distanceK(TreeNode root, TreeNode target, int K) {
-        parent = new HashMap<>();
-        dfs(root, root);
+        Map<TreeNode, TreeNode> parent = new HashMap<>();
+        dfs(root, root, parent);
 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(target);
@@ -54,11 +53,11 @@ public class AllNodesDistanceKinBst {
                 .collect(Collectors.toList());
     }
 
-    public void dfs(TreeNode node, TreeNode par) {
+    public void dfs(TreeNode node, TreeNode par,  Map<TreeNode, TreeNode> parent) {
         if (node != null) {
             parent.put(node, par);
-            dfs(node.left, node);
-            dfs(node.right, node);
+            dfs(node.left, node, parent);
+            dfs(node.right, node, parent);
         }
     }
 

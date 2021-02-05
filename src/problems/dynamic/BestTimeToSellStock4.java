@@ -21,8 +21,8 @@ public class BestTimeToSellStock4 {
         }
 
         // for k days, we can perform max 2k transactions (buy, sell)
-        // if 2k < n, then it will be BestTimeToSellStock1, where we perform as many transaction as possible because 2k transaction is not possible
-        if (2*k < n) {
+        // if 2k >= n, make as many transaction as possible
+        if (2*k >= n) {
             int maxProfit = 0;
             for (int i = 1; i < prices.length; i++) {
                 if (prices[i] > prices[i-1]) {
@@ -32,15 +32,15 @@ public class BestTimeToSellStock4 {
             return maxProfit;
         }
 
-        int[][] dp = new int[k+1][n];
-        // we can maximize by either not doing any transaction or transacting n times for that day: whichever is max
+        int[][] dp = new int[k + 1][n]; // k is 1 based
         for (int i = 1; i <= k; i++) {
-            int localMax = dp[i-1][0] - prices[0];
+            int tmpMax =  -prices[0]; // we started i = 1, money we spent buying stock at day 0 (debt, so negative)
             for (int j = 1; j < n; j++) {
-                dp[i][j] = Math.max(dp[i][j-1], prices[j] - localMax);
-                localMax = Math.max(localMax, dp[i-1][j] - prices[j]);
+                // two choices: do nothing (dp[i][j-1]) or sell at price prices[j]
+                dp[i][j] = Math.max(dp[i][j - 1], prices[j] + tmpMax); // max between our old profit and profit if we are going to sell the jth stock
+                tmpMax =  Math.max(tmpMax, dp[i - 1][j - 1] - prices[j]); // maximize our debt (coz we are using -ve). dp[i-1][j-1] because according to ^ we used yesterdays last transaction. so going one step back
             }
         }
-        return dp[k][n-1];
+        return dp[k][n - 1];
     }
 }

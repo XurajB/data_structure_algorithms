@@ -10,6 +10,8 @@ public class Test {
 
         System.out.println(Arrays.toString(increasingCount(new int[] {100,10,50,60,20,90,110})));
 
+        System.out.println(20 & 15);
+
     }
 
     private static int[] increasingCount(int[] input) {

@@ -18,7 +18,7 @@ public class InsertDeleteGetRandom2 {
 
     /** Initialize your data structure here. */
     public InsertDeleteGetRandom2() {
-        map = new HashMap<Integer, Set<Integer>>();
+        map = new HashMap<>();
         list = new ArrayList<>();
         random = new Random();
     }
@@ -31,7 +31,7 @@ public class InsertDeleteGetRandom2 {
         map.get(val).add(list.size());
         list.add(val);
 
-        return true;
+        return true; // always true since dupes are allowed
     }
 
     /** Removes a value from the collection. Returns true if the collection contained the specified element. */

@@ -15,7 +15,7 @@ public class SquaresOfASortedArray {
         int i = 0;
         int j = nums.length - 1;
         int[] ans = new int[nums.length];
-        while (i <= j) {
+        while (i <= j) { // note: ==, for case like -7,-3,2,3,11
             if (Math.abs(nums[i]) > Math.abs(nums[j])) {
                 ans[index--] = nums[i] * nums[i];
                 i++;

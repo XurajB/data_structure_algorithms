@@ -21,6 +21,6 @@ public class AngleBetweenHandsOfAClock {
 
         double diff = Math.abs(hourAngle - minuteAngle);
 
-        return Math.min(diff, 360 - diff);
+        return Math.min(diff, 360-diff);
     }
 }

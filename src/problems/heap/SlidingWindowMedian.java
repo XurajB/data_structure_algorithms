@@ -19,33 +19,31 @@ public class SlidingWindowMedian {
     // O(n*klogk) [it would be nlogk but remove is k]. Use treeset for nlogk
     // O(k)
     private static double[] medianSlidingWindow(int[] nums, int k) {
-        double ans[] = new double[nums.length - k + 1];
-        // use two heaps
-        PriorityQueue<Integer> max = new PriorityQueue<>((a,b) -> b.compareTo(a));
-        PriorityQueue<Integer> min = new PriorityQueue<>();
+        PriorityQueue<Integer> max = new PriorityQueue<>();
+        PriorityQueue<Integer> min = new PriorityQueue<>(Comparator.reverseOrder());
+
+        int n = nums.length;
+        double[] ans = new double[n-k+1];
 
         for (int i = 0; i < nums.length; i++) {
-            // keep both of them balanced
             max.offer(nums[i]);
             min.offer(max.poll());
-            if (max.size() < min.size()) {
+            if (min.size() > max.size()) {
                 max.offer(min.poll());
             }
 
-            if (max.size() + min.size() == k) {
-                double median;
-                if (max.size() == min.size()) {
-                    median = ((double) max.peek() + (double) min.peek()) / 2.0; // avoid overflow
+            if (i-k+1 >= 0) {
+                double median = 0.0;
+                if (k % 2 == 0) {
+                    median = ((double) max.peek() + (double) min.peek())/2.0; // prevent overflow
                 } else {
-                    median = (double) max.peek();
+                    median = max.peek();
                 }
-                int pos = i - k + 1;
-                ans[pos] = median;
+                ans[i-k+1] = median;
 
-                // remove num at pos to keep size at k
-                // remove will cost O(k)
-                if (!max.remove(nums[pos])) {
-                    min.remove(nums[pos]);
+                // this will cost O(k)
+                if (!max.remove(nums[i-k+1])) {
+                    min.remove(nums[i-k+1]);
                 }
             }
         }

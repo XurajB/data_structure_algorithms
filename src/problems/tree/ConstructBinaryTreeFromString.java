@@ -43,7 +43,7 @@ public class ConstructBinaryTreeFromString {
             node.right = helper(s);
         }
 
-        i++;
+        i++; // for close bracket
         return node;
     }
 }

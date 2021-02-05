@@ -43,15 +43,14 @@ public class ParkingLot {
     // another option is to define ParkingSpot as abstract or interface and derive all types from it, if we need to add another type, we just extend or implement the ParkingSpot class
     abstract class ParkingSpot {
         int id;
-        abstract void reserve();
+        int vehicleId;
     }
-    class HandicappedParkingSpot extends ParkingLot {
+    class HandicappedParkingSpot extends ParkingSpot {
     }
 
     class ParkingTicket {
         int id;
-        int parkingSpotId;
-        ParkingSpot type;
+        ParkingSpot spot;
         int issueTime;
     }
 

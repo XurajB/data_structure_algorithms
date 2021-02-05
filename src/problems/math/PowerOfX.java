@@ -52,6 +52,9 @@ public class PowerOfX {
         if (n == 0) {
             return 1.0;
         }
+        if (n == 1) {
+            return x;
+        }
         double half = fastPow(x, n / 2);
         if (n % 2 == 0) {
             return half * half;
@@ -60,11 +63,15 @@ public class PowerOfX {
         }
     }
     public double myPow(double x, int n) {
-        long N = n;
+        // if n is -ve min, then converting to pos will be 0 int. so it is better to do conversion now and calc
+        long N = n; // convert this to long so we can do -n
         if (N < 0) {
             x = 1 / x;
             N = -N;
         }
         return fastPow(x, N);
     }
+
+    // iterative
+
 }

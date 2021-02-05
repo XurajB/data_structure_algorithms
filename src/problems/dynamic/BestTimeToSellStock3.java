@@ -1,5 +1,7 @@
 package problems.dynamic;
 
+import java.util.Arrays;
+
 /**
  * Say you have an array for which the ith element is the price of a given stock on day i.
  * Design an algorithm to find the maximum profit. You may complete at most two transactions.
@@ -68,5 +70,41 @@ public class BestTimeToSellStock3 {
         }
 
         return sell2;
+    }
+
+    //
+    ///// Generalize this for k transaction
+    private static int maxProfit(int k, int[] prices) {
+        int n = prices.length;
+        if (n <= 1 || k <= 0) {
+            return 0;
+        }
+
+        // for k day, the max transaction is 2*k (buying, selling)
+        // if n <= 2k, that means we can make all possible transaction without worrying about max 2k
+        if (2*k >= n) {
+            int maxProfit = 0;
+            for (int i = 1; i < prices.length; i++) {
+                if (prices[i] > prices[i-1]) {
+                    maxProfit += prices[i] - prices[i-1];
+                }
+            }
+            return maxProfit;
+        }
+
+        // looking at 2 transaction solution up ^^
+        int[] buy = new int[k];
+        Arrays.fill(buy, Integer.MAX_VALUE);
+
+        int[] sell = new int[k];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                buy[j] = Math.min(buy[j], j == 0 ? prices[i] : prices[i] - sell[j-1]); // use profit from last transaction
+                sell[j] = Math.max(sell[j], prices[i] - buy[j]);
+            }
+        }
+
+        return sell[k-1]; // last transaction
     }
 }

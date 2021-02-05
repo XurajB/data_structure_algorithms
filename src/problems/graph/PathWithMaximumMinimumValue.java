@@ -1,6 +1,5 @@
 package problems.graph;
 
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
@@ -15,46 +14,38 @@ public class PathWithMaximumMinimumValue {
         System.out.println(maximumMinimumPath(A));
     }
 
-    // O(nLogn), n = number of elements
+    // O(VlogV + E)
     // space: n
     private static int maximumMinimumPath(int[][] A) {
-        int[][] dirs = new int[][] {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
-        int n = A.length;
-        int m = A[0].length;
-        int[][] visited = new int[n][m];
-        // pq to maintain next max node for max path
-        // node[0] = x, node[1] = y, node[2] = value
-        PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]> (){
-            @Override
-            public int compare(int[] a, int[] b) {
-                return b[2] - a[2];
-            }
-        });
+        int m = A.length;
+        int n = A[0].length;
 
-        pq.offer(new int[] {0, 0, A[0][0]});
-        visited[0][0] = -1;
+        PriorityQueue<int[]> heap = new PriorityQueue<>((a, b) -> b[2] - a[2]);
+        boolean[][] visited = new boolean[m][n];
+        heap.offer(new int[] {0, 0, A[0][0]});
 
-        int min = A[0][0];
-        while (!pq.isEmpty()) {
-            int[] node = pq.poll();
-            if (node[2] < min) {
-                min = node[2];
-            }
-            // check if we reached end
-            if (node[0] == n-1 && node[1] == m-1) {
+        int[][] dr = {{0,1},{1,0},{0,-1},{-1,0}};
+
+        int min = Integer.MAX_VALUE;
+        while (!heap.isEmpty()) {
+            int[] curr = heap.poll();
+
+            min = Math.min(min, curr[2]);
+            if (curr[0] == m - 1 && curr[1] == n - 1) {
                 return min;
             }
-            for (int[] dir: dirs) {
-                int nextX = node[0] + dir[0];
-                int nextY = node[1] + dir[1];
 
-                if (nextX < 0 || nextY < 0 || nextX >= n || nextY >= m || visited[nextX][nextY] == -1) {
-                    continue;
+            for (int i = 0; i < 4; i++) {
+                int nr = curr[0] + dr[i][0];
+                int nc = curr[1] + dr[i][1];
+
+                if (nr >= 0 && nr < m && nc >= 0 && nc < n && !visited[nr][nc]) {
+                    int ns = A[nr][nc];
+                    heap.offer(new int[]{nr, nc, Math.min(curr[2], ns)});
+                    visited[nr][nc] = true;
                 }
-                pq.offer(new int[] {nextX, nextY, A[nextX][nextY]});
-                visited[node[0]][node[1]] = -1;
             }
         }
-        return -1;
+        return 0;
     }
 }

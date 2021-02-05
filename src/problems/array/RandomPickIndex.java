@@ -47,11 +47,11 @@ public class RandomPickIndex {
             if (nums[i] == target) {
                 // increase total candidate count
                 count++;
-                // we pick index with probability 1/count (reservoir sampling)
-                // java Random: All possible values are produced with (approximately) equal probability.
+
+                // if count was 1, probability of getting 0 is 100%
+                // as it increases, the probability of getting 0 also increases. So random index
+                // we only do this if target matches nums[i]
                 if (rnd.nextInt(count) == 0) {
-                    // ^ it could be = 0 or count - 1, what is the probability of selecting random = 0? => equal probability.
-                    // it has probability 1 when count = 1, 1/2 when count = 2, 2/3 when count = 3. total: 1 * 1/2 * 2/3 = 1/3.
                     result = i;
                 }
             }

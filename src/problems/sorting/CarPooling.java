@@ -1,9 +1,6 @@
 package problems.sorting;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * You are driving a vehicle that has capacity empty seats initially available for passengers.  The vehicle only drives east (ie. it cannot turn around and drive west.)
@@ -22,7 +19,7 @@ public class CarPooling {
     // O(nlogn)
     private static boolean carPooling(int[][] trips, int capacity) {
         Arrays.sort(trips, (a, b) -> a[1] - b[1]);
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]); // end, num_passengers
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0])); // end, num_passengers
         int size = 0;
         for (int i = 0; i < trips.length; i++) {
             while (pq.size() > 0 && pq.peek()[0] <= trips[i][1]) {

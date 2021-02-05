@@ -19,26 +19,26 @@ public class MinimumWindowSubstring {
         for (char c : t.toCharArray()) {
             map[c]++;
         }
-        int start = 0, end = 0, minStart = 0, minLen = Integer.MAX_VALUE, counter = t.length();
-        while (end < s.length()) {
-            final char c1 = s.charAt(end);
+        int left = 0, right = 0, minStart = 0, minLen = Integer.MAX_VALUE, counter = t.length();
+        while (right < s.length()) {
+            final char c1 = s.charAt(right);
             if (map[c1] > 0) {
                 counter--;
             }
             map[c1]--;
             while (counter == 0) {
-                if (minLen > end - start + 1) {
-                    minLen = end - start + 1;
-                    minStart = start;
+                if (minLen > right - left + 1) {
+                    minLen = right - left + 1;
+                    minStart = left;
                 }
-                char c2 = s.charAt(start);
+                char c2 = s.charAt(left);
                 map[c2]++;
                 if (map[c2] > 0) {
                     counter++;
                 }
-                start++;
+                left++;
             }
-            end++;
+            right++;
         }
         return minLen == Integer.MAX_VALUE ? "" : s.substring(minStart, minStart + minLen);
     }

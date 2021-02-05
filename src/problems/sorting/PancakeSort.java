@@ -12,10 +12,13 @@ public class PancakeSort {
     }
 
     private static int[] pancakeSort(int[] arr) {
+        // coming from the back, we want to flip such that element at the the ith place is at correct place
         for (int i = arr.length - 1; i >= 0; i--) {
-            int maxIndex = findMaxIndex(arr, i);
-            flip(arr, maxIndex + 1);
-            flip(arr, i + 1);
+            int maxIndex = findMaxIndex(arr, i); // flip from 0 to i.
+            flip(arr, maxIndex + 1); // flip from 0 to index+1. this will bring max to front
+            flip(arr, i + 1); // this will bring max to correct place
+
+            // maxIndex+1, i+1 are flip indexes
         }
         return arr;
     }

@@ -22,7 +22,7 @@ public class CousinsInBinaryTree {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
-            Map<Integer, Integer> map = new HashMap<>();
+            Map<Integer, Integer> map = new HashMap<>(); // value, parent val
             int size = queue.size();
             for (int i = 0; i < size; i++) {
                 TreeNode node = queue.poll();

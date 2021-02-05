@@ -13,27 +13,25 @@ public class ValidateBST {
         // I have both recursive and iterative solutions below
     }
 
-    TreeNode prev = null;
-    boolean isValid = true;
+    TreeNode prev = null; // can't put in param, object
     private boolean isValid(TreeNode root) {
         if (root == null) {
             return true;
         }
-        validate(root);
-        return isValid;
+        return validate(root);
     }
     // validate using inorder, previous node cannot be greater than current
     // O(N)
-    private void validate(TreeNode node) {
+    private boolean validate(TreeNode node) {
         if (node == null) {
-            return;
+            return true;
         }
-        validate(node.left);
+        boolean left = validate(node.left);
         if (prev != null && prev.val >= node.val) {
-            isValid = false;
+            return false;
         }
         prev = node;
-        validate(node.right);
+        return validate(node.right) && left;
     }
 
     // iterative inorder

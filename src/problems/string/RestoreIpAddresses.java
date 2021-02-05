@@ -12,6 +12,29 @@ import java.util.List;
  */
 public class RestoreIpAddresses {
 
+    // O(1) coz there are only finite combination (<= 255 and 3 dots)
+    private void helper(String s, int index, String cur, List<String> ans, int dotCount) {
+        if (index == s.length() || dotCount == 3) {
+            if (cur.length() == s.length() + 3) {
+                ans.add(cur);
+            }
+            return;
+        }
+        long num = 0;
+        for (int i = index; i < s.length(); i++) {
+            num = num*10 + (s.charAt(i)-'0');
+            if (num >= 0 && num <= 255) { // need to check both for overflow
+                if (index == 0) {
+                    helper(s, i+1, num + "", ans, 0);
+                } else {
+                    helper(s, i+1, cur+"."+num, ans, dotCount+1);
+                }
+            }
+        }
+    }
+
+    ///////////////////////
+
     private int n;
     private String s;
     private LinkedList<String> segments;

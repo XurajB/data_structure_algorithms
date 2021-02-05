@@ -17,7 +17,7 @@ public class MedianOfTwoSortedArrays {
 
         // if nums1 length is greater, switch them we that nums1 is smaller than nums2
         if (x > y) {
-            findMedianSortedArrays(nums2, nums1);
+            return findMedianSortedArrays(nums2, nums1);
         }
 
         // we do binary search in the smaller array

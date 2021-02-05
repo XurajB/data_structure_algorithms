@@ -23,11 +23,44 @@ public class BstToSortedDll {
         }
     }
 
+    // thread safe version
+    public Node treeToDoublyList(Node root) {
+        if (root == null) {
+            return null;
+        }
+
+        Node dummy = new Node(0, null, null);
+        Node prev = dummy;
+
+        prev = inorder(root, prev);
+
+        prev.right = dummy.right;
+        dummy.right.left = prev;
+
+        return dummy.right;
+    }
+
+    private Node inorder(Node node, Node prev) {
+        if (node == null) {
+            return prev;
+        }
+        prev = inorder(node.left, prev);
+
+        prev.right = node;
+        node.left = prev;
+
+        prev = inorder(node.right, node); //note
+
+        return prev;
+    }
+
+    /////////////////////////////////////
+    ///////
 
     private Node first = null;
     private Node last = null;
 
-    private Node treeToDoublyList(Node root) {
+    private Node treeToDoublyList2(Node root) {
         if (root == null) {
             return null;
         }

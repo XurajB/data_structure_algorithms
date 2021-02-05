@@ -31,6 +31,7 @@ public class ExpressionAddOperators {
             return;
         }
         long curr = 0;
+        // loop because we have try every combination of nums (105 = 1, 5, 10, 105). See TargetSum
         for (int i = index; i < nums.length; i++) {
             // corner case: if current num is 0, we can only use it as a single digit number
             // if it is not a single digit number with leading 0, it should be considered as an invalid number

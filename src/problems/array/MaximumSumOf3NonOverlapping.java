@@ -23,7 +23,7 @@ public class MaximumSumOf3NonOverlapping {
 
         int[] sum = new int[n+1];
         int[] posLeft = new int[n]; // starting index for the left interval in range [0, i]
-        int[] posRight = new int[n]; // starting index for the right interval in range [i, n-1]
+        int[] posRight = new int[n]; // starting index for the right interval in range [i+k, n-1]
 
         int[] ans = new int[3]; // 3 indexes
 
@@ -31,11 +31,12 @@ public class MaximumSumOf3NonOverlapping {
             sum[i+1] = sum[i] + nums[i];
         }
 
+        posLeft[k-1] = 0;
         int leftMax = sum[k] - sum[0];
         for (int i = k; i < n; i++) {
-            int diff = sum[i+1] - sum[i+1-k];
+            int diff = sum[i+1] - sum[i+1-k]; // i+1 coz sum is n+1
             if (diff > leftMax) {
-                posLeft[i] = i+1-k;
+                posLeft[i] = i+1-k; // start index of the max interval so far
                 leftMax = diff;
             } else {
                 posLeft[i] = posLeft[i-1];

@@ -16,11 +16,17 @@ public class ReconstructItinerary {
         System.out.println(findItinerary(tickets));
     }
 
+    /**
+     * A eulerian graph is a graph containing eulerian cycle. Simple definition: you can draw the graph without taking your pencil off the paper, ending at your starting point
+     * Connected graph is eulerian if and only if every vertex has even degree.
+     * Eulerian path: that visits every edge exactly once. Eulerian circuit is an eulerian path which starts and ends on the same vertex.
+     */
+
     static Map<String, PriorityQueue<String>> map = new HashMap<>();
     static LinkedList<String> ans = new LinkedList<>();
     private static List<String> findItinerary(List<List<String>> tickets) {
         for (List<String> ticket: tickets) {
-            map.putIfAbsent(ticket.get(0), new PriorityQueue<>(String::compareTo));
+            map.putIfAbsent(ticket.get(0), new PriorityQueue<>());
             map.get(ticket.get(0)).offer(ticket.get(1));
         }
         dfs("JFK");
@@ -32,6 +38,7 @@ public class ReconstructItinerary {
         while (arrivals != null && !arrivals.isEmpty()) {
             dfs(arrivals.poll());
         }
+        // add the airport to the head of the itenary
         ans.addFirst(departure);
     }
 }

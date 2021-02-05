@@ -1,4 +1,4 @@
-package problems.graph;
+package problems.backtracking;
 
 /**
  * Given a 2D board and a word, find if the word exists in the grid.
@@ -31,6 +31,8 @@ public class WordSearch {
         return false;
     }
 
+    // backtracking
+    // dfs alone won't solve this: think of a path that crosses itself
     private static boolean dfs(char[][] board, int i, int j, String word, int index) {
         if (index == word.length()) {
             return true;

@@ -14,6 +14,7 @@ public class SlidingPuzzle {
         System.out.println(slidingPuzzle(board));
     }
 
+    // O(6 * 6!)
     private static int slidingPuzzle(int[][] board) {
         if (board == null || board.length == 0) {
             return 0;
@@ -36,13 +37,14 @@ public class SlidingPuzzle {
         // we calculate possible directions based on board target
         // all positions that 0 can be swapped to, there are 6 indexes that 0 can be and 6 different directions
         // example of 0 being at index 0 (think of the target being a single string)
-        // 0 1 2
-        // 4 5 3
+        // 1 2 3
+        // 4 5 0
         // If 0 is at idx 0, then it can be swapped to idx 1 or 3.
         // If 0 is at idx 1, then it can be swapped to idx 0 or 2 or 4.
         // If 0 is at idx 2, etc.
         int[][] dirs = {{1, 3}, {0, 2, 4}, {1, 5},
-                        {0, 4}, {1, 3, 5}, {2, 4}};
+                        {0, 4}, {1, 3, 5}, {2, 4}}; // indexes
+        // int[][] dirs = new int[6][] is legal in java
         int level = 0;
         while (!queue.isEmpty()) {
             int size = queue.size();

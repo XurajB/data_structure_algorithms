@@ -27,6 +27,10 @@ public class PartitionToKEqualSum {
     // O(k * 2^n) (we are doing recursion for n elements, choosing true/false (2) for each backtrack for subset of k times
     // O(n) ~  visited + stack O(2.n)
     private static boolean canPartition(int[] nums, int k, int target, int curSum, int index, boolean[] visited) {
+        if (curSum > target) {
+            return false;
+        }
+
         if (k == 0) {
             return true;
         }
@@ -37,7 +41,7 @@ public class PartitionToKEqualSum {
         }
 
         for (int i = index; i < nums.length; i++) {
-            if (curSum + nums[i] <= k && !visited[i]) {
+            if (!visited[i]) {
                 visited[i] = true;
                 if (canPartition(nums, k, target, curSum + nums[i], i + 1, visited)) {
                     return true;

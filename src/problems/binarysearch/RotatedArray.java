@@ -15,27 +15,25 @@ public class RotatedArray {
     // there are many properties of the pivot, it is the smallest number. or number that is smaller than both left or right elements
     // simple solution is to do the linear search for smallest or find a number that is less than its neighbours - O(N)
     // better solution would be a binary search O(logN) - which can utilize both of these properties
-    public static int findPivot(int[] nums) {
-        int low = 0;
-        int high = nums.length - 1;
-        int n = nums.length;
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-            int left = (mid - 1 + n) % n; // one element left to mid. if they overflow we want to start from the beginning
-            if (nums[low] <= nums[high]) { //case 1
-                return low;
-            } else if (nums[mid] < nums[left]) {
-                return mid;
-            } else if (nums[mid] >= nums[low]) {
-                low = mid + 1;
-            } else if (nums[mid] <= nums[high]) {
-                high = mid - 1;
+    private static int findPivot(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left < right) {
+            int mid = left + (right-left)/2;
+
+            if (nums[mid] > nums[right]) {
+                left = mid + 1;
+            } else {
+                right = mid;
             }
         }
 
-        return -1; //this means the array
+        return nums[left];
     }
 
+
+    /////////////////////////
     private static int findPivot2(int[] nums) {
         if (nums.length == 1) {
             return 0;
