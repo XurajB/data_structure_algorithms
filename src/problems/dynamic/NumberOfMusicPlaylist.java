@@ -17,11 +17,14 @@ public class NumberOfMusicPlaylist {
         int MOD = (int) Math.pow(10, 9) + 7;
         long[][] dp = new long[L+1][N+1];
 
-        dp[0][0] = 1;
+        dp[0][0] = 1; // let dp[i][j] be number of playlists of length i, with j diff songs
         for (int i = 1; i <= L; i++) {
             for (int j = 1; j <= N; j++) {
-                // two cases. case 1: listen to i-1 songs with j-1 different songs, with additional choices of j songs
-                // case 2: listen to i-1 songs with j different songs, then last one is old song with the choices of j or (j-K) since we can't choose old song within K distance
+                // two cases.
+                // case 1: listen to i-1 songs with j-1 different songs,
+                // with additional choices of j songs
+                // case 2: listen to i-1 songs with j different songs, then last one is old song
+                // with the choices of j or (j-K) since we can't choose old song within K distance
                 dp[i][j] = (dp[i-1][j-1] * j) %MOD;
                 if (j > K) {
                     // we can also pick repeated songs

@@ -14,7 +14,7 @@ public class ValidPalindrome3 {
     // top down with memo
     // O(N^2)
     private static boolean isValidPalindrome(String s, int k) {
-        Integer[][] memo = new Integer[s.length()][s.length()];
+        Integer[][] memo = new Integer[s.length()][s.length()]; // ex: cccdddd
         return helper(s, 0, s.length() - 1, memo) <= k;
     }
 

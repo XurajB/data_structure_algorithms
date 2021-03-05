@@ -32,4 +32,26 @@ public class MaximumSwap {
 
         return num;
     }
+
+    ///
+    public int maximumSwap2(int num) {
+        char[] chars = Integer.toString(num).toCharArray();
+        int[] pos = new int[10];
+        for (int i = 0; i < chars.length; i++) {
+            char c = chars[i];
+            pos[c - '0'] = i;
+        }
+        for (int i = pos.length - 1; i >= 0; i--) {
+            for (int j = 0; j < pos[i]; j++) {
+                if (chars[j]-'0' < i) {
+                    char temp = chars[j];
+                    chars[j] = chars[pos[i]];
+                    chars[pos[i]] = temp;
+
+                    return Integer.parseInt(new String(chars));
+                }
+            }
+        }
+        return num;
+    }
 }

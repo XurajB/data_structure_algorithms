@@ -13,25 +13,24 @@ public class RemoveDuplicateLetters {
 
     // O(N), we are only storing max 26 chars so O(1) on space
     private static String removeDuplicateLetters(String s) {
-        Map<Character, Integer> map = new HashMap<>(); // char, last occurrence
-        Set<Character> seen = new HashSet<>();
-        Deque<Character> stack = new ArrayDeque<>();
+        int[] last = new int[26];
         for (int i = 0; i < s.length(); i++) {
-            map.put(s.charAt(i), i);
+            last[s.charAt(i) - 'a'] = i;
         }
+        Deque<Character> stack = new ArrayDeque<>();
+        Set<Character> set = new HashSet<>();
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (!seen.contains(c)) {
-                while (!stack.isEmpty() && c < stack.peek() && map.get(stack.peek()) > i) {
-                    seen.remove(stack.pop());
+            if (!set.contains(s.charAt(i))) {
+                while (!stack.isEmpty() && stack.peek() > s.charAt(i) && last[stack.peek() - 'a'] > i) {
+                    set.remove(stack.pop());
                 }
-                stack.push(c);
-                seen.add(c);
+                stack.push(s.charAt(i));
+                set.add(s.charAt(i));
             }
         }
         StringBuilder sb = new StringBuilder();
-        for (Character c: stack) { // Note: dq will still return like stack.pop(), unlike stack
-            sb.append(c.charValue());
+        while (!stack.isEmpty()) {
+            sb.append(stack.pop());
         }
         return sb.reverse().toString();
     }

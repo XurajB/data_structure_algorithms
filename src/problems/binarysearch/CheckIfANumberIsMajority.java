@@ -12,10 +12,11 @@ public class CheckIfANumberIsMajority {
 
     private static boolean isMajorityElement(int[] nums, int target) {
         int n = nums.length;
+        // find left and right bound of the target
         int first = search(nums, target);
-        int second = search(nums, target + 1); // if target+1 is not present, it will still return left most position as if it is present
 
-        return second - first > nums.length / 2;
+        int next = first + nums.length / 2;
+        return next < nums.length && nums[next] == target;
     }
 
     // find the first occurrence of target

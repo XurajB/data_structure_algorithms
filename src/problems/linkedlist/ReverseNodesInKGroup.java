@@ -37,7 +37,6 @@ public class ReverseNodesInKGroup {
         ListNode temp;
         ListNode prev = begin;
         ListNode first = curr;
-
         while (curr != end) {
             temp = curr.next;
             curr.next = prev;

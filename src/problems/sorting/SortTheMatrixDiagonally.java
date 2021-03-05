@@ -1,6 +1,5 @@
 package problems.sorting;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
@@ -30,25 +29,25 @@ public class SortTheMatrixDiagonally {
     }
 
     private void sortDiagonal(int[][] mat, int i, int j) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
-        int m = mat.length;
-        int n = mat[0].length;
-        // get all the elements
-        while (i < m && j < n) {
-            pq.offer(mat[i][j]);
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        int x = i;
+        int y = j;
+        // collect
+        while (x < mat.length && y < mat[0].length) {
+            pq.offer(mat[x][y]);
+            x++;
+            y++;
+        }
+        // put them back
+        while (i < mat.length && j < mat[0].length) {
+            mat[i][j] = pq.poll();
             i++;
             j++;
-        }
-        // insert from the bottom
-        while (i > 0 && j > 0) {
-            --i;
-            --j;
-            mat[i][j] = pq.poll();
         }
     }
 
     ////////////////////////////////////
-    // O(m*n log(min(m,n))
+    // O(m*n log(m*n)
     // O(m*n)
     public int[][] diagonalSort2(int[][] mat) {
         HashMap<Integer, PriorityQueue<Integer>> map = new HashMap<>(); // sort each value or pq

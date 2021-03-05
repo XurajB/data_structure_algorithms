@@ -14,10 +14,9 @@ public class LongestSubstringWithAtLestKRepeating {
     private static int longestSubstring(String s, int k) {
         int longest = 0;
         final int n = s.length();
-        int[] freq = new int[26];
         // go from 1 to 26 length of unique chars to consider
         for (int i = 1; i <= 26; i++) {
-            Arrays.fill(freq, 0);
+            int[] freq = new int[26];
 
             int left = 0;
             int right = 0;

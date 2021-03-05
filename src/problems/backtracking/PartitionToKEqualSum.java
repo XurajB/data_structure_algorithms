@@ -13,10 +13,9 @@ public class PartitionToKEqualSum {
 
     private static boolean canPartitionKSubsets(int[] nums, int k) {
         int sum = Arrays.stream(nums).sum();
-        int max = Arrays.stream(nums).max().getAsInt();
 
         int target = sum / k;
-        if (sum % k != 0 || max > target) {
+        if (sum % k != 0) {
             return false; // not possible
         }
 
@@ -24,7 +23,7 @@ public class PartitionToKEqualSum {
         return canPartition(nums, k, target, 0, 0, new boolean[nums.length]);
     }
 
-    // O(k * 2^n) (we are doing recursion for n elements, choosing true/false (2) for each backtrack for subset of k times
+    // O(n * 2^n) (we are doing recursion for n elements, choosing true/false (2) for each backtrack for subset of k times
     // O(n) ~  visited + stack O(2.n)
     private static boolean canPartition(int[] nums, int k, int target, int curSum, int index, boolean[] visited) {
         if (curSum > target) {

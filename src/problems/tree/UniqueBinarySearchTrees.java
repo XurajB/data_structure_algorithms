@@ -29,6 +29,31 @@ public class UniqueBinarySearchTrees {
         return dp[n];
     }
 
+    //// top down with memo
+    public int numTrees2(int n) {
+        Integer[][] memo = new Integer[n][n];
+        return helper(0, n-1, memo); // or 1, n and memo size n+1
+    }
+
+    private int helper(int left, int right, Integer[][] memo) {
+        if (left >= right) {
+            return 1;
+        }
+
+        if (memo[left][right] != null) {
+            return memo[left][right];
+        }
+
+        int count = 0;
+        for (int i = left; i <= right; i++) {
+            count += helper(left, i-1, memo) * helper(i+1, right, memo);
+        }
+
+        memo[left][right] = count;
+        return count;
+    }
+
+    //////////////////
     // Given an integer n, generate all structurally unique BST's (binary search trees) that store values 1 ... n.
     public List<TreeNode> generateTrees(int n) {
         // if we pick a root, then the total trees we can calculate

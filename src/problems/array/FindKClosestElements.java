@@ -24,6 +24,7 @@ public class FindKClosestElements {
         // we need k elements
         while (high - lo >= k) {
             // if left diff is higher, then move closer to less diff
+            // if ((x - arr[lo]) > (arr[high] - x)) works as well since we know lo is lower than x and high is higher
             if (Math.abs(arr[lo] - x) > Math.abs(arr[high] - x)) {
                 lo++;
             } else {
@@ -43,13 +44,13 @@ public class FindKClosestElements {
     // (logn)+k
     private static List<Integer> findClosestElement2(int[] arr, int k, int x) {
         int lo = 0;
-        int high = arr.length - k - 1; // range of all possible start of size k + 1
-        while (lo <= high) {
+        int high = arr.length - k; // range of all possible start of size k + 1
+        while (lo < high) {
             int mid = lo + (high - lo)/2;
-            if (Math.abs(arr[mid] - x) > Math.abs(arr[mid+k] - x)) {
+            if (x - arr[mid] > arr[mid+k] - x) {
                 lo = mid + 1;
             } else {
-                high = mid - 1;
+                high = mid;
             }
         }
 

@@ -58,9 +58,9 @@ public class ProductExceptSelf {
 
         // refill answer, while calculating left product on the fly
         int rightProduct = 1;
-        for (int i = nums.length - 1; i >= 0; i--) {
-            answer[i] = rightProduct * answer[i];
-            rightProduct *= nums[i];
+        for (int i = nums.length - 2; i >= 0; i--) {
+            rightProduct = rightProduct * answer[i+1];
+            answer[i] = answer[i] * rightProduct;
         }
 
         return answer;

@@ -19,11 +19,10 @@ public class GreatestSumDivisibleBy3 {
             sum += num;
 
             if (num % 3 == 1) {
-                leftTwo = Math.min(leftTwo, leftOne + num); // we want to maximize the answer, check if leftTwo can be minimized
+                leftTwo = Math.min(leftTwo, leftOne + num); // two numbers with num%3 = 1 combined will equal to be num%3 = 2
                 leftOne = Math.min(leftOne, num);
-            }
-            if (num % 3 == 2) {
-                leftOne = Math.min(leftOne, leftTwo + num);
+            } else if (num % 3 == 2) {
+                leftOne = Math.min(leftOne, leftTwo + num); // two numbers with num%3 = 2 combined will equal to be num%3 = 1
                 leftTwo = Math.min(leftTwo, num);
             }
         }

@@ -16,7 +16,6 @@ public class NumberOfConnectedComponents {
         for (int[] edge: edges) {
             int x = find(parents, edge[0]);
             int y = find(parents, edge[1]);
-
             // union
             if (x != y) {
                 parents[x] = y;

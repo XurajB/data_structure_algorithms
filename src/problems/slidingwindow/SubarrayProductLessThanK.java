@@ -12,20 +12,20 @@ public class SubarrayProductLessThanK {
 
     private static int numSubarrayProductLessThanK(int[] nums, int k) {
         // since contiguous subarray
-        int i = 0;
-        int j = 0;
-        int count = 0;
+        int left = 0;
+        int right = 0;
+
         int prod = 1;
-
-        while (j < nums.length) {
-            prod = prod * nums[j];
-            while (j >= i && prod >= k) {
-                prod = prod / nums[i++];
+        int count = 0;
+        while (right < nums.length) {
+            prod = prod * nums[right];
+            while (right >= left && prod >= k) {
+                prod = prod/nums[left];
+                left++;
             }
-            count = count + j - i + 1; // note
-            j++;
+            count += right - left +1;
+            right++;
         }
-
         return count;
     }
 }

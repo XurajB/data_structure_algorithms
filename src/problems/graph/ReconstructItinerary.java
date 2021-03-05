@@ -21,24 +21,24 @@ public class ReconstructItinerary {
      * Connected graph is eulerian if and only if every vertex has even degree.
      * Eulerian path: that visits every edge exactly once. Eulerian circuit is an eulerian path which starts and ends on the same vertex.
      */
-
-    static Map<String, PriorityQueue<String>> map = new HashMap<>();
-    static LinkedList<String> ans = new LinkedList<>();
+    // ElogV
     private static List<String> findItinerary(List<List<String>> tickets) {
+        LinkedList<String> ans = new LinkedList<>();
+        Map<String, PriorityQueue<String>> map = new HashMap<>();
+
         for (List<String> ticket: tickets) {
             map.putIfAbsent(ticket.get(0), new PriorityQueue<>());
             map.get(ticket.get(0)).offer(ticket.get(1));
         }
-        dfs("JFK");
+        dfs("JFK", map, ans);
         return ans;
     }
-
-    private static void dfs(String departure) {
+    private static void dfs(String departure, Map<String, PriorityQueue<String>> map, LinkedList<String> ans) {
         PriorityQueue<String> arrivals = map.get(departure);
         while (arrivals != null && !arrivals.isEmpty()) {
-            dfs(arrivals.poll());
+            dfs(arrivals.poll(), map, ans);
         }
-        // add the airport to the head of the itenary
+        // add the airport to the head of the itinerary
         ans.addFirst(departure);
     }
 }

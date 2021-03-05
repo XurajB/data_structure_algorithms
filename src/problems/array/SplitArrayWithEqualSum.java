@@ -41,7 +41,7 @@ public class SplitArrayWithEqualSum {
             }
 
             // all splits of right half nums[j+1, nums.length - 1]
-            for (int k = j + 2; k < nums.length - 1; k++) {
+            for (int k = j + 1; k < nums.length - 1; k++) {
                 int third = preSum[k - 1] - preSum[j]; // sum: j+1, k-1
                 int fourth = preSum[nums.length - 1] - preSum[k]; // sum: k+1, nums.length - 1
                 if (third == fourth) {

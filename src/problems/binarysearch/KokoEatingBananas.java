@@ -1,5 +1,7 @@
 package problems.binarysearch;
 
+import java.util.Arrays;
+
 /**
  * Koko loves to eat bananas.  There are N piles of bananas, the i-th pile has piles[i] bananas.  The guards have gone and will come back in H hours.
  * Koko can decide her bananas-per-hour eating speed of K.  Each hour, she chooses some pile of bananas, and eats K bananas from that pile.
@@ -16,10 +18,7 @@ public class KokoEatingBananas {
 
     // if we take 4 as eating rate: then she takes: 1 + 2 + 2 + 2 hours to eat all
     private static int minEatingSpeed(int[] piles, int H) {
-        int max = 0;
-        for (int pile: piles) {
-            max = Math.max(max, pile);
-        }
+        int max = Arrays.stream(piles).max().getAsInt();
         int lo = 1;
         int high = max;
         while (lo <= high) {

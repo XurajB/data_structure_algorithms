@@ -12,23 +12,23 @@ public class MinimumSizeSubarraySum {
     // note the question says positive integers
     // O(N), O(1)
     private static int minSubArrayLen(int s, int[] nums) {
-        int i = 0;
-        int j = 0;
+        int min = Integer.MAX_VALUE;
+        int left = 0;
+        int right = 0;
         int sum = 0;
-
-        int ans = Integer.MAX_VALUE;
-        while (i < nums.length) {
-            sum += nums[i++];
-
+        while (right < nums.length) {
+            sum += nums[right];
             while (sum >= s) {
-                sum -= nums[j++];
-                ans = Math.min(ans, i - j + 1); // do this inside, because sum >= s
-            }
-        }
+                min = Math.min(min, right - left + 1);
+                sum -= nums[left];
 
-        if (ans == Integer.MAX_VALUE) {
+                left++;
+            }
+            right++;
+        }
+        if (min == Integer.MAX_VALUE) {
             return 0;
         }
-        return ans;
+        return min;
     }
 }

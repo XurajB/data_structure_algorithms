@@ -29,17 +29,16 @@ public class DiameterOfBinaryTree {
     }
 
     // dfs without using global variable
-    private int[] helper2(TreeNode root) {
+    private int helper(TreeNode root, int[] ans) {
         if (root == null) {
-            return new int[] {0, 0};
+            return 0;
         }
-        int[] left = helper2(root.left);
-        int[] right = helper2(root.right);
 
-        int depth = Math.max(left[0], right[0]) + 1;
-        int diameter = Math.max(Math.max(left[1], right[1]), left[0] + right[0]);
+        int left = helper(root.left, ans);
+        int right = helper(root.right, ans);
 
-        return new int[] {depth, diameter};
+        ans[0] = Math.max(ans[0], left + right);
+        return Math.max(left, right) + 1;
     }
 
     // iterative

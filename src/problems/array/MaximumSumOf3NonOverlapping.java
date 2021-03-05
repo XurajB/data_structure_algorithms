@@ -14,59 +14,69 @@ public class MaximumSumOf3NonOverlapping {
     }
 
     // O(N)
-    // we need 3 non overlapping intervals, with max sum of all 3 intervals.
-    // if the middle interval is: [i, i+k-1], the left interval will be: [0, i-1] and right will be be [i+k, n-1]
-    // in order to get lexicographical smallest order, always select the left most one
+    // steps: 1: create window sums
+    // step2: calculate best indexes on left side
+    // step3: calculate best indexes on right side
+    // step4: iterate the middle part: calculate max sum using left, middle, right
+    // example: [1,2,1,2,6,7,5,1]
+    // window sum: [3, 3, 3, 8, 13, 12, 6]
+    // left best: [0, 0, 0, 3, 4, 4, 4]
+    // right best: [4, 4, 4, 4, 4, 5, 6]
     private static int[] maxSumOfThreeSubarrays(int[] nums, int k) {
         int n = nums.length;
-        int maxSum = 0;
+        int[] windowSum = new int[n-k+1];
 
-        int[] sum = new int[n+1];
-        int[] posLeft = new int[n]; // starting index for the left interval in range [0, i]
-        int[] posRight = new int[n]; // starting index for the right interval in range [i+k, n-1]
-
-        int[] ans = new int[3]; // 3 indexes
-
+        int sum = 0;
         for (int i = 0; i < n; i++) {
-            sum[i+1] = sum[i] + nums[i];
-        }
-
-        posLeft[k-1] = 0;
-        int leftMax = sum[k] - sum[0];
-        for (int i = k; i < n; i++) {
-            int diff = sum[i+1] - sum[i+1-k]; // i+1 coz sum is n+1
-            if (diff > leftMax) {
-                posLeft[i] = i+1-k; // start index of the max interval so far
-                leftMax = diff;
-            } else {
-                posLeft[i] = posLeft[i-1];
+            sum += nums[i];
+            if (i >= k) {
+                sum -= nums[i-k]; // remove last item from window
+            }
+            if (i-k+1 >= 0) {
+                windowSum[i-k+1] = sum;
             }
         }
 
-        posRight[n-k] = n-k;
-        int rightMax = sum[n] - sum[n-k];
-        for (int i = n-k-1; i >= 0; i--) {
-            int diff = sum[i+k]-sum[i];
-            if (diff >= rightMax) { // Note: >= for right side
-                posRight[i] = i;
-                rightMax = diff;
-            } else {
-                posRight[i] = posRight[i+1];
+        System.out.println(Arrays.toString(windowSum));
+
+        // we have the interval sum. we need to find i, j, k such that we can maximize w[i] + w[j] + w[k]
+        // calculate best indxes on left side
+        int[] left = new int[n-k+1];
+        int best = 0;
+        for (int i = 0; i < left.length; i++) {
+            if (windowSum[i] > windowSum[best]) {
+                best = i;
             }
+            left[i] = best;
         }
+
+        System.out.println(Arrays.toString(left));
+
+        int[] right = new int[n-k+1];
+        best = right.length - 1;
+        for (int i = right.length - 1; i >= 0; i--) {
+            if (windowSum[i] >= windowSum[best]) { // note: >=
+                best = i;
+            }
+            right[i] = best;
+        }
+
+        System.out.println(Arrays.toString(right));
 
         // test all middle intervals
-        // k <= i <= n-2k
-        for (int i = k; i <= n - 2*k; i++) {
-            int left = posLeft[i-1];
-            int right = posRight[i+k];
+        int[] ans = new int[3];
+        int maxSum = 0;
+        for (int j = k; j < windowSum.length - k; j++) {
 
-            int total = (sum[i+k]-sum[i]) + (sum[left + k] - sum[left]) + (sum[right + k] - sum[right]);
+            int x = left[j-k];
+            int y = right[j+k];
+
+            int total = windowSum[x] + windowSum[y] + windowSum[j];
             if (total > maxSum) {
                 maxSum = total;
-                ans[0] = left;
-                ans[1] = i;
-                ans[2] = right;
+                ans[0] = x;
+                ans[1] = j;
+                ans[2] = y;
             }
         }
 

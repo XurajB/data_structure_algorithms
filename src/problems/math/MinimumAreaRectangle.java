@@ -22,7 +22,7 @@ public class MinimumAreaRectangle {
             if (!map.containsKey(point[0])) {
                 map.put(point[0], new HashSet<>());
             }
-            map.get(point[0]).add(point[1]);
+            map.get(point[0]).add(point[1]); // x, y
         }
 
         int min = Integer.MAX_VALUE;

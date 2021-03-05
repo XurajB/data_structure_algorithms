@@ -35,7 +35,7 @@ public class ValidateBinaryTreeNodes {
         // all same trees are merged, if we have a node that still has it as parent then it is disjoint
         int count = 0;
         for (int i = 0; i < n; i++) {
-            if (find(parents, i) == i) {
+            if (parents[i] == i) {
                 count++;
             }
         }
@@ -46,12 +46,16 @@ public class ValidateBinaryTreeNodes {
         if (parents[x] == x) {
             return x;
         }
-        return find(parents, parents[x]);
+        parents[x] = find(parents, parents[x]);
+        return parents[x];
     }
 
     private static void union(int[] parents, int x, int y) {
-        if (find(parents, parents[x]) != find(parents, parents[y])) {
-            parents[x] = y;
+        int px = find(parents, x);
+        int py = find(parents, y);
+
+        if (px != py) {
+            parents[x] = y; // make y parent of x
         }
     }
 }

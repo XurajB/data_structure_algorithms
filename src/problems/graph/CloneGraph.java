@@ -63,18 +63,16 @@ public class CloneGraph {
         if (node == null) {
             return null;
         }
-        Map<Node, Node> map = new HashMap<>();
-        map.put(node, new Node(node.val));
-        dfs(node, map);
-        return map.get(node);
+        return dfs(node, new HashMap<>());
     }
-    private void dfs(Node node, Map<Node, Node> map) {
-        for (Node neigh: node.neighbors) {
-            if (!map.containsKey(neigh)) {
-                map.put(neigh, new Node(neigh.val));
-                dfs(neigh, map);
-            }
-            map.get(node).neighbors.add(map.get(neigh));
+    private Node dfs(Node node, Map<Node, Node> map) {
+        if (map.containsKey(node)) {
+            return map.get(node);
         }
+        map.put(node, new Node(node.val));
+        for (Node next: node.neighbors) {
+            map.get(node).neighbors.add(dfs(next, map));
+        }
+        return map.get(node);
     }
 }

@@ -7,22 +7,22 @@ import dataStructures.ListNode;
  */
 public class RemoveLinkedListElements {
     private ListNode removeElements(ListNode head, int val) {
-        // we use a dummy node to make things simpler if the val is in head and prev node being null
-        ListNode dummy = new ListNode(0);
+        ListNode dummy = new ListNode(-1);
         dummy.next = head;
 
-        ListNode current = head;
-        ListNode prev = dummy;
+        ListNode cur = head; // note
+        ListNode last = dummy;
+        while (cur != null) {
 
-        while (current != null) {
-            if (current.val == val) {
-                prev.next = current.next;
-            } else {
-                // there can be consecutive nodes with val, so only update prev here
-                prev = current;
+            if (cur.val != val) {
+                last.next = cur;
+                last = cur;
             }
-            current = current.next;
+            cur = cur.next;
         }
+
+        // update last one
+        last.next = cur;
 
         return dummy.next;
     }

@@ -15,7 +15,39 @@ public class LongestMountainInArray {
     public static void main(String[] args) {
         System.out.println(longestMountain(new int[] {1,2,3,2,1,0,2,3,1}));
     }
-    private static int longestMountain(int[] A) {
+
+    private static int longestMountain(int[] arr) {
+        int inc = 0;
+        int dec = 0;
+
+        int i = 1;
+        int max = 0;
+        while (i < arr.length) {
+            dec = 0;
+            inc = 0;
+            while (i < arr.length && arr[i] > arr[i-1]) {
+                inc++;
+                i++;
+            }
+
+            while (i < arr.length && arr[i] < arr[i-1]) {
+                dec++;
+                i++;
+            }
+
+            if (i < arr.length && arr[i] == arr[i-1]) {
+                i++;
+            }
+
+            if (inc > 0 && dec > 0) { // mountain
+                max = Math.max(max, inc + dec + 1);
+            }
+        }
+
+        return max;
+    }
+
+    private static int longestMountain2(int[] A) {
         int max = 0;
         int dec = 0;
         int inc = 0;

@@ -14,7 +14,7 @@ public class FirstMissingPositive {
     private static int firstMissingPositive(int[] nums) {
         int n = nums.length;
         if (n == 0) {
-            return n;
+            return 1;
         }
 
         boolean hasOne = false;

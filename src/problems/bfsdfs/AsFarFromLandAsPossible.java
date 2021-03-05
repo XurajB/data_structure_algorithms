@@ -12,8 +12,8 @@ public class AsFarFromLandAsPossible {
     // O(n*n)
     // put all 1s in queue, and see how far we can go until we see 0
     public int maxDistance(int[][] grid) {
-        int max = -1;
         Queue<int[]> queue = new LinkedList<>();
+
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j] == 1) {
@@ -21,8 +21,10 @@ public class AsFarFromLandAsPossible {
                 }
             }
         }
+
         int[][] dirs = {{0, 1}, {1,0}, {-1,0}, {0,-1}};
-        int level = 0;
+        int level = -1; // we already have ones in queue
+
         while (!queue.isEmpty()) {
             int size = queue.size();
             for (int k = 0; k < size; k++) {
@@ -31,15 +33,14 @@ public class AsFarFromLandAsPossible {
                     int nx = cur[0] + dir[0];
                     int ny = cur[1] + dir[1];
                     if (nx >= 0 && ny >= 0 && nx < grid.length && ny < grid[0].length && grid[nx][ny] == 0) {
-                        grid[nx][ny] = level + 1;
-                        max = Math.max(max, level+1);
-
+                        grid[nx][ny] = 1;
                         queue.offer(new int[] {nx, ny});
                     }
                 }
             }
             level++;
         }
-        return max;
+
+        return level <= 0 ? -1 : level;
     }
 }
